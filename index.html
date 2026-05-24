@@ -115,6 +115,11 @@ h1{font-size:34px;line-height:1.05;letter-spacing:-.04em;color:var(--text);margi
 .link-list{display:grid;gap:12px;margin-top:18px}
 .link-card{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:13px 14px;box-shadow:0 8px 22px rgba(27,23,19,.045);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
 .link-card:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(27,23,19,.07);border-color:#d2c4b1}
+.copy-code-button{width:100%;appearance:none;border:1px dashed #d8bd56;background:#fff8e3;color:var(--green);border-radius:18px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-family:inherit;box-shadow:0 6px 16px rgba(27,23,19,.035);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+.copy-code-button:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(27,23,19,.06);border-color:#c8920a;background:#fff4ce}
+.copy-code-button span{font-size:13px;font-weight:800}
+.copy-code-button strong{font-size:15px;letter-spacing:.06em}
+.copy-code-button.copied{background:#ecf5ee;border-style:solid;border-color:rgba(31,58,46,.24)}
 .logo-box{width:54px;height:54px;border-radius:15px;background:#fff;border:1px solid #ece4d8;display:flex;align-items:center;justify-content:center;padding:7px;overflow:hidden}
 .logo-box img{max-width:100%;max-height:38px;object-fit:contain}
 .logo-box.text-icon{font-size:22px;font-weight:900;color:var(--green)}
@@ -130,7 +135,7 @@ h1{font-size:34px;line-height:1.05;letter-spacing:-.04em;color:var(--text);margi
 .footer{margin-top:16px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:12px;color:#716a60}
 .footer a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:420px){.page{padding:20px 12px 28px}h1{font-size:31px}.link-card{grid-template-columns:48px 1fr;gap:11px;padding:12px}.logo-box{width:48px;height:48px}.link-action{grid-column:2;justify-self:start;margin-top:1px}.code-strip{align-items:flex-start;flex-direction:column}.code-strip strong{font-size:17px}}
+@media(max-width:420px){.page{padding:20px 12px 28px}h1{font-size:31px}.link-card{grid-template-columns:48px 1fr;gap:11px;padding:12px}.logo-box{width:48px;height:48px}.link-action{grid-column:2;justify-self:start;margin-top:1px}.copy-code-button{padding:11px 12px}.code-strip{align-items:flex-start;flex-direction:column}.code-strip strong{font-size:17px}}
 </style>
 </head>
 <body>
@@ -151,6 +156,11 @@ h1{font-size:34px;line-height:1.05;letter-spacing:-.04em;color:var(--text);margi
       <span class="link-action">Visit</span>
     </a>
 
+    <button type="button" class="copy-code-button" data-code="REMYSLAB20" data-product="Pack Leashes" data-placement="pack_leashes_code_button" aria-label="Copy Pack Leashes discount code REMYSLAB20">
+      <span>Grab the code</span>
+      <strong>REMYSLAB20</strong>
+    </button>
+
     <a class="link-card affiliate-link" href="https://www.brooksandroo.com/" target="_blank" rel="nofollow sponsored" data-product="Brooks & Roo" data-category="accessories and toys" data-result="Current partner" data-placement="main_link_card" data-discount="">
       <span class="logo-box"><img src="/assets/logos/brooks-and-roo-logo.jpg" alt="Brooks and Roo logo" width="400" height="120" loading="lazy" decoding="async"/></span>
       <span class="link-copy"><h2>Brooks &amp; Roo</h2><p>Current partner, code coming soon</p></span>
@@ -170,10 +180,6 @@ h1{font-size:34px;line-height:1.05;letter-spacing:-.04em;color:var(--text);margi
     </a>
   </section>
 
-  <section class="code-strip" aria-label="Current discount code">
-    <span>Current Pack Leashes code</span>
-    <strong>REMYSLAB20</strong>
-  </section>
 
   <section class="visually-hidden" aria-label="About Remy’s Lab">
     <h2>What is Remy’s Lab?</h2>
@@ -198,6 +204,49 @@ function getNetwork(url){
   if(url.includes('brooksandroo'))return 'Brooks & Roo';
   return 'Other';
 }
+
+
+function copyText(text){
+  if(navigator.clipboard&&window.isSecureContext){
+    return navigator.clipboard.writeText(text);
+  }
+  const area=document.createElement('textarea');
+  area.value=text;
+  area.setAttribute('readonly','');
+  area.style.position='absolute';
+  area.style.left='-9999px';
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand('copy');
+  document.body.removeChild(area);
+  return Promise.resolve();
+}
+
+document.querySelectorAll('.copy-code-button').forEach(function(button){
+  const original=button.innerHTML;
+  button.addEventListener('click',function(){
+    const code=button.dataset.code||'';
+    const product=button.dataset.product||'Remy’s Lab';
+    if(!code)return;
+    copyText(code).then(function(){
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({
+        event:'coupon_code_copy',
+        product_name:product,
+        product_category:'discount_code',
+        button_text:button.textContent.trim(),
+        button_location:button.dataset.placement||'remys_lab',
+        discount_code:code
+      });
+      button.classList.add('copied');
+      button.innerHTML='<span>Copied</span><strong>'+code+'</strong>';
+      setTimeout(function(){
+        button.classList.remove('copied');
+        button.innerHTML=original;
+      },1600);
+    });
+  });
+});
 
 document.addEventListener('click',function(e){
   const link=e.target.closest('a.affiliate-link,a[rel*="sponsored"]');
