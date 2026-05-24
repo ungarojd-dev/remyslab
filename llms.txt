@@ -1,0 +1,30 @@
+# Remy's Lab
+
+> Dog products tested by an actual Lab.
+
+Remy's Lab is a simple link-in-bio style page connected to @remy.lab on TikTok. Remy is a yellow Labrador who tests dog products. The site helps dog owners quickly find current product notes, partner links, and discount codes without a hard sell.
+
+## Main page
+
+- [Remy's Lab home](https://remyslab.com/): Current dog product test notes, partner links, discount codes, and affiliate disclosure.
+
+## Current partner brands
+
+- Pack Leashes: Current partner. Use code REMYSLAB20 for 20% off.
+- Brooks & Roo: Current partner. Code coming soon.
+
+## Brand positioning
+
+Remy's Lab is not a traditional product review blog. It is a TikTok follow-up page for people who saw a product test and want a simple place to find the product, code, and context.
+
+## Tone
+
+Useful, casual, low pressure, and transparent. Avoid hard-selling language. Product links should feel like helpful notes, not ads.
+
+## Social
+
+- TikTok: https://www.tiktok.com/@remy.lab
+
+## Affiliate disclosure
+
+Some links may be affiliate links. If a visitor uses one, Remy's Lab may earn a commission. That does not change which products are listed.
