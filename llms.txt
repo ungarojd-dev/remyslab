@@ -2,20 +2,25 @@
 
 > Dog products tested by an actual Lab.
 
-Remy's Lab is a simple link-in-bio style page connected to @remy.lab on TikTok. Remy is a yellow Labrador who tests dog products. The site helps dog owners quickly find current product notes, partner links, and discount codes without a hard sell.
+Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find current product notes, partner links, discount codes, and written test notes without a hard sell.
 
-## Main page
+## Pages
 
-- [Remy's Lab home](https://remyslab.com/): Current dog product test notes, partner links, discount codes, and affiliate disclosure.
+- [Remy's Lab home](https://remyslab.com/): Current dog product partner links, discount codes, and affiliate disclosure.
+- [Lab Notes blog](https://remyslab.com/blog/): Written test notes and honest product write-ups from Remy's real-world testing.
+
+## Lab Notes posts
+
+- [Pack Leashes: Remy's Test Notes](https://remyslab.com/blog/pack-leashes-test-notes.html): Hands-free bungee leash tested over a full month of trail runs and neighborhood walks.
 
 ## Current partner brands
 
-- Pack Leashes: Current partner. Use code REMYSLAB20 for 20% off.
+- Pack Leashes: Current partner. Use code REMYSLAB20 for 20% off at packleashes.com.
 - Brooks & Roo: Current partner. Code coming soon.
 
 ## Brand positioning
 
-Remy's Lab is not a traditional product review blog. It is a TikTok follow-up page for people who saw a product test and want a simple place to find the product, code, and context.
+Remy's Lab is not a traditional product review blog. It is a TikTok follow-up page for people who saw a product test and want a simple place to find the product, test notes, and discount code.
 
 ## Tone
 
@@ -27,4 +32,4 @@ Useful, casual, low pressure, and transparent. Avoid hard-selling language. Prod
 
 ## Affiliate disclosure
 
-Some links may be affiliate links. If a visitor uses one, Remy's Lab may earn a commission. That does not change which products are listed.
+Some links may be affiliate links. If a visitor uses one, Remy's Lab may earn a commission. That does not change which products are listed or what gets written about them.

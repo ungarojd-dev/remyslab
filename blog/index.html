@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TS4KTRPL');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Lab Notes — Remy's Lab</title>
+<meta name="description" content="Written test notes from Remy, a yellow Lab who actually uses this stuff. Honest takes on dog gear, walk gear, toys, and more."/>
+<link rel="canonical" href="https://remyslab.com/blog/"/>
+<link rel="icon" type="image/png" href="/assets/icons/favicon.png"/>
+<meta name="theme-color" content="#f7f5ef"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Remy's Lab"/>
+<meta property="og:title" content="Lab Notes — Remy's Lab"/>
+<meta property="og:description" content="Written test notes from Remy, a yellow Lab who actually uses this stuff."/>
+<meta property="og:url" content="https://remyslab.com/blog/"/>
+<meta property="og:image" content="https://remyslab.com/assets/logos/remys-lab-logo-transparent.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Lab Notes — Remy's Lab"/>
+<meta name="twitter:description" content="Written test notes from Remy, a yellow Lab who actually uses this stuff."/>
+<meta name="twitter:image" content="https://remyslab.com/assets/logos/remys-lab-logo-transparent.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"/></noscript>
+<style>
+:root{
+  --bg:#f7f5ef;--surface:#fffdfa;--surface-soft:#f2eee6;
+  --line:#e4dccf;--green:#1f3a2e;--green2:#28493a;
+  --gold:#c8920a;--text:#1b1713;--muted:#6c665d;
+  --shadow-sm:0 1px 4px rgba(27,23,19,.05);
+  --shadow:0 4px 16px rgba(27,23,19,.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.nav-inner{max-width:600px;margin:0 auto;padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.nav-logo img{width:32px;height:32px;object-fit:contain}
+.nav-logo span{font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.02em}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{font-size:13px;font-weight:700;padding:6px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent;text-decoration:none;transition:all .15s;white-space:nowrap}
+.nav-tab:hover{background:var(--surface-soft);border-color:var(--line);color:var(--text)}
+.nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* HERO */
+.blog-hero{background:var(--green);padding:24px 16px 22px}
+.blog-hero-inner{max-width:600px;margin:0 auto}
+.blog-hero h1{font-size:clamp(22px,5vw,30px);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.15;margin-bottom:7px}
+.blog-hero p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.5;max-width:440px}
+.hero-meta{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+.hero-stat{font-size:11px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:5px}
+.hero-stat span{color:#d8c47a}
+
+/* FILTER STRIP */
+.filter-strip{background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm);position:sticky;top:52px;z-index:100}
+.filter-scroll{display:flex;gap:7px;padding:10px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:600px;margin:0 auto}
+.filter-scroll::-webkit-scrollbar{display:none}
+.filter-pill{font-size:12px;font-weight:800;padding:7px 15px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;font-family:inherit}
+.filter-pill:hover{border-color:var(--green);color:var(--green)}
+.filter-pill.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* SEARCH */
+.search-wrap{max-width:600px;margin:0 auto;padding:14px 16px 0}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;transition:border-color .15s;box-shadow:var(--shadow-sm)}
+.search-box:focus-within{border-color:var(--green);box-shadow:0 0 0 3px rgba(31,58,46,.08)}
+.search-icon{font-size:14px;color:var(--muted);flex-shrink:0}
+.search-input{flex:1;border:none;outline:none;font-family:inherit;font-size:14px;color:var(--text);background:transparent}
+.search-input::placeholder{color:var(--muted)}
+.search-clear{background:none;border:none;cursor:pointer;font-size:15px;color:var(--muted);padding:0;display:none}
+.search-clear.visible{display:block}
+.search-count{font-size:11px;color:var(--muted);font-weight:700;padding:6px 16px 0;max-width:600px;margin:0 auto}
+
+/* POST LIST */
+.post-list{max-width:600px;margin:0 auto;padding:14px 16px 56px}
+
+/* FEATURED CARD */
+.post-featured{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:10px;display:block;transition:transform .15s,box-shadow .15s}
+.post-featured:active{transform:scale(.99)}
+.post-featured-body{padding:18px 18px 0}
+.post-featured-foot{padding:12px 18px 16px;display:flex;align-items:center;justify-content:space-between}
+.featured-label{font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:10px}
+.post-featured-body h2{font-size:18px;font-weight:800;line-height:1.25;color:var(--text);letter-spacing:-.02em;margin:8px 0 9px}
+.post-featured-body p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* REGULAR CARDS — horizontal, tap-friendly */
+.post-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:9px;display:flex;align-items:stretch;transition:transform .15s,box-shadow .15s;min-height:90px}
+.post-card:active{transform:scale(.99)}
+.post-card-accent{width:5px;flex-shrink:0}
+.accent-walk{background:#2a7a50}
+.accent-toys{background:#e07c1a}
+.accent-food{background:#b85c00}
+.accent-accessories{background:#4e5d3c}
+.accent-health{background:#4a6fa5}
+.accent-training{background:#1f3a2e}
+.post-card-body{padding:13px 13px 11px;flex:1;min-width:0}
+.post-card-arrow{display:flex;align-items:center;padding:0 13px 0 4px;color:var(--muted);font-size:16px;flex-shrink:0}
+.card-cat{font-size:9px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.post-card-body h3{font-size:15px;font-weight:800;line-height:1.3;color:var(--text);letter-spacing:-.01em;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-card-body p{font-size:12px;color:var(--muted);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-meta{display:flex;align-items:center;justify-content:space-between;margin-top:7px}
+.card-date{font-size:10px;color:var(--muted);font-weight:600}
+.card-read{font-size:10px;font-weight:800;color:var(--green)}
+
+/* BADGES */
+.lab-badge{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;display:inline-block;margin-bottom:7px}
+.badge-approved{background:#ecf5ee;color:var(--green);border:1px solid rgba(31,58,46,.15)}
+.badge-tested{background:#e8f0fb;color:#1a3a7a;border:1px solid rgba(26,58,122,.15)}
+.badge-skipped{background:#fdf0e8;color:#7a3a1a;border:1px solid rgba(122,58,26,.15)}
+.badge-still{background:#fff8e3;color:#7a6010;border:1px solid rgba(200,146,10,.25)}
+
+/* CTA STRIP */
+.cta-strip{background:var(--green);border-radius:16px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cta-strip-text p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.4}
+.cta-strip-text strong{font-size:14px;font-weight:800;color:#fff;display:block;margin-bottom:2px}
+.cta-btn{background:#d8c47a;color:var(--green);font-weight:900;font-size:12px;padding:9px 15px;border-radius:999px;white-space:nowrap;flex-shrink:0;transition:background .15s;text-decoration:none}
+.cta-btn:hover{background:#fff}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty p{font-size:14px}
+
+/* FOOTER */
+footer{background:var(--green);padding:24px 16px 20px}
+.footer-inner{max-width:600px;margin:0 auto}
+.footer-brand{font-size:15px;font-weight:800;color:#fff;margin-bottom:5px}
+.footer-desc{font-size:11px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:14px}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.55);font-weight:700}
+.footer-links a:hover{color:#fff}
+.footer-bottom{font-size:10px;color:rgba(255,255,255,.3);padding-top:12px;border-top:1px solid rgba(255,255,255,.1)}
+
+@media(max-width:380px){
+  .nav-logo span{display:none}
+  .nav-tab{font-size:12px;padding:5px 10px}
+  .blog-hero h1{font-size:20px}
+}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">
+      <img src="/assets/icons/logo-dog.png" alt="Remy's Lab" width="32" height="32"/>
+      <span>Remy's Lab</span>
+    </a>
+    <div class="nav-tabs">
+      <a class="nav-tab" href="/">Links</a>
+      <a class="nav-tab active" href="/blog/">Lab Notes</a>
+    </div>
+  </div>
+</nav>
+
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <h1>Lab Notes 🧪</h1>
+    <p>Written test notes after Remy actually uses the stuff. Honest takes, no fluff.</p>
+    <div class="hero-meta">
+      <div class="hero-stat"><span>1</span> Test published</div>
+      <div class="hero-stat"><span>@remy.lab</span> on TikTok</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="search" placeholder="Search lab notes — leashes, toys, treats..." autocomplete="off" aria-label="Search lab notes"/>
+    <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">✕</button>
+  </div>
+</div>
+<div class="search-count" id="searchCount"></div>
+
+<!-- FILTER STRIP -->
+<div class="filter-strip">
+  <div class="filter-scroll">
+    <button class="filter-pill active" onclick="filterPosts('all',this)">All Notes</button>
+    <button class="filter-pill" onclick="filterPosts('Walk Gear',this)">Walk Gear</button>
+    <button class="filter-pill" onclick="filterPosts('Toys',this)">Toys</button>
+    <button class="filter-pill" onclick="filterPosts('Food & Treats',this)">Food &amp; Treats</button>
+    <button class="filter-pill" onclick="filterPosts('Accessories',this)">Accessories</button>
+    <button class="filter-pill" onclick="filterPosts('Health & Wellness',this)">Health &amp; Wellness</button>
+    <button class="filter-pill" onclick="filterPosts('Training',this)">Training</button>
+  </div>
+</div>
+
+<main>
+<div class="post-list" id="postList">
+
+  <!-- FEATURED POST -->
+  <a class="post-featured" href="/blog/pack-leashes-test-notes.html" data-category="Walk Gear">
+    <div class="post-featured-body">
+      <span class="featured-label">🐾 Latest test</span>
+      <span class="lab-badge badge-approved">Remy approved</span>
+      <h2>Pack Leashes Hands-Free Leash: Remy's Test Notes</h2>
+      <p>We put the hands-free bungee leash through a full month of trail runs and neighborhood walks. Here's what Remy actually thought.</p>
+    </div>
+    <div class="post-featured-foot">
+      <span class="card-date">January 15, 2025 · Walk Gear</span>
+      <span class="card-read">Read notes →</span>
+    </div>
+  </a>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-text">
+      <strong>Pack Leashes · use REMYSLAB20</strong>
+      <p>20% off — current Remy's Lab partner</p>
+    </div>
+    <a class="cta-btn affiliate-link" href="https://www.packleashes.com/" target="_blank" rel="nofollow sponsored" data-product="Pack Leashes" data-category="walk gear" data-result="Remy approved" data-placement="blog_index_cta" data-discount="REMYSLAB20">Visit →</a>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Remy's Lab</div>
+    <div class="footer-desc">Dog products tested by an actual Lab 🧪 — test notes, partner links, and discount codes from @remy.lab on TikTok.</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/blog/">Lab Notes</a>
+      <a href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener">TikTok</a>
+      <a href="/disclaimer.html">Disclosure</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+    <div class="footer-bottom">© 2025 Remy's Lab — Some links may be affiliate links. Remy is a real dog.</div>
+  </div>
+</footer>
+
+<script>
+function getNetwork(url){
+  if(url.includes('packleashes'))return 'Pack Leashes';
+  if(url.includes('brooksandroo'))return 'Brooks & Roo';
+  return 'Other';
+}
+document.addEventListener('click',function(e){
+  const link=e.target.closest('a.affiliate-link,a[rel*="sponsored"]');
+  if(!link)return;
+  const href=link.getAttribute('href')||'';
+  window.dataLayer=window.dataLayer||[];
+  window.dataLayer.push({event:'affiliate_click',product_name:link.dataset.product||'',product_category:link.dataset.category||'remys_lab',lab_result:link.dataset.result||'',button_text:link.textContent.trim(),button_location:link.dataset.placement||'blog_index',affiliate_network:getNetwork(href),discount_code:link.dataset.discount||'',affiliate_url:href});
+});
+
+const searchInput=document.getElementById('searchInput');
+const searchClear=document.getElementById('searchClear');
+const searchCount=document.getElementById('searchCount');
+
+searchInput.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  searchClear.classList.toggle('visible',q.length>0);
+  if(q.length===0){clearSearch();return;}
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+  document.querySelector('.filter-pill').classList.add('active');
+  const items=document.querySelectorAll('[data-category]');
+  const cta=document.querySelector('.cta-strip');
+  if(cta)cta.style.display='none';
+  let count=0;
+  items.forEach(el=>{
+    if(el.classList.contains('cta-strip')){return;}
+    const text=el.innerText.toLowerCase();
+    el.style.display=text.includes(q)?'':'none';
+    if(text.includes(q))count++;
+  });
+  searchCount.textContent=count===0?'No notes found':`${count} note${count===1?'':'s'} found`;
+  const ex=document.getElementById('emptyState');
+  if(count===0){
+    if(!ex){const d=document.createElement('div');d.id='emptyState';d.className='empty';d.innerHTML='<p>No notes match that search.<br>Try a different keyword.</p>';document.getElementById('postList').appendChild(d);}
+  }else if(ex){ex.remove();}
+});
+
+function clearSearch(){
+  searchInput.value='';
+  searchClear.classList.remove('visible');
+  searchCount.textContent='';
+  document.querySelectorAll('[data-category]').forEach(el=>el.style.display='');
+  const cta=document.querySelector('.cta-strip');
+  if(cta)cta.style.display='';
+  const ex=document.getElementById('emptyState');
+  if(ex)ex.remove();
+}
+
+function filterPosts(cat,btn){
+  searchInput.value='';
+  searchClear.classList.remove('visible');
+  searchCount.textContent='';
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  const items=document.querySelectorAll('[data-category]');
+  const cta=document.querySelector('.cta-strip');
+  let visible=0;
+  items.forEach(el=>{
+    if(el.classList.contains('cta-strip')){el.style.display=cat==='all'?'':'none';return;}
+    const show=cat==='all'||el.dataset.category===cat;
+    el.style.display=show?'':'none';
+    if(show)visible++;
+  });
+  const ex=document.getElementById('emptyState');
+  if(visible===0){
+    if(!ex){const d=document.createElement('div');d.id='emptyState';d.className='empty';d.innerHTML='<p>No notes in this category yet.<br>Check back soon.</p>';document.getElementById('postList').appendChild(d);}
+  }else if(ex){ex.remove();}
+}
+</script>
+</body>
+</html>

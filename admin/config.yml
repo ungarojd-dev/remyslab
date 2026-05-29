@@ -1,0 +1,41 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "blog/images"
+public_folder: "/blog/images"
+
+collections:
+  - name: "blog"
+    label: "Lab Notes"
+    folder: "blog/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description (for SEO)", name: "description", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - label: "Lab Result"
+        name: "lab_result"
+        widget: "select"
+        options:
+          - "Remy approved"
+          - "Remy tested"
+          - "Still testing"
+          - "Remy skipped"
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Walk Gear"
+          - "Toys"
+          - "Food & Treats"
+          - "Accessories"
+          - "Health & Wellness"
+          - "Training"
+      - { label: "Product Name", name: "product_name", widget: "string", required: false }
+      - { label: "Partner Brand", name: "partner_brand", widget: "string", required: false }
+      - { label: "Affiliate URL", name: "affiliate_url", widget: "string", required: false }
+      - { label: "Discount Code", name: "discount_code", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
