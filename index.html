@@ -281,37 +281,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <!-- DIVIDER -->
-    <div class="section-divider" data-utility="true"><span>Follow the Lab</span></div>
-
-    <!-- TIKTOK BANNER -->
-    <div class="product-group" data-utility="true">
-      <a class="tiktok-banner" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" aria-label="Watch Remy's Lab on TikTok">
-        <span class="tiktok-play" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-        </span>
-        <span class="tiktok-copy">
-          <p class="tiktok-label">Latest lab test</p>
-          <p class="tiktok-handle">@remy.lab</p>
-          <p class="tiktok-sub">Watch Remy test the latest</p>
-        </span>
-        <span class="tiktok-logo" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34.2 4h-6.6v27.6c0 3-2.4 5.4-5.4 5.4s-5.4-2.4-5.4-5.4 2.4-5.4 5.4-5.4c.54 0 1.02.06 1.5.18V19.7c-.48-.06-.99-.1-1.5-.1-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12V18.1c2.28 1.56 5.04 2.46 8 2.46V14c-4.44 0-8-3.58-8-8z" fill="white"/>
-          </svg>
-        </span>
-      </a>
-    </div>
-
   </section>
 
   <!-- Empty state -->
-  <div class="empty-state" id="emptyState" hidden>
+  <div class="empty-state" id="emptyState" style="display:none">
     <strong>🧪</strong>
     No tests found — Remy's working on it.
   </div>
 
-  <section class="visually-hidden" aria-label="About Remy's Lab">
+  <!-- TikTok banner — always visible, not filterable -->
+  <div style="margin-top:10px;display:grid;gap:6px">
+    <div class="section-divider"><span>Follow the Lab</span></div>
+    <a class="tiktok-banner" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" aria-label="Watch Remys Lab on TikTok">
+      <span class="tiktok-play" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></span>
+      <span class="tiktok-copy"><p class="tiktok-label">Latest lab test</p><p class="tiktok-handle">@remy.lab</p><p class="tiktok-sub">Watch Remy test the latest</p></span>
+      <span class="tiktok-logo" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34.2 4h-6.6v27.6c0 3-2.4 5.4-5.4 5.4s-5.4-2.4-5.4-5.4 2.4-5.4 5.4-5.4c.54 0 1.02.06 1.5.18V19.7c-.48-.06-.99-.1-1.5-.1-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12V18.1c2.28 1.56 5.04 2.46 8 2.46V14c-4.44 0-8-3.58-8-8z" fill="white"/></svg></span>
+    </a>
+  </div>
+
+  <section class="visually-hidden" aria-label="About Remys Lab">
     <h2>What is Remy's Lab?</h2>
     <p>Remy's Lab is a dog product testing page connected to @remy.lab on TikTok. Remy, a yellow Labrador, tests dog products so dog owners can see current product notes, partner links, and discount codes in one simple place.</p>
   </section>
@@ -407,11 +395,11 @@ document.addEventListener('click',function(e){
       var name=(g.dataset.searchname||'').toLowerCase();
       var catMatch=activeFilter==='all'||cat===activeFilter;
       var searchMatch=searchQuery===''||name.indexOf(searchQuery)>-1;
-      if(catMatch&&searchMatch){g.hidden=false;visible++;}
-      else{g.hidden=true;}
+      if(catMatch&&searchMatch){g.style.display="grid";visible++;}
+      else{g.style.display="none";}
     });
-    dividers.forEach(function(d){d.hidden=(visible===0);});
-    emptyState.hidden=(visible>0);
+    dividers.forEach(function(d){d.style.display=(visible===0)?"none":"";});
+    emptyState.style.display=(visible>0)?"none":"block";
     if(searchQuery!==''){
       resultsLine.textContent=visible+' result'+(visible!==1?'s':'')+' for "'+searchQuery+'"'+(activeFilter!=='all'?' in '+(catLabels[activeFilter]||activeFilter):'');
     } else if(activeFilter!=='all'){
