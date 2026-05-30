@@ -27,27 +27,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:image" content="https://remyslab.com/assets/logos/remys-lab-logo-transparent.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"/>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"/></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@400;500&family=Caveat:wght@600&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@400;500&family=Caveat:wght@600&display=swap"/></noscript>
 <style>
 :root{
   --bg:#f7f5ef;--surface:#fffdfa;--line:#e4dccf;
-  --green:#1f3a2e;--gold:#c8920a;--gold-light:#fff8e3;
+  --green:#1f3a2e;--gold:#c8920a;--gold-light:#fff8e3;--gold-border:#e7cf7a;
   --text:#1b1713;--muted:#6c665d;
-  --approved-bg:#ecf5ee;--approved-text:#1f3a2e;--approved-border:rgba(31,58,46,.18);
-  --testing-bg:#fff8e3;--testing-text:#7a5c00;--testing-border:#e7cf7a;
-  --pass-bg:#fdf0f0;--pass-text:#8b2020;--pass-border:#f0c0c0;
-  --paper:#fffef9;
+  --approved-bg:#ecf5ee;--approved-border:rgba(31,58,46,.18);--approved-text:#1f3a2e;
+  --testing-bg:#fff8e3;--testing-border:#e7cf7a;--testing-text:#7a5c00;
+  --note-yellow:#fef9c3;--note-green:#dcfce7;--note-blue:#dbeafe;--note-pink:#fce7f3;--note-orange:#ffedd5;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
+body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;display:flex;flex-direction:column;padding-bottom:24px}
 main{flex:1}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 
-/* ── Nav ── */
-nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(27,23,19,.04)}
+/* Nav */
+nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 1px 6px rgba(27,23,19,.05)}
 .nav-inner{max-width:620px;margin:0 auto;padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
 .nav-logo img{width:32px;height:32px;object-fit:contain}
@@ -57,21 +56,16 @@ nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1p
 .nav-tab:hover{background:var(--bg);border-color:var(--line);color:var(--text)}
 .nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
 
-/* ── Clipboard hero — full width ── */
+/* Clipboard header */
 .lab-hero{background:#d6cfc4;position:relative;border-bottom:3px solid #b0a898;box-shadow:0 4px 16px rgba(27,23,19,.12)}
-/* Clip centered at top */
 .lab-hero::before{content:'';position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:64px;height:26px;background:#8a7e72;border-radius:10px 10px 5px 5px;box-shadow:0 3px 8px rgba(0,0,0,.25);z-index:4}
 .lab-hero::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:36px;height:16px;background:#a89e92;border-radius:5px;z-index:5}
-/* Paper */
 .clipboard-paper{background:#fffef9;margin:18px 0 0;padding:18px 20px 20px;position:relative;box-shadow:inset 0 2px 4px rgba(0,0,0,.04)}
-/* Ruled lines on paper */
 .clipboard-paper::before{content:'';position:absolute;inset:0;top:52px;background-image:repeating-linear-gradient(transparent,transparent 26px,rgba(180,200,220,.3) 26px,rgba(180,200,220,.3) 27px);pointer-events:none}
-/* Red margin line */
 .clipboard-paper::after{content:'';position:absolute;left:44px;top:0;bottom:0;width:1.5px;background:rgba(210,80,80,.18);pointer-events:none}
 .cb-inner{max-width:620px;margin:0 auto;position:relative}
 .cb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid rgba(27,23,19,.07)}
 .cb-title{font-family:"DM Mono",monospace;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#9e9080}
-.cb-date{font-family:"DM Mono",monospace;font-size:10px;color:#b0a898}
 .cb-heading{font-size:clamp(22px,5vw,30px);font-weight:800;color:var(--text);letter-spacing:-.03em;line-height:1.1;margin-bottom:5px;padding-left:32px}
 .cb-sub{font-size:12px;color:var(--muted);line-height:1.6;padding-left:32px;margin-bottom:14px}
 .cb-stats{display:flex;gap:16px;flex-wrap:wrap;padding-left:32px}
@@ -81,7 +75,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1p
 .cb-active{display:inline-flex;align-items:center;gap:5px;background:var(--approved-bg);border:1px solid var(--approved-border);border-radius:999px;padding:3px 10px;font-family:"DM Mono",monospace;font-size:9px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
 .cb-active .dot{width:5px;height:5px;border-radius:50%;background:#6ee98a;box-shadow:0 0 5px #6ee98a;flex-shrink:0}
 
-/* ── Sticky search + filter ── */
+/* Search + filter */
 .controls{position:sticky;top:52px;z-index:100;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px 0}
 .controls-inner{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
 .search-row{position:relative}
@@ -99,67 +93,49 @@ nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1p
 .filter-pill:hover{border-color:#c8b89a;color:var(--text)}
 .filter-pill.active{background:var(--green);border-color:var(--green);color:#fff}
 
-/* ── Post list ── */
-.post-list{max-width:620px;margin:0 auto;padding:16px 16px 60px;display:grid;gap:10px}
-.results-label{font-size:11px;color:var(--muted);font-weight:600;padding:0 2px}
+/* Sticky notes board */
+.notes-board{max-width:620px;margin:0 auto;padding:20px 16px 40px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.results-label{font-size:11px;color:var(--muted);font-weight:600;grid-column:1/-1}
 
-/* ── Featured card code row ── */
-.featured-code-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--gold-light);border-top:1px solid var(--gold-border)}
-.featured-code-label{font-size:11px;font-weight:600;color:var(--muted)}
-.featured-code-val{font-family:"DM Mono",monospace;font-size:13px;font-weight:500;letter-spacing:.05em;color:var(--green)}
-.featured-code-note{font-size:11px;color:#b0a898}
+/* Sticky note */
+.sticky{display:flex;flex-direction:column;border-radius:4px 4px 4px 16px;padding:14px 14px 12px;box-shadow:3px 4px 12px rgba(27,23,19,.13),0 1px 3px rgba(27,23,19,.08);position:relative;transition:transform .15s ease,box-shadow .15s ease;text-decoration:none;min-height:160px;overflow:hidden}
+.sticky::after{content:'';position:absolute;bottom:0;right:0;width:20px;height:20px;background:rgba(0,0,0,.08);clip-path:polygon(100% 0,100% 100%,0 100%)}
+.sticky:hover{transform:translateY(-3px) rotate(0deg);box-shadow:5px 8px 20px rgba(27,23,19,.18),0 2px 4px rgba(27,23,19,.1)}
+.sticky:nth-child(odd){transform:rotate(-1deg)}
+.sticky:nth-child(even){transform:rotate(.8deg)}
+.sticky:nth-child(odd):hover{transform:translateY(-3px) rotate(-1deg)}
+.sticky:nth-child(even):hover{transform:translateY(-3px) rotate(.8deg)}
 
-/* ── Featured card — specimen card style ── */
-.post-featured{display:block;background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(27,23,19,.07);transition:transform .15s,box-shadow .15s;position:relative}
-.post-featured:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,23,19,.1)}
-.featured-top{padding:16px 16px 0;border-bottom:1px dashed var(--line);padding-bottom:14px;margin-bottom:0}
-.featured-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
-.featured-tag{font-family:"DM Mono",monospace;font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
-.result-badge{font-family:"DM Mono",monospace;font-size:9px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:6px;border:1px solid transparent}
-.result-badge.approved{background:var(--approved-bg);color:var(--approved-text);border-color:var(--approved-border)}
-.result-badge.testing{background:var(--testing-bg);color:var(--testing-text);border-color:var(--testing-border)}
-.result-badge.pass{background:var(--pass-bg);color:var(--pass-text);border-color:var(--pass-border)}
-.post-featured h2{font-size:17px;font-weight:800;line-height:1.25;color:var(--text);letter-spacing:-.02em;margin-bottom:6px}
-.post-featured .excerpt{font-size:12px;color:var(--muted);line-height:1.6}
-.featured-foot{padding:11px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-top:1px solid var(--line)}
-.featured-foot-meta{font-family:"DM Mono",monospace;font-size:10px;color:var(--muted)}
-.read-link{font-size:12px;font-weight:800;color:var(--green);display:flex;align-items:center;gap:4px}
+/* Note colors */
+.sticky.yellow{background:var(--note-yellow)}
+.sticky.green{background:var(--note-green)}
+.sticky.blue{background:var(--note-blue)}
+.sticky.pink{background:var(--note-pink)}
+.sticky.orange{background:var(--note-orange)}
 
-/* ── Regular post card ── */
-.post-card{display:flex;align-items:stretch;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(27,23,19,.04);transition:transform .15s,box-shadow .15s;text-decoration:none}
-.post-card:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(27,23,19,.08)}
-.card-stripe{width:4px;flex-shrink:0}
-.stripe-walk{background:#2a7a50}
-.stripe-toys{background:#e07c1a}
-.stripe-treats{background:#b85c00}
-.stripe-accessories{background:#4e5d3c}
-.stripe-health{background:#4a6fa5}
-.stripe-training{background:#1f3a2e}
-.stripe-cleaning{background:#6b7fa3}
-.stripe-default{background:var(--green)}
-.card-body{padding:12px 12px 11px;flex:1;min-width:0}
-.card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
-.card-cat{font-family:"DM Mono",monospace;font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-.card-body h3{font-size:14px;font-weight:800;line-height:1.3;color:var(--text);letter-spacing:-.01em;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-body p{font-size:11px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
-.card-date{font-family:"DM Mono",monospace;font-size:9px;color:#b0a898}
-.card-arrow{display:flex;align-items:center;padding:0 10px 0 4px;color:var(--muted);font-size:16px;flex-shrink:0}
+/* Note tape at top */
+.sticky-tape{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:40px;height:14px;background:rgba(255,255,255,.55);border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
 
-/* ── CTA strip ── */
-.cta-strip{background:var(--green);border-radius:16px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;overflow:hidden}
-.cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 50%,rgba(200,146,10,.15),transparent 60%);pointer-events:none}
-.cta-text strong{font-size:13px;font-weight:800;color:#fff;display:block;margin-bottom:2px}
-.cta-text p{font-size:11px;color:rgba(255,255,255,.55)}
-.cta-btn{background:#d8c47a;color:var(--green);font-weight:900;font-size:11px;padding:8px 14px;border-radius:999px;white-space:nowrap;flex-shrink:0;transition:background .15s;text-decoration:none;position:relative}
-.cta-btn:hover{background:#fff}
+.sticky-cat{font-family:"DM Mono",monospace;font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(27,23,19,.45);margin-bottom:6px}
+.sticky-title{font-family:"Caveat",cursive;font-size:19px;font-weight:600;color:#1b1713;line-height:1.25;margin-bottom:8px;flex:1}
+.sticky-excerpt{font-size:11px;color:rgba(27,23,19,.6);line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sticky-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.sticky-badge{font-family:"DM Mono",monospace;font-size:9px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.sticky-badge.approved{background:rgba(31,58,46,.12);color:#1f3a2e}
+.sticky-badge.testing{background:rgba(200,146,10,.15);color:#7a5c00}
+.sticky-date{font-family:"DM Mono",monospace;font-size:9px;color:rgba(27,23,19,.35)}
 
-/* ── Empty state ── */
-.empty{text-align:center;padding:40px 16px;color:var(--muted)}
-.empty-icon{font-size:32px;margin-bottom:10px}
+/* Code strip on sticky */
+.sticky-code{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(27,23,19,.15);display:flex;align-items:center;justify-content:space-between;gap:6px}
+.sticky-code-label{font-size:10px;color:rgba(27,23,19,.5)}
+.sticky-code-val{font-family:"DM Mono",monospace;font-size:11px;font-weight:500;color:#1f3a2e}
+
+/* Empty state */
+.empty{text-align:center;padding:40px 16px;color:var(--muted);grid-column:1/-1}
+.empty-icon{font-size:28px;margin-bottom:8px}
 .empty p{font-size:13px;line-height:1.6}
 
-/* ── Footer ── */
+/* Footer */
 footer{background:var(--green);padding:24px 16px 20px;margin-top:auto}
 .footer-inner{max-width:620px;margin:0 auto}
 .footer-brand{font-size:14px;font-weight:800;color:#fff;margin-bottom:4px}
@@ -171,118 +147,37 @@ footer{background:var(--green);padding:24px 16px 20px;margin-top:auto}
 
 @media(max-width:380px){
   .nav-logo span{display:none}
-  .nav-tab{font-size:12px;padding:5px 10px}
-  .lab-hero h1{font-size:22px}
-  .hero-stats{gap:12px}
+  .notes-board{grid-template-columns:1fr}
+  .sticky:nth-child(odd),.sticky:nth-child(even){transform:rotate(0deg)}
 }
-
-/* ── Beaker splash screen ── */
-#splash{position:fixed;inset:0;z-index:9999;background:#1f3a2e;overflow:hidden;pointer-events:none}
-#splash.done{animation:splashFade .9s ease forwards}
-@keyframes splashFade{to{opacity:0;visibility:hidden}}
-
-/* Labels centered */
-.splash-label{position:fixed;bottom:18%;left:50%;transform:translateX(-50%);font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap;opacity:0;animation:labelFade .5s ease .1s forwards}
-.splash-sublabel{position:fixed;bottom:15%;left:50%;transform:translateX(-50%);font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(110,233,138,.45);white-space:nowrap;opacity:0;animation:labelFade .5s ease .4s forwards}
-@keyframes labelFade{to{opacity:1}}
-
-/* Beaker falling */
-.beaker-wrap{position:fixed;left:50%;top:-160px;transform:translateX(-50%);width:80px;z-index:10;will-change:transform}
-.beaker-wrap.fall{animation:beakerFall 1.4s cubic-bezier(.2,0,1,1) forwards}
-@keyframes beakerFall{
-  0%{top:-160px;transform:translateX(-50%) rotate(-6deg)}
-  70%{top:calc(50% - 100px);transform:translateX(-50%) rotate(-6deg)}
-  85%{top:calc(50% - 70px);transform:translateX(-50%) rotate(2deg)}
-  100%{top:calc(50% - 55px);transform:translateX(-50%) rotate(4deg)}
-}
-.beaker-wrap.smash{visibility:hidden}
-
-/* Impact flash */
-.impact-flash{position:fixed;inset:0;background:rgba(180,255,200,.15);opacity:0;pointer-events:none}
-.impact-flash.go{animation:flash .15s ease forwards}
-@keyframes flash{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
-
-/* Glass shards */
-.shard{position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0}
-
-/* Liquid splat burst */
-.liquid-burst{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:180px;height:60px;background:radial-gradient(ellipse,rgba(110,233,138,.7) 0%,rgba(78,200,120,.3) 50%,transparent 70%);border-radius:50%;filter:blur(6px);opacity:0}
-.liquid-burst.go{animation:burstOut .4s ease forwards}
-@keyframes burstOut{
-  0%{transform:translate(-50%,-50%) scale(0);opacity:0}
-  50%{transform:translate(-50%,-50%) scale(1.6);opacity:1}
-  100%{transform:translate(-50%,-50%) scale(2.2);opacity:.4}
-}
-
-/* Liquid drips falling from smash point */
-.ldrip{position:fixed;left:50%;top:50%;width:6px;border-radius:3px;background:rgba(110,233,138,.8);opacity:0;transform-origin:top}
-.ldrip.go{animation:ldripFall ease-in forwards}
-@keyframes ldripFall{
-  0%{height:0;opacity:.9}
-  100%{height:45vh;opacity:0}
-}
-.ld1{margin-left:-40px;animation-duration:.9s}
-.ld2{margin-left:-10px;animation-duration:1.1s}
-.ld3{margin-left:20px;animation-duration:.8s}
-.ld4{margin-left:35px;animation-duration:1s}
-
-/* Full screen smoke */
-.smoke-fill{position:fixed;inset:0;opacity:0;background:radial-gradient(ellipse at 50% 50%,rgba(110,233,138,.2) 0%,rgba(80,180,110,.08) 55%,transparent 75%)}
-.smoke-fill.go{animation:smokeBoom 1.4s ease forwards}
-@keyframes smokeBoom{
-  0%{opacity:0;transform:scale(.1)}
-  50%{opacity:1;transform:scale(1.1)}
-  100%{opacity:.7;transform:scale(1)}
-}
-.cloud{position:fixed;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)}
-.cloud.go{animation:cloudRise ease forwards}
-@keyframes cloudRise{
-  0%{transform:translateY(0) scale(.2);opacity:0}
-  25%{opacity:.8}
-  100%{transform:translateY(-60vh) scale(2.4);opacity:0}
-}
-.c1{width:220px;height:220px;left:5%;top:50%;animation-duration:2.4s}
-.c2{width:280px;height:280px;left:30%;top:50%;animation-duration:2.8s}
-.c3{width:200px;height:200px;left:60%;top:50%;animation-duration:2.2s}
-.c4{width:320px;height:320px;left:15%;top:50%;animation-duration:3s}
-.c5{width:240px;height:240px;left:50%;top:50%;animation-duration:2.6s}
-.c6{width:160px;height:160px;left:75%;top:50%;animation-duration:2s}
-.c7{width:260px;height:260px;left:-5%;top:50%;animation-duration:2.5s}
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<!-- Beaker splash screen -->
-<div id="splash" role="presentation" aria-hidden="true">
-
-  <div class="impact-flash" id="impactFlash"></div>
-  <div class="smoke-fill" id="smokeFill"></div>
-  <div class="cloud c1" id="c1"></div>
-  <div class="cloud c2" id="c2"></div>
-  <div class="cloud c3" id="c3"></div>
-  <div class="cloud c4" id="c4"></div>
-  <div class="cloud c5" id="c5"></div>
-  <div class="cloud c6" id="c6"></div>
-  <div class="cloud c7" id="c7"></div>
-  <div class="liquid-burst" id="liquidBurst"></div>
-  <div class="ldrip ld1" id="ld1"></div>
-  <div class="ldrip ld2" id="ld2"></div>
-  <div class="ldrip ld3" id="ld3"></div>
-  <div class="ldrip ld4" id="ld4"></div>
-  <div class="shard sh1" id="sh1"></div>
-  <div class="shard sh2" id="sh2"></div>
-  <div class="shard sh3" id="sh3"></div>
-  <div class="shard sh4" id="sh4"></div>
-  <div class="shard sh5" id="sh5"></div>
-  <div class="shard sh6" id="sh6"></div>
-  <div class="shard sh7" id="sh7"></div>
-  <div class="shard sh8" id="sh8"></div>
-  <div class="shard sh9" id="sh9"></div>
-  <div class="shard sh10" id="sh10"></div>
-  <div class="shard sh11" id="sh11"></div>
-  <div class="shard sh12" id="sh12"></div>
-
-  <div class="beaker-wrap" id="beakerWrap">
+<!-- Beaker splash -->
+<div id="splash" role="presentation" aria-hidden="true" style="position:fixed;inset:0;z-index:9999;background:#1f3a2e;overflow:hidden;pointer-events:none">
+  <div id="impactFlash" style="position:fixed;inset:0;background:rgba(180,255,200,.15);opacity:0;pointer-events:none"></div>
+  <div id="smokeFill" style="position:fixed;inset:0;opacity:0;background:radial-gradient(ellipse at 50% 50%,rgba(110,233,138,.2) 0%,rgba(80,180,110,.08) 55%,transparent 75%)"></div>
+  <div class="cloud" id="c1" style="position:fixed;width:220px;height:220px;left:5%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div class="cloud" id="c2" style="position:fixed;width:280px;height:280px;left:30%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div class="cloud" id="c3" style="position:fixed;width:200px;height:200px;left:60%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div class="cloud" id="c4" style="position:fixed;width:320px;height:320px;left:15%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div class="cloud" id="c5" style="position:fixed;width:240px;height:240px;left:50%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div class="cloud" id="c6" style="position:fixed;width:160px;height:160px;left:75%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div class="cloud" id="c7" style="position:fixed;width:260px;height:260px;left:-5%;top:50%;border-radius:50%;filter:blur(30px);opacity:0;background:rgba(130,220,160,.12)"></div>
+  <div id="liquidBurst" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:180px;height:60px;background:radial-gradient(ellipse,rgba(110,233,138,.7) 0%,rgba(78,200,120,.3) 50%,transparent 70%);border-radius:50%;filter:blur(6px);opacity:0"></div>
+  <div id="sh1" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:18px;height:6px"></div>
+  <div id="sh2" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:14px;height:4px"></div>
+  <div id="sh3" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:10px;height:4px"></div>
+  <div id="sh4" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:20px;height:5px"></div>
+  <div id="sh5" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:8px;height:3px"></div>
+  <div id="sh6" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:16px;height:5px"></div>
+  <div id="sh7" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:11px;height:4px"></div>
+  <div id="sh8" style="position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0;width:9px;height:3px"></div>
+  <div id="beakerWrap" style="position:fixed;left:50%;top:-160px;transform:translateX(-50%);width:80px;z-index:10;will-change:transform">
     <svg viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:80px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.5))">
       <path d="M24 8 L24 58 L6 100 Q3 110 10 113 L70 113 Q77 110 74 100 L56 58 L56 8 Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linejoin="round"/>
       <path d="M26 64 L10 100 Q7 109 14 112 L66 112 Q73 109 70 100 L54 64 Z" fill="rgba(110,233,138,0.55)"/>
@@ -292,14 +187,14 @@ footer{background:var(--green);padding:24px 16px 20px;margin-top:auto}
       <line x1="30" y1="12" x2="30" y2="55" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
     </svg>
   </div>
-
-  <p class="splash-label">Remy's Lab</p>
-  <p class="splash-sublabel">Loading test notes…</p>
+  <p style="position:fixed;bottom:18%;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap;opacity:0;animation:lf .5s ease .1s forwards">Remy's Lab</p>
+  <p style="position:fixed;bottom:15%;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(110,233,138,.45);white-space:nowrap;opacity:0;animation:lf .5s ease .4s forwards">Loading test notes…</p>
+  <style>
+    @keyframes lf{to{opacity:1}}
+    #splash.done{animation:sf .9s ease forwards}
+    @keyframes sf{to{opacity:0;visibility:hidden}}
+  </style>
 </div>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav>
   <div class="nav-inner">
@@ -314,7 +209,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </nav>
 
-<!-- Hero -->
 <div class="lab-hero">
   <div class="clipboard-paper">
     <div class="cb-inner">
@@ -325,7 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="cb-sub">Written after Remy actually uses the stuff. Honest takes, no fluff.</p>
       <div class="cb-stats">
         <div class="cb-stat">
-          <span class="cb-stat-val" id="statCount">1</span>
+          <span class="cb-stat-val" id="statCount">2</span>
           <span class="cb-stat-label">Tests filed</span>
         </div>
         <div class="cb-stat">
@@ -336,7 +230,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- Search + Filter -->
 <div class="controls">
   <div class="controls-inner">
     <div class="search-row">
@@ -359,61 +252,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <main>
-<div class="post-list" id="postList">
-
+<div class="notes-board" id="postList">
   <p class="results-label" id="resultsLabel"></p>
 
   <!-- ============================================================
-       TO ADD A POST: copy a post-card block and update:
-         data-category  = Walk Gear | Toys | Treats | Cleaning | Health | Accessories
-         data-result    = approved | testing | pass
-         data-title     = post title (for search)
-         href           = link to the post page
+       TO ADD A NOTE: copy a .sticky block and update:
+         data-category = Walk Gear | Toys | Treats | Cleaning | Health | Accessories
+         data-result   = approved | testing
+         data-title    = searchable keywords
+         color class   = yellow | green | blue | pink | orange
+         href          = post page url
   ============================================================ -->
 
-  <!-- FEATURED: Pack Leashes -->
-  <a class="post-featured" href="/blog/pack-leashes-test-notes.html"
+  <!-- Pack Leashes -->
+  <a class="sticky yellow" href="/blog/pack-leashes-test-notes.html"
      data-category="Walk Gear" data-result="approved"
-     data-title="pack leashes hands-free leash remy test notes walk gear">
-    <div class="featured-top">
-      <div class="featured-header">
-        <span class="featured-tag">Latest test · Walk Gear</span>
-        <span class="result-badge approved">🦴 Remy approved</span>
-      </div>
-      <h2>Pack Leashes Hands-Free Leash: Remy's Test Notes</h2>
-      <p class="excerpt">Put the hands-free bungee leash through a full month of trail runs and neighborhood walks. Here's what Remy actually thought.</p>
+     data-title="pack leashes hands-free leash walk gear remy test">
+    <div class="sticky-tape"></div>
+    <div class="sticky-cat">Walk Gear</div>
+    <div class="sticky-title">Pack Leashes Hands-Free Leash</div>
+    <div class="sticky-excerpt">Put through a full month of trail runs and neighborhood walks. Here's what Remy actually thought.</div>
+    <div class="sticky-footer">
+      <span class="sticky-badge approved">🦴 Approved</span>
+      <span class="sticky-date">Jan 2025</span>
     </div>
-    <div class="featured-foot">
-      <span class="featured-foot-meta">Jan 15 2025 · Walk Gear</span>
-      <span class="read-link">Read notes →</span>
-    </div>
-    <div class="featured-code-row">
-      <span class="featured-code-label">20% off with code</span>
-      <span class="featured-code-val">REMYSLAB20</span>
-      <span class="featured-code-note">· use if you buy</span>
+    <div class="sticky-code">
+      <span class="sticky-code-label">20% off with code</span>
+      <span class="sticky-code-val">REMYSLAB20</span>
     </div>
   </a>
 
-  <!-- BLACK+DECKER Pet Hair Roller -->
-  <a class="post-card" href="/blog/black-decker-pet-hair-roller-review.html"
+  <!-- BLACK+DECKER -->
+  <a class="sticky green" href="/blog/black-decker-pet-hair-roller-review.html"
      data-category="Cleaning" data-result="approved"
-     data-title="black decker pet hair roller remover cleaning couch clothes comforter lab review">
-    <span class="card-stripe stripe-cleaning"></span>
-    <div class="card-body">
-      <div class="card-top">
-        <span class="card-cat">Cleaning</span>
-        <span class="result-badge approved">🦴 Remy approved</span>
-      </div>
-      <h3>BLACK+DECKER Pet Hair Roller: Remy's Test Notes</h3>
-      <p>Tested on black felt couches, a comforter, and clothes. At $16 it's a solid swap if you're tired of buying lint roller refills.</p>
-      <div class="card-foot">
-        <span class="card-date">May 29 2025 · Cleaning</span>
-        <span class="read-link" style="font-size:12px;font-weight:800;color:var(--green)">Read notes →</span>
-      </div>
+     data-title="black decker pet hair roller cleaning couch clothes comforter">
+    <div class="sticky-tape"></div>
+    <div class="sticky-cat">Cleaning</div>
+    <div class="sticky-title">BLACK+DECKER Pet Hair Roller</div>
+    <div class="sticky-excerpt">Tested on black felt couch, regular couch, comforter, and clothes. Great swap for lint rollers.</div>
+    <div class="sticky-footer">
+      <span class="sticky-badge approved">🦴 Approved</span>
+      <span class="sticky-date">May 2025</span>
     </div>
-    <div class="card-arrow">›</div>
   </a>
-
 
 </div>
 </main>
@@ -435,19 +316,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
+// Beaker splash
+(function(){
+  var splash=document.getElementById('splash');
+  var beaker=document.getElementById('beakerWrap');
+  var clouds=['c1','c2','c3','c4','c5','c6','c7'];
+  var shards=[[-180,-130,18,6,800],[170,-110,14,4,700],[-130,-190,10,4,900],[210,-150,20,5,750],[-90,-210,8,3,850],[110,-200,16,5,800],[-210,-70,11,4,700],[230,-90,9,3,900]];
+  function go(id){var el=document.getElementById(id);if(el)el.classList.add('go');}
+  var cx=window.innerWidth/2,cy=window.innerHeight/2;
+  shards.forEach(function(d,i){
+    var el=document.getElementById('sh'+(i+1));
+    if(!el)return;
+    el.style.left=cx+'px';el.style.top=cy+'px';
+    el.style.width=d[2]+'px';el.style.height=d[3]+'px';
+  });
+  setTimeout(function(){
+    beaker.style.animation='beakerFall 1.4s cubic-bezier(.2,0,1,1) forwards';
+  },100);
+  setTimeout(function(){
+    beaker.style.visibility='hidden';
+    var flash=document.getElementById('impactFlash');
+    flash.style.animation='flash .15s ease forwards';
+    var burst=document.getElementById('liquidBurst');
+    burst.style.animation='burstOut .4s ease forwards';
+    shards.forEach(function(d,i){
+      var el=document.getElementById('sh'+(i+1));
+      if(!el)return;
+      el.style.opacity='1';
+      el.style.transform='translate(-50%,-50%) rotate(0deg)';
+      el.getBoundingClientRect();
+      el.style.transition='transform '+d[4]+'ms ease-out,opacity '+d[4]+'ms ease-out';
+      el.style.transform='translate(calc(-50% + '+d[0]+'px),calc(-50% + '+d[1]+'px)) rotate(360deg) scale(.3)';
+      el.style.opacity='0';
+    });
+  },1550);
+  setTimeout(function(){
+    var smoke=document.getElementById('smokeFill');
+    smoke.style.animation='smokeBoom 1.4s ease forwards';
+    clouds.forEach(function(id,i){
+      var el=document.getElementById(id);
+      if(!el)return;
+      setTimeout(function(){el.style.animation='cloudRise '+(2.2+i*.2)+'s ease forwards';},i*80);
+    });
+  },1700);
+  setTimeout(function(){
+    splash.classList.add('done');
+    setTimeout(function(){splash.style.display='none';},900);
+  },2600);
+})();
+
+// Keyframes injected via JS for splash
+var ks=document.createElement('style');
+ks.textContent='@keyframes beakerFall{0%{top:-160px;transform:translateX(-50%) rotate(-6deg)}70%{top:calc(50% - 100px);transform:translateX(-50%) rotate(-6deg)}100%{top:calc(50% - 55px);transform:translateX(-50%) rotate(4deg)}}@keyframes flash{0%{opacity:0}40%{opacity:1}100%{opacity:0}}@keyframes burstOut{0%{transform:translate(-50%,-50%) scale(0);opacity:0}50%{transform:translate(-50%,-50%) scale(1.6);opacity:1}100%{transform:translate(-50%,-50%) scale(2.2);opacity:.4}}@keyframes smokeBoom{0%{opacity:0;transform:scale(.1)}50%{opacity:1;transform:scale(1.1)}100%{opacity:.7;transform:scale(1)}}@keyframes cloudRise{0%{transform:translateY(0) scale(.2);opacity:0}25%{opacity:.8}100%{transform:translateY(-60vh) scale(2.4);opacity:0}}';
+document.head.appendChild(ks);
+
 // Affiliate tracking
-function getNetwork(url){
-  if(url.includes('amazon'))return 'Amazon Associates';
-  if(url.includes('packleashes'))return 'Pack Leashes';
-  if(url.includes('brooksandroo'))return 'Brooks & Roo';
-  return 'Other';
-}
 document.addEventListener('click',function(e){
   var link=e.target.closest('a.affiliate-link,a[rel*="sponsored"]');
   if(!link)return;
   var href=link.getAttribute('href')||'';
   window.dataLayer=window.dataLayer||[];
-  window.dataLayer.push({event:'affiliate_click',product_name:link.dataset.product||'',product_category:link.dataset.category||'',lab_result:link.dataset.result||'',button_text:link.textContent.trim(),button_location:link.dataset.placement||'blog_index',affiliate_network:link.dataset.network||getNetwork(href),discount_code:link.dataset.discount||'',affiliate_url:href});
+  window.dataLayer.push({event:'affiliate_click',product_name:link.dataset.product||'',product_category:link.dataset.category||'',lab_result:link.dataset.result||'',button_text:link.textContent.trim(),button_location:link.dataset.placement||'blog_index',affiliate_network:'Other',discount_code:link.dataset.discount||'',affiliate_url:href});
 });
 
 // Search + filter
@@ -456,26 +385,20 @@ document.addEventListener('click',function(e){
   var searchClear=document.getElementById('searchClear');
   var resultsLabel=document.getElementById('resultsLabel');
   var pills=document.querySelectorAll('.filter-pill');
-  var posts=document.querySelectorAll('#postList [data-category]:not([data-utility])');
-  var ctas=document.querySelectorAll('[data-utility]');
+  var notes=document.querySelectorAll('.sticky');
   var activeFilter='all';
   var searchQuery='';
 
-  // Set stat count
-  document.getElementById('statCount').textContent=posts.length;
-
-
   function applyFilters(){
     var visible=0;
-    posts.forEach(function(p){
-      var cat=p.dataset.category||'';
-      var title=(p.dataset.title||p.textContent||'').toLowerCase();
+    notes.forEach(function(n){
+      var cat=n.dataset.category||'';
+      var title=(n.dataset.title||n.textContent||'').toLowerCase();
       var catMatch=activeFilter==='all'||cat===activeFilter;
       var searchMatch=searchQuery===''||title.indexOf(searchQuery)>-1;
-      p.style.display=(catMatch&&searchMatch)?'':'none';
+      n.style.display=(catMatch&&searchMatch)?'flex':'none';
       if(catMatch&&searchMatch)visible++;
     });
-    ctas.forEach(function(c){c.style.display=(searchQuery===''&&activeFilter==='all')?'':'none';});
     if(searchQuery!==''){
       resultsLabel.textContent=visible+' note'+(visible!==1?'s':'')+' for "'+searchQuery+'"';
     } else if(activeFilter!=='all'){
@@ -485,12 +408,7 @@ document.addEventListener('click',function(e){
     }
     var empty=document.getElementById('emptyState');
     if(visible===0){
-      if(!empty){
-        var d=document.createElement('div');
-        d.id='emptyState';d.className='empty';
-        d.innerHTML='<div class="empty-icon">🧪</div><p>No notes filed yet for this category.<br/>Remy is working on it.</p>';
-        document.getElementById('postList').appendChild(d);
-      }
+      if(!empty){var d=document.createElement('div');d.id='emptyState';d.className='empty';d.innerHTML='<div class="empty-icon">🧪</div><p>No notes here yet.<br/>Remy is working on it.</p>';document.getElementById('postList').appendChild(d);}
     } else if(empty){empty.remove();}
   }
 
@@ -517,84 +435,6 @@ document.addEventListener('click',function(e){
   });
 
   applyFilters();
-})();
-</script>
-
-<script>
-(function(){
-  var splash = document.getElementById('splash');
-  var beaker = document.getElementById('beakerWrap');
-  var clouds = ['c1','c2','c3','c4','c5','c6','c7'];
-  var ldrips = ['ld1','ld2','ld3','ld4'];
-  function go(id){ var el=document.getElementById(id); if(el) el.classList.add('go'); }
-
-  // Shard data: [dx, dy, rotation, width, height, duration]
-  var shardData = [
-    [-180,-130,320,18,6,800],
-    [ 170,-110,-280,14,4,700],
-    [-130,-190,400,10,4,900],
-    [ 210,-150,-360,20,5,750],
-    [ -90,-210,300, 8,3,850],
-    [ 110,-200,-420,16,5,800],
-    [-210, -70,260,11,4,700],
-    [ 230, -90,-300, 9,3,900],
-    [ -70,-230,380,13,4,650],
-    [ 150,-220,-340, 7,3,800],
-    [-250, -40,200,15,5,950],
-    [ 260, -60,-250,10,4,700]
-  ];
-
-  // Create shards dynamically in JS so we can use keyframes with real values
-  var cx = window.innerWidth/2;
-  var cy = window.innerHeight/2;
-  shardData.forEach(function(d, i){
-    var el = document.getElementById('sh'+(i+1));
-    if(!el) return;
-    el.style.left = cx + 'px';
-    el.style.top  = cy + 'px';
-    el.style.width  = d[3]+'px';
-    el.style.height = d[4]+'px';
-    el.style.opacity = '0';
-  });
-
-  // 1. Beaker falls slowly
-  setTimeout(function(){ beaker.classList.add('fall'); }, 100);
-
-  // 2. Smash at end of fall
-  setTimeout(function(){
-    beaker.classList.add('smash');
-    go('impactFlash');
-    go('liquidBurst');
-    ldrips.forEach(go);
-
-    // Animate each shard with JS
-    shardData.forEach(function(d, i){
-      var el = document.getElementById('sh'+(i+1));
-      if(!el) return;
-      var dur = d[5];
-      el.style.transition = 'none';
-      el.style.opacity = '1';
-      el.style.transform = 'translate(-50%,-50%) rotate(0deg)';
-      // Force reflow
-      el.getBoundingClientRect();
-      el.style.transition = 'transform '+dur+'ms ease-out, opacity '+dur+'ms ease-out';
-      el.style.transform = 'translate(calc(-50% + '+d[0]+'px), calc(-50% + '+d[1]+'px)) rotate('+d[2]+'deg) scale(0.3)';
-      el.style.opacity = '0';
-    });
-
-  }, 1550);
-
-  // 3. Smoke fills screen
-  setTimeout(function(){
-    go('smokeFill');
-    clouds.forEach(go);
-  }, 1700);
-
-  // 4. Fade out
-  setTimeout(function(){
-    splash.classList.add('done');
-    setTimeout(function(){ splash.style.display='none'; }, 900);
-  }, 2600);
 })();
 </script>
 </body>
