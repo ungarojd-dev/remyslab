@@ -173,38 +173,23 @@ footer{background:var(--green);padding:24px 16px 20px;margin-top:auto}
 @keyframes labelFade{to{opacity:1}}
 
 /* Beaker falling */
-.beaker-wrap{position:fixed;left:50%;top:-160px;transform:translateX(-50%);width:80px;z-index:10}
-.beaker-wrap.fall{animation:beakerFall .55s cubic-bezier(.4,0,1,1) forwards}
+.beaker-wrap{position:fixed;left:50%;top:-160px;transform:translateX(-50%);width:80px;z-index:10;will-change:transform}
+.beaker-wrap.fall{animation:beakerFall 1.4s cubic-bezier(.2,0,1,1) forwards}
 @keyframes beakerFall{
-  0%{top:-160px;transform:translateX(-50%) rotate(-8deg)}
-  100%{top:calc(50% - 60px);transform:translateX(-50%) rotate(5deg)}
+  0%{top:-160px;transform:translateX(-50%) rotate(-6deg)}
+  70%{top:calc(50% - 100px);transform:translateX(-50%) rotate(-6deg)}
+  85%{top:calc(50% - 70px);transform:translateX(-50%) rotate(2deg)}
+  100%{top:calc(50% - 55px);transform:translateX(-50%) rotate(4deg)}
 }
-.beaker-wrap.smash{animation:none;top:calc(50% - 60px);transform:translateX(-50%) rotate(5deg);opacity:0}
+.beaker-wrap.smash{visibility:hidden}
 
 /* Impact flash */
 .impact-flash{position:fixed;inset:0;background:rgba(180,255,200,.15);opacity:0;pointer-events:none}
 .impact-flash.go{animation:flash .15s ease forwards}
 @keyframes flash{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
 
-/* Glass shards — each flies in different direction */
-.shard{position:fixed;left:50%;top:50%;width:12px;height:5px;background:rgba(200,240,220,.55);border-radius:2px;opacity:0;transform-origin:center}
-.shard.go{animation:shardFly ease-out forwards}
-@keyframes shardFly{
-  0%{opacity:1;transform:translate(-50%,-50%) rotate(0deg) scale(1)}
-  100%{opacity:0;transform:var(--fly) rotate(var(--rot)) scale(.4)}
-}
-.sh1{--fly:translate(-180px,-120px);--rot:320deg;width:18px;height:6px;animation-duration:.8s}
-.sh2{--fly:translate(160px,-100px);--rot:-280deg;width:14px;height:4px;animation-duration:.7s}
-.sh3{--fly:translate(-120px,-180px);--rot:400deg;width:10px;height:4px;animation-duration:.9s}
-.sh4{--fly:translate(200px,-140px);--rot:-360deg;width:20px;height:5px;animation-duration:.75s}
-.sh5{--fly:translate(-80px,-200px);--rot:300deg;width:8px;height:3px;animation-duration:.85s}
-.sh6{--fly:translate(100px,-190px);--rot:-420deg;width:16px;height:5px;animation-duration:.8s}
-.sh7{--fly:translate(-200px,-60px);--rot:260deg;width:11px;height:4px;animation-duration:.7s}
-.sh8{--fly:translate(220px,-80px);--rot:-300deg;width:9px;height:3px;animation-duration:.9s}
-.sh9{--fly:translate(-60px,-220px);--rot:380deg;width:13px;height:4px;animation-duration:.65s}
-.sh10{--fly:translate(140px,-210px);--rot:-340deg;width:7px;height:3px;animation-duration:.8s}
-.sh11{--fly:translate(-240px,-30px);--rot:200deg;width:15px;height:5px;animation-duration:.95s}
-.sh12{--fly:translate(250px,-50px);--rot:-250deg;width:10px;height:4px;animation-duration:.7s}
+/* Glass shards */
+.shard{position:fixed;background:rgba(210,245,225,.6);border-radius:2px;opacity:0}
 
 /* Liquid splat burst */
 .liquid-burst{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:180px;height:60px;background:radial-gradient(ellipse,rgba(110,233,138,.7) 0%,rgba(78,200,120,.3) 50%,transparent 70%);border-radius:50%;filter:blur(6px);opacity:0}
@@ -507,37 +492,79 @@ document.addEventListener('click',function(e){
 
 <script>
 (function(){
-  var splash  = document.getElementById('splash');
-  var beaker  = document.getElementById('beakerWrap');
-  var clouds  = ['c1','c2','c3','c4','c5','c6','c7'];
-  var shards  = ['sh1','sh2','sh3','sh4','sh5','sh6','sh7','sh8','sh9','sh10','sh11','sh12'];
-  var ldrips  = ['ld1','ld2','ld3','ld4'];
+  var splash = document.getElementById('splash');
+  var beaker = document.getElementById('beakerWrap');
+  var clouds = ['c1','c2','c3','c4','c5','c6','c7'];
+  var ldrips = ['ld1','ld2','ld3','ld4'];
+  function go(id){ var el=document.getElementById(id); if(el) el.classList.add('go'); }
 
-  function go(id){ document.getElementById(id).classList.add('go'); }
+  // Shard data: [dx, dy, rotation, width, height, duration]
+  var shardData = [
+    [-180,-130,320,18,6,800],
+    [ 170,-110,-280,14,4,700],
+    [-130,-190,400,10,4,900],
+    [ 210,-150,-360,20,5,750],
+    [ -90,-210,300, 8,3,850],
+    [ 110,-200,-420,16,5,800],
+    [-210, -70,260,11,4,700],
+    [ 230, -90,-300, 9,3,900],
+    [ -70,-230,380,13,4,650],
+    [ 150,-220,-340, 7,3,800],
+    [-250, -40,200,15,5,950],
+    [ 260, -60,-250,10,4,700]
+  ];
 
-  // 1. Beaker falls
-  setTimeout(function(){ beaker.classList.add('fall'); }, 200);
+  // Create shards dynamically in JS so we can use keyframes with real values
+  var cx = window.innerWidth/2;
+  var cy = window.innerHeight/2;
+  shardData.forEach(function(d, i){
+    var el = document.getElementById('sh'+(i+1));
+    if(!el) return;
+    el.style.left = cx + 'px';
+    el.style.top  = cy + 'px';
+    el.style.width  = d[3]+'px';
+    el.style.height = d[4]+'px';
+    el.style.opacity = '0';
+  });
 
-  // 2. Impact — hide beaker, fire shards, liquid burst, drips, flash
+  // 1. Beaker falls slowly
+  setTimeout(function(){ beaker.classList.add('fall'); }, 100);
+
+  // 2. Smash at end of fall
   setTimeout(function(){
     beaker.classList.add('smash');
     go('impactFlash');
     go('liquidBurst');
-    shards.forEach(go);
     ldrips.forEach(go);
-  }, 760);
+
+    // Animate each shard with JS
+    shardData.forEach(function(d, i){
+      var el = document.getElementById('sh'+(i+1));
+      if(!el) return;
+      var dur = d[5];
+      el.style.transition = 'none';
+      el.style.opacity = '1';
+      el.style.transform = 'translate(-50%,-50%) rotate(0deg)';
+      // Force reflow
+      el.getBoundingClientRect();
+      el.style.transition = 'transform '+dur+'ms ease-out, opacity '+dur+'ms ease-out';
+      el.style.transform = 'translate(calc(-50% + '+d[0]+'px), calc(-50% + '+d[1]+'px)) rotate('+d[2]+'deg) scale(0.3)';
+      el.style.opacity = '0';
+    });
+
+  }, 1550);
 
   // 3. Smoke fills screen
   setTimeout(function(){
     go('smokeFill');
     clouds.forEach(go);
-  }, 900);
+  }, 1700);
 
   // 4. Fade out
   setTimeout(function(){
     splash.classList.add('done');
     setTimeout(function(){ splash.style.display='none'; }, 900);
-  }, 3800);
+  }, 4200);
 })();
 </script>
 </body>
