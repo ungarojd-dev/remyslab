@@ -2,29 +2,27 @@
 
 > Dog products tested by an actual Lab.
 
-Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find current product notes, partner links, discount codes, and written test notes without a hard sell.
+Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find product notes, partner links, discount codes, and practical dog owner guides without a hard sell.
 
 ## Pages
 
-- [Remy's Lab home](https://remyslab.com/): Current dog product partner links, discount codes, and affiliate disclosure.
-- [Lab Notes blog](https://remyslab.com/blog/): Written test notes and honest product write-ups from Remy's real-world testing.
+- [Remy's Lab home](https://remyslab.com/): Current product links, discount codes, and affiliate disclosure.
+- [Lab Notes](https://remyslab.com/blog/): Written notes after Remy actually uses a product.
+- [Dog Owner Guides](https://remyslab.com/guides/): Practical evergreen answers for common dog owner problems.
 
-## Lab Notes posts
+## Lab Notes
 
-- [Pack Leashes: Remy's Test Notes](https://remyslab.com/blog/pack-leashes-test-notes.html): Hands-free bungee leash tested over a full month of trail runs and neighborhood walks.
+- [FURemover Pet Hair Broom: Remy's Test Notes](https://remyslab.com/blog/furemover-pet-hair-broom-review.html): Rubber bristles pull embedded Lab hair out of carpet and work well on hardwood floors too.
+- [BLACK+DECKER Pet Hair Roller: Remy's Test Notes](https://remyslab.com/blog/black-decker-pet-hair-roller-review.html): Tested on a black felt couch, regular couch, comforter, and clothes. Great swap for lint rollers.
+
+## Dog Owner Guides
+
+- No Dog Owner Guides are currently published.
 
 ## Current partner brands
 
 - Pack Leashes: Current partner. Use code REMYSLAB20 for 20% off at packleashes.com.
 - Brooks & Roo: Current partner. Code coming soon.
-
-## Brand positioning
-
-Remy's Lab is not a traditional product review blog. It is a TikTok follow-up page for people who saw a product test and want a simple place to find the product, test notes, and discount code.
-
-## Tone
-
-Useful, casual, low pressure, and transparent. Avoid hard-selling language. Product links should feel like helpful notes, not ads.
 
 ## Social
 
