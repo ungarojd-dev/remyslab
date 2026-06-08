@@ -146,7 +146,8 @@ img{display:block;max-width:100%}
 .codes-intro{font-size:12px;color:var(--muted);line-height:1.45;margin:0 2px 2px}
 .partner-code-card{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:0 4px 16px rgba(27,23,19,.04)}
 .partner-code-main{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:10px}
-.partner-logo{font-family:"DM Mono",monospace;font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--green);background:var(--approved-bg);border-color:var(--approved-border)}
+.partner-logo{padding:4px;background:#fff;border-color:#eadff0}
+.partner-logo img{max-width:100%;max-height:40px;object-fit:contain}
 .partner-copy{min-width:0}
 .partner-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:1px}
 .partner-copy h2{font-size:14px;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:1px}
@@ -228,7 +229,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="codes-intro">Codes from brands we work with. Use one if it helps, no pressure.</p>
     <article class="partner-code-card">
       <div class="partner-code-main">
-        <span class="logo-box partner-logo" aria-hidden="true">LP</span>
+        <span class="logo-box partner-logo"><img src="/assets/logos/le-puppino-logo.svg" alt="Le Puppino logo" width="320" height="320" loading="lazy" decoding="async"/></span>
         <span class="partner-copy">
           <span class="partner-kicker">Current partner</span>
           <h2>Le Puppino</h2>
@@ -275,6 +276,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          data-network     = affiliate network name
   ============================================================ -->
   <section aria-label="Remy's Lab product links" class="link-list" id="productList">
+
+    <!-- Mighty Paw Naturals 12-Inch Bully Sticks ── treats ── approved -->
+    <div class="product-group" data-category="treats" data-searchname="mighty paw naturals bully sticks 12 inch dog chew grass fed beef single ingredient low odor lower odor treat">
+      <a class="link-card affiliate-link" href="https://amzn.to/4xgL7NE" target="_blank" rel="nofollow sponsored"
+         data-product="Mighty Paw Naturals 12-Inch Bully Sticks" data-category="treats" data-result="approved"
+         data-placement="main_link_card" data-discount="" data-network="Amazon Associates">
+        <span class="lab-badge approved">🦴 Remy approved</span>
+        <span class="logo-box text-icon" aria-hidden="true">🥩</span>
+        <span class="link-copy">
+          <h2>Mighty Paw Bully Sticks</h2>
+          <p>Single-ingredient chew Remy loves</p>
+        </span>
+        <span class="link-action">Visit</span>
+      </a>
+    </div>
 
     <!-- BLACK+DECKER Pet Hair Roller ── gear ── approved -->
     <div class="product-group" data-category="cleaning" data-searchname="black decker pet hair roller remover lint fur couch car">
@@ -346,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 function getNetwork(url){
-  if(url.includes('amazon'))return 'Amazon Associates';
+  if(url.includes('amazon')||url.includes('amzn'))return 'Amazon Associates';
   if(url.includes('clickbank'))return 'ClickBank';
   if(url.includes('mavely'))return 'Mavely';
   if(url.includes('packleashes'))return 'Pack Leashes';
