@@ -141,6 +141,19 @@ img{display:block;max-width:100%}
 .code-soon span{font-size:12px;color:var(--muted)}
 .code-soon em{font-family:"DM Mono",monospace;font-size:12px;color:#b0a898;font-style:normal}
 
+/* ── Current codes ── */
+.codes-section{display:grid;gap:7px;margin-bottom:4px}
+.codes-intro{font-size:12px;color:var(--muted);line-height:1.45;margin:0 2px 2px}
+.partner-code-card{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:0 4px 16px rgba(27,23,19,.04)}
+.partner-code-main{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:10px}
+.partner-logo{font-family:"DM Mono",monospace;font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--green);background:var(--approved-bg);border-color:var(--approved-border)}
+.partner-copy{min-width:0}
+.partner-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:1px}
+.partner-copy h2{font-size:14px;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:1px}
+.partner-copy p{font-size:11px;color:var(--muted);line-height:1.4}
+.partner-visit{font-size:11px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 10px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
+.partner-note{font-size:11px;color:var(--muted);line-height:1.45;padding:0 2px}
+
 /* ── TikTok banner ── */
 .tiktok-banner{display:flex;align-items:center;gap:14px;background:#0f0f0f;border-radius:20px;padding:16px 16px 16px 16px;text-decoration:none;position:relative;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease;box-shadow:0 4px 20px rgba(0,0,0,.18)}
 .tiktok-banner:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,.26)}
@@ -207,6 +220,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <img class="logo" src="/assets/logos/remys-lab-logo-transparent.png" alt="Remy's Lab logo" id="page-title" width="1672" height="941" decoding="async" fetchpriority="high"/>
     <p class="tagline">Dog products tested by an actual Lab 🧪</p>
     <p class="intro">Test notes and honest product takes from <a href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener">@remy.lab</a>.</p>
+  </section>
+
+  <!-- Current partner codes -->
+  <section class="codes-section" aria-labelledby="currentCodesTitle">
+    <div class="section-divider"><span id="currentCodesTitle">Current Codes</span></div>
+    <p class="codes-intro">Codes from brands we work with. Use one if it helps, no pressure.</p>
+    <article class="partner-code-card">
+      <div class="partner-code-main">
+        <span class="logo-box partner-logo" aria-hidden="true">LP</span>
+        <span class="partner-copy">
+          <span class="partner-kicker">Current partner</span>
+          <h2>Le Puppino</h2>
+          <p>40% off sitewide</p>
+        </span>
+        <a class="partner-visit affiliate-link" href="https://lepuppino.com/" target="_blank" rel="nofollow sponsored"
+           data-product="Le Puppino" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="remyslab40" data-network="Le Puppino">Visit</a>
+      </div>
+      <p class="partner-note">Storewide code. Individual products will get notes after Remy tests them.</p>
+      <button class="copy-code-button" type="button" data-code="remyslab40" data-product="Le Puppino" data-category="partner_store" data-placement="current_codes" aria-label="Copy Le Puppino discount code remyslab40">
+        <span class="btn-left"><span class="btn-label">40% off sitewide</span><strong>remyslab40</strong></span>
+        <span class="btn-cta">Copy code</span>
+      </button>
+    </article>
   </section>
 
   <!-- Search + Filter -->
@@ -314,6 +351,7 @@ function getNetwork(url){
   if(url.includes('mavely'))return 'Mavely';
   if(url.includes('packleashes'))return 'Pack Leashes';
   if(url.includes('brooksandroo'))return 'Brooks & Roo';
+  if(url.includes('lepuppino'))return 'Le Puppino';
   return 'Other';
 }
 
@@ -332,7 +370,7 @@ document.querySelectorAll('.copy-code-button, .code-copy-btn').forEach(function(
     if(!code)return;
     copyText(code).then(function(){
       window.dataLayer=window.dataLayer||[];
-      window.dataLayer.push({event:'coupon_code_copy',product_name:product,product_category:'discount_code',button_text:button.textContent.trim(),button_location:button.dataset.placement||'remys_lab',discount_code:code});
+      window.dataLayer.push({event:'coupon_code_copy',product_name:product,product_category:button.dataset.category||'discount_code',button_text:button.textContent.trim(),button_location:button.dataset.placement||'remys_lab',discount_code:code});
       var cta=button.querySelector('.btn-cta');
       var label=button.querySelector('.btn-label');
       button.classList.add('copied');
