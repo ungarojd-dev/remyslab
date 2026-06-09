@@ -175,9 +175,12 @@ img{display:block;max-width:100%}
 .partner-copy p{font-size:11px;color:var(--muted);line-height:1.4}
 .partner-visit{font-size:11px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 10px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
 .partner-note{font-size:11px;color:var(--muted);line-height:1.45;padding:0 2px}
-.codes-dots{display:flex;justify-content:center;gap:5px;margin:1px 0 3px}
-.codes-dot{width:6px;height:6px;border:0;border-radius:999px;background:#d7cec0;padding:0;cursor:pointer;transition:width .18s ease,background .18s ease}
-.codes-dot.active{width:18px;background:var(--gold)}
+.codes-controls{display:flex;align-items:center;justify-content:center;gap:8px;margin:2px 0 3px}
+.codes-arrow-btn{appearance:none;width:34px;height:34px;border:1px solid var(--gold-border);border-radius:999px;background:var(--surface);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(27,23,19,.04);transition:transform .16s ease,box-shadow .16s ease,background .16s ease,color .16s ease,border-color .16s ease}
+.codes-arrow-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(27,23,19,.08);background:#fff8e3;border-color:#d8bb57}
+.codes-arrow-btn[disabled]{opacity:.45;cursor:default;transform:none;box-shadow:none;background:var(--surface)}
+.codes-arrow-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.codes-control-copy{font-size:11px;font-weight:700;color:var(--muted)}
 
 /* Section divider */
 .section-divider{display:flex;align-items:center;gap:10px;margin:4px 0 2px}
@@ -256,7 +259,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="section-divider"><span id="currentCodesTitle">Current Codes</span></div>
     <div class="codes-intro-row">
       <p class="codes-intro">Codes from brands we work with. Use one if it helps, no pressure.</p>
-      <span class="codes-swipe-hint" aria-hidden="true">Swipe →</span>
+      <span class="codes-swipe-hint" aria-hidden="true">Swipe or tap the arrow</span>
     </div>
     <div class="codes-viewport" id="codesViewport">
       <div class="codes-track" id="codesTrack" aria-label="Current discount codes">
@@ -298,7 +301,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </article>
       </div>
     </div>
-    <div class="codes-dots" id="codesDots" aria-label="Choose discount code card"></div>
+    <div class="codes-controls" aria-label="Current code navigation">
+      <button class="codes-arrow-btn" type="button" id="codesPrev" aria-label="Show previous discount code" disabled>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg>
+      </button>
+      <span class="codes-control-copy" id="codesControlCopy">1 of 2</span>
+      <button class="codes-arrow-btn" type="button" id="codesNext" aria-label="Show next discount code">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg>
+      </button>
+    </div>
   </section>
 
   <!-- Search + Filter -->
@@ -458,30 +469,39 @@ document.addEventListener('click',function(e){
 (function(){
   var track=document.getElementById('codesTrack');
   var viewport=document.getElementById('codesViewport');
-  var dotsWrap=document.getElementById('codesDots');
-  if(!track||!viewport||!dotsWrap)return;
+  var prevBtn=document.getElementById('codesPrev');
+  var nextBtn=document.getElementById('codesNext');
+  var controlCopy=document.getElementById('codesControlCopy');
+  if(!track||!viewport||!prevBtn||!nextBtn||!controlCopy)return;
   var cards=Array.prototype.slice.call(track.querySelectorAll('.partner-code-card'));
-  if(cards.length<2){dotsWrap.style.display='none';return;}
-  var dots=cards.map(function(card,index){
-    var dot=document.createElement('button');
-    dot.className='codes-dot'+(index===0?' active':'');
-    dot.type='button';
-    dot.setAttribute('aria-label','Show discount code '+(index+1)+' of '+cards.length);
-    dot.addEventListener('click',function(){track.scrollTo({left:card.offsetLeft,behavior:'smooth'});});
-    dotsWrap.appendChild(dot);
-    return dot;
-  });
-  function updateCodesState(){
+  if(cards.length<2){
+    var controls=document.querySelector('.codes-controls');
+    if(controls)controls.style.display='none';
+    return;
+  }
+  function getNearestIndex(){
     var nearest=0;
     var closest=Infinity;
     cards.forEach(function(card,index){
       var distance=Math.abs(card.offsetLeft-track.scrollLeft);
       if(distance<closest){closest=distance;nearest=index;}
     });
-    dots.forEach(function(dot,index){dot.classList.toggle('active',index===nearest);});
+    return nearest;
+  }
+  function scrollToIndex(index){
+    var safe=Math.max(0,Math.min(cards.length-1,index));
+    track.scrollTo({left:cards[safe].offsetLeft,behavior:'smooth'});
+  }
+  function updateCodesState(){
+    var current=getNearestIndex();
     var atEnd=track.scrollLeft+track.clientWidth>=track.scrollWidth-4;
     viewport.classList.toggle('at-end',atEnd);
+    controlCopy.textContent=(current+1)+' of '+cards.length;
+    prevBtn.disabled=current===0;
+    nextBtn.disabled=current===cards.length-1;
   }
+  prevBtn.addEventListener('click',function(){scrollToIndex(getNearestIndex()-1);});
+  nextBtn.addEventListener('click',function(){scrollToIndex(getNearestIndex()+1);});
   track.addEventListener('scroll',updateCodesState,{passive:true});
   window.addEventListener('resize',updateCodesState);
   updateCodesState();
