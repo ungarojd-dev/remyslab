@@ -69,11 +69,22 @@ img{display:block;max-width:100%}
 .nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
 
 /* ── Hero ── */
-.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 0 20px}
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 0 18px}
 .logo{width:min(100%,300px);height:auto;margin-bottom:6px}
 .tagline{font-size:15px;font-weight:600;color:var(--muted);margin-bottom:4px}
 .intro{font-size:13px;color:#575046;max-width:380px}
 .intro a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.hero-follow-card{width:100%;max-width:420px;display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:12px;margin-top:14px;padding:12px 12px 12px 10px;background:linear-gradient(135deg,#fffdfa 0%,#fff8e3 100%);border:1px solid var(--gold-border);border-radius:18px;box-shadow:0 6px 18px rgba(27,23,19,.05);text-align:left;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.hero-follow-card:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(27,23,19,.09);border-color:#d9bb58}
+.hero-follow-avatar-wrap{position:relative;width:58px;height:58px;flex-shrink:0;animation:heroAvatarFloat 3.1s ease-in-out infinite}
+.hero-follow-avatar{width:58px;height:58px;border-radius:16px;object-fit:cover;border:2px solid #fff;box-shadow:0 8px 18px rgba(27,23,19,.16)}
+.hero-follow-badge{position:absolute;right:-4px;bottom:-3px;background:#111;color:#fff;border-radius:999px;padding:3px 7px;font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.hero-follow-copy{min-width:0;display:flex;flex-direction:column;gap:1px}
+.hero-follow-kicker{font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--gold)}
+.hero-follow-handle{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.02em}
+.hero-follow-sub{font-size:12px;line-height:1.35;color:var(--muted)}
+.hero-follow-cta{font-size:11px;font-weight:800;color:#fff;background:#111;border-radius:999px;padding:8px 12px;white-space:nowrap;align-self:center;box-shadow:0 6px 14px rgba(0,0,0,.16)}
+@keyframes heroAvatarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
 /* ── Search + Filter wrap ── */
 .search-filter-wrap{position:sticky;top:0;z-index:10;background:var(--bg);padding:10px 0 12px;display:flex;flex-direction:column;gap:8px}.filter-fade-wrap{position:relative}.filter-fade-wrap::after{content:"";position:absolute;top:0;right:0;bottom:4px;width:48px;background:linear-gradient(to right,transparent,var(--bg) 70%);pointer-events:none;z-index:1;transition:opacity .2s ease}.filter-fade-wrap.at-end::after{opacity:0}.scroll-hint{position:absolute;right:4px;top:50%;transform:translateY(-50%);z-index:2;pointer-events:none;color:var(--muted);font-size:13px;transition:opacity .2s ease;line-height:1}.filter-fade-wrap.at-end .scroll-hint{opacity:0}
@@ -145,8 +156,16 @@ img{display:block;max-width:100%}
 
 /* ── Current codes ── */
 .codes-section{display:grid;gap:7px;margin-bottom:4px}
-.codes-intro{font-size:12px;color:var(--muted);line-height:1.45;margin:0 2px 2px}
-.partner-code-card{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:0 4px 16px rgba(27,23,19,.04)}
+.codes-intro-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 2px}
+.codes-intro{font-size:12px;color:var(--muted);line-height:1.45}
+.codes-swipe-hint{flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.codes-viewport{position:relative;margin-right:-16px;overflow:hidden}
+.codes-viewport::after{content:"";position:absolute;top:0;right:0;bottom:4px;width:34px;background:linear-gradient(to right,transparent,var(--bg) 84%);pointer-events:none;transition:opacity .18s ease}
+.codes-viewport.at-end::after{opacity:0}
+.codes-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:0;padding:0 34px 4px 0;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+.codes-track::-webkit-scrollbar{display:none}
+.partner-code-card{position:relative;display:grid;gap:10px;flex:0 0 calc(100% - 38px);scroll-snap-align:start;background:linear-gradient(180deg,#fffdf7 0%,var(--surface) 100%);border:1px solid var(--gold-border);border-radius:18px;padding:15px 13px 13px;box-shadow:0 4px 16px rgba(27,23,19,.04);overflow:hidden}
+.partner-code-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
 .partner-code-main{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:10px}
 .partner-logo{padding:4px;background:#fff;border-color:#eadff0}
 .partner-logo img{max-width:100%;max-height:40px;object-fit:contain}
@@ -156,20 +175,9 @@ img{display:block;max-width:100%}
 .partner-copy p{font-size:11px;color:var(--muted);line-height:1.4}
 .partner-visit{font-size:11px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 10px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
 .partner-note{font-size:11px;color:var(--muted);line-height:1.45;padding:0 2px}
-
-/* ── TikTok banner ── */
-.tiktok-banner{display:flex;align-items:center;gap:14px;background:#0f0f0f;border-radius:20px;padding:16px 16px 16px 16px;text-decoration:none;position:relative;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease;box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.tiktok-banner:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,.26)}
-.tiktok-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(105,201,208,.12) 0%,transparent 50%,rgba(254,44,85,.1) 100%);pointer-events:none}
-.tiktok-play{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s ease}
-.tiktok-banner:hover .tiktok-play{background:rgba(255,255,255,.18)}
-.tiktok-play svg{width:18px;height:18px;fill:#fff;margin-left:2px}
-.tiktok-copy{flex:1;min-width:0}
-.tiktok-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:3px}
-.tiktok-handle{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.01em;margin-bottom:2px}
-.tiktok-sub{font-size:12px;color:rgba(255,255,255,.5)}
-.tiktok-logo{flex-shrink:0;opacity:.9}
-.tiktok-logo svg{width:28px;height:28px}
+.codes-dots{display:flex;justify-content:center;gap:5px;margin:1px 0 3px}
+.codes-dot{width:6px;height:6px;border:0;border-radius:999px;background:#d7cec0;padding:0;cursor:pointer;transition:width .18s ease,background .18s ease}
+.codes-dot.active{width:18px;background:var(--gold)}
 
 /* Section divider */
 .section-divider{display:flex;align-items:center;gap:10px;margin:4px 0 2px}
@@ -194,7 +202,13 @@ img{display:block;max-width:100%}
   .page{padding:16px 12px 24px}
   .nav-logo span{display:none}
   .nav-tab{font-size:12px;padding:6px 10px}
-  .tiktok-handle{font-size:14px}
+  .hero-follow-card{grid-template-columns:52px 1fr auto;gap:10px;padding:10px 10px 10px 9px}
+  .hero-follow-avatar-wrap,.hero-follow-avatar{width:52px;height:52px}
+  .hero-follow-sub{font-size:11px}
+  .hero-follow-cta{padding:7px 10px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-follow-avatar-wrap{animation:none}
 }
 </style>
 </head>
@@ -223,48 +237,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <img class="logo" src="/assets/logos/remys-lab-logo-transparent.png" alt="Remy's Lab logo" id="page-title" width="1672" height="941" decoding="async" fetchpriority="high"/>
     <p class="tagline">Dog products tested by an actual Lab 🧪</p>
     <p class="intro">Test notes and honest product takes from <a href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener">@remy.lab</a>.</p>
+    <a class="hero-follow-card" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" aria-label="Follow Remys Lab on TikTok">
+      <span class="hero-follow-avatar-wrap">
+        <img class="hero-follow-avatar" src="/assets/profile/remy-follow.jpg" alt="Remy smiling in the backyard" width="320" height="320" loading="eager" decoding="async"/>
+        <span class="hero-follow-badge" aria-hidden="true">TikTok</span>
+      </span>
+      <span class="hero-follow-copy">
+        <span class="hero-follow-kicker">Follow the lab</span>
+        <span class="hero-follow-handle">@remy.lab</span>
+        <span class="hero-follow-sub">Quick tests, honest notes, and Remy being Remy.</span>
+      </span>
+      <span class="hero-follow-cta">Follow</span>
+    </a>
   </section>
 
   <!-- Current partner codes -->
   <section class="codes-section" aria-labelledby="currentCodesTitle">
     <div class="section-divider"><span id="currentCodesTitle">Current Codes</span></div>
-    <p class="codes-intro">Codes from brands we work with. Use one if it helps, no pressure.</p>
-    <article class="partner-code-card">
-      <div class="partner-code-main">
-        <span class="logo-box partner-logo"><img src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo" width="225" height="225" loading="lazy" decoding="async"/></span>
-        <span class="partner-copy">
-          <span class="partner-kicker">Current partner</span>
-          <h2>Pack Leashes</h2>
-          <p>20% off sitewide</p>
-        </span>
-        <a class="partner-visit affiliate-link" href="https://www.packleashes.com/" target="_blank" rel="nofollow sponsored"
-           data-product="Pack Leashes" data-category="partner_store" data-result="current_partner"
-           data-placement="current_codes" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit</a>
+    <div class="codes-intro-row">
+      <p class="codes-intro">Codes from brands we work with. Use one if it helps, no pressure.</p>
+      <span class="codes-swipe-hint" aria-hidden="true">Swipe →</span>
+    </div>
+    <div class="codes-viewport" id="codesViewport">
+      <div class="codes-track" id="codesTrack" aria-label="Current discount codes">
+        <article class="partner-code-card">
+          <div class="partner-code-main">
+            <span class="logo-box partner-logo"><img src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo" width="225" height="225" loading="lazy" decoding="async"/></span>
+            <span class="partner-copy">
+              <span class="partner-kicker">Current partner</span>
+              <h2>Pack Leashes</h2>
+              <p>20% off sitewide</p>
+            </span>
+            <a class="partner-visit affiliate-link" href="https://www.packleashes.com/" target="_blank" rel="nofollow sponsored"
+               data-product="Pack Leashes" data-category="partner_store" data-result="current_partner"
+               data-placement="current_codes" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit</a>
+          </div>
+          <p class="partner-note">Friends and family code. Use it if you buy from Pack Leashes.</p>
+          <button class="copy-code-button" type="button" data-code="REMYSLAB20" data-product="Pack Leashes" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pack Leashes discount code REMYSLAB20">
+            <span class="btn-left"><span class="btn-label">20% off sitewide</span><strong>REMYSLAB20</strong></span>
+            <span class="btn-cta">Copy code</span>
+          </button>
+        </article>
+        <article class="partner-code-card">
+          <div class="partner-code-main">
+            <span class="logo-box partner-logo"><img src="/assets/logos/le-puppino-logo.svg" alt="Le Puppino logo" width="320" height="320" loading="lazy" decoding="async"/></span>
+            <span class="partner-copy">
+              <span class="partner-kicker">Current partner</span>
+              <h2>Le Puppino</h2>
+              <p>40% off sitewide</p>
+            </span>
+            <a class="partner-visit affiliate-link" href="https://lepuppino.com/" target="_blank" rel="nofollow sponsored"
+               data-product="Le Puppino" data-category="partner_store" data-result="current_partner"
+               data-placement="current_codes" data-discount="REMYSLAB40" data-network="Le Puppino">Visit</a>
+          </div>
+          <p class="partner-note">Storewide code. Individual products will get notes after Remy tests them.</p>
+          <button class="copy-code-button" type="button" data-code="REMYSLAB40" data-product="Le Puppino" data-category="partner_store" data-placement="current_codes" aria-label="Copy Le Puppino discount code REMYSLAB40">
+            <span class="btn-left"><span class="btn-label">40% off sitewide</span><strong>REMYSLAB40</strong></span>
+            <span class="btn-cta">Copy code</span>
+          </button>
+        </article>
       </div>
-      <p class="partner-note">Friends and family code. Use it if you buy from Pack Leashes.</p>
-      <button class="copy-code-button" type="button" data-code="REMYSLAB20" data-product="Pack Leashes" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pack Leashes discount code REMYSLAB20">
-        <span class="btn-left"><span class="btn-label">20% off sitewide</span><strong>REMYSLAB20</strong></span>
-        <span class="btn-cta">Copy code</span>
-      </button>
-    </article>
-    <article class="partner-code-card">
-      <div class="partner-code-main">
-        <span class="logo-box partner-logo"><img src="/assets/logos/le-puppino-logo.svg" alt="Le Puppino logo" width="320" height="320" loading="lazy" decoding="async"/></span>
-        <span class="partner-copy">
-          <span class="partner-kicker">Current partner</span>
-          <h2>Le Puppino</h2>
-          <p>40% off sitewide</p>
-        </span>
-        <a class="partner-visit affiliate-link" href="https://lepuppino.com/" target="_blank" rel="nofollow sponsored"
-           data-product="Le Puppino" data-category="partner_store" data-result="current_partner"
-           data-placement="current_codes" data-discount="REMYSLAB40" data-network="Le Puppino">Visit</a>
-      </div>
-      <p class="partner-note">Storewide code. Individual products will get notes after Remy tests them.</p>
-      <button class="copy-code-button" type="button" data-code="REMYSLAB40" data-product="Le Puppino" data-category="partner_store" data-placement="current_codes" aria-label="Copy Le Puppino discount code REMYSLAB40">
-        <span class="btn-left"><span class="btn-label">40% off sitewide</span><strong>REMYSLAB40</strong></span>
-        <span class="btn-cta">Copy code</span>
-      </button>
-    </article>
+    </div>
+    <div class="codes-dots" id="codesDots" aria-label="Choose discount code card"></div>
   </section>
 
   <!-- Search + Filter -->
@@ -350,16 +384,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     No tests found - Remy's working on it.
   </div>
 
-  <!-- TikTok banner - always visible, not filterable -->
-  <div style="margin-top:10px;display:grid;gap:6px">
-    <div class="section-divider"><span>Follow the Lab</span></div>
-    <a class="tiktok-banner" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" aria-label="Watch Remys Lab on TikTok">
-      <span class="tiktok-play" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></span>
-      <span class="tiktok-copy"><p class="tiktok-label">Latest lab test</p><p class="tiktok-handle">@remy.lab</p><p class="tiktok-sub">Watch Remy test the latest</p></span>
-      <span class="tiktok-logo" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34.2 4h-6.6v27.6c0 3-2.4 5.4-5.4 5.4s-5.4-2.4-5.4-5.4 2.4-5.4 5.4-5.4c.54 0 1.02.06 1.5.18V19.7c-.48-.06-.99-.1-1.5-.1-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12V18.1c2.28 1.56 5.04 2.46 8 2.46V14c-4.44 0-8-3.58-8-8z" fill="white"/></svg></span>
-    </a>
-  </div>
-
   <section class="visually-hidden" aria-label="About Remys Lab">
     <h2>What is Remy's Lab?</h2>
     <p>Remy's Lab is a dog product testing page connected to @remy.lab on TikTok. Remy, a yellow Labrador, tests dog products so dog owners can see current product notes, partner links, and discount codes in one simple place.</p>
@@ -430,6 +454,38 @@ document.addEventListener('click',function(e){
   window.dataLayer=window.dataLayer||[];
   window.dataLayer.push({event:'affiliate_click',product_name:link.dataset.product||link.textContent.trim(),product_category:link.dataset.category||'remys_lab',lab_result:link.dataset.result||'',button_text:link.textContent.trim(),button_location:link.dataset.placement||'remys_lab',affiliate_network:link.dataset.network||getNetwork(href),discount_code:link.dataset.discount||'',affiliate_url:href});
 });
+
+(function(){
+  var track=document.getElementById('codesTrack');
+  var viewport=document.getElementById('codesViewport');
+  var dotsWrap=document.getElementById('codesDots');
+  if(!track||!viewport||!dotsWrap)return;
+  var cards=Array.prototype.slice.call(track.querySelectorAll('.partner-code-card'));
+  if(cards.length<2){dotsWrap.style.display='none';return;}
+  var dots=cards.map(function(card,index){
+    var dot=document.createElement('button');
+    dot.className='codes-dot'+(index===0?' active':'');
+    dot.type='button';
+    dot.setAttribute('aria-label','Show discount code '+(index+1)+' of '+cards.length);
+    dot.addEventListener('click',function(){track.scrollTo({left:card.offsetLeft,behavior:'smooth'});});
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+  function updateCodesState(){
+    var nearest=0;
+    var closest=Infinity;
+    cards.forEach(function(card,index){
+      var distance=Math.abs(card.offsetLeft-track.scrollLeft);
+      if(distance<closest){closest=distance;nearest=index;}
+    });
+    dots.forEach(function(dot,index){dot.classList.toggle('active',index===nearest);});
+    var atEnd=track.scrollLeft+track.clientWidth>=track.scrollWidth-4;
+    viewport.classList.toggle('at-end',atEnd);
+  }
+  track.addEventListener('scroll',updateCodesState,{passive:true});
+  window.addEventListener('resize',updateCodesState);
+  updateCodesState();
+})();
 
 (function(){
   var pills=document.querySelectorAll('.filter-pill');
