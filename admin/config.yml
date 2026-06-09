@@ -48,6 +48,8 @@ collections:
           - { label: "Not for us", value: "pass" }
       - { label: "Product Name", name: "product_name", widget: "string" }
       - { label: "Brand", name: "brand", widget: "string", required: false }
+      - { label: "Product Image", name: "image_url", widget: "image", required: false, hint: "Upload a square product image when available." }
+      - { label: "Product Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the product image clearly for accessibility." }
       - { label: "Price Text", name: "price_text", widget: "string", required: false, hint: "Example: ~$20" }
       - { label: "Affiliate URL", name: "affiliate_url", widget: "string", required: false }
       - { label: "Affiliate Network", name: "affiliate_network", widget: "string", required: false, hint: "Example: Amazon Associates" }
