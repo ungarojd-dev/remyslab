@@ -86,6 +86,10 @@ img{display:block;max-width:100%}
 .hero-follow-cta{font-size:11px;font-weight:800;color:#fff;background:#111;border-radius:999px;padding:8px 12px;white-space:nowrap;align-self:center;box-shadow:0 6px 14px rgba(0,0,0,.16)}
 @keyframes heroAvatarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
+/* ── Tested product heading ── */
+.tested-products-intro{display:grid;gap:5px;margin:7px 0 0}
+.tested-products-copy{font-size:12px;color:var(--muted);line-height:1.45;margin:0 2px}
+
 /* ── Search + Filter wrap ── */
 .search-filter-wrap{position:sticky;top:0;z-index:10;background:var(--bg);padding:10px 0 12px;display:flex;flex-direction:column;gap:8px}.filter-fade-wrap{position:relative}.filter-fade-wrap::after{content:"";position:absolute;top:0;right:0;bottom:4px;width:48px;background:linear-gradient(to right,transparent,var(--bg) 70%);pointer-events:none;z-index:1;transition:opacity .2s ease}.filter-fade-wrap.at-end::after{opacity:0}.scroll-hint{position:absolute;right:4px;top:50%;transform:translateY(-50%);z-index:2;pointer-events:none;color:var(--muted);font-size:13px;transition:opacity .2s ease;line-height:1}.filter-fade-wrap.at-end .scroll-hint{opacity:0}
 
@@ -310,6 +314,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg>
       </button>
     </div>
+  </section>
+
+  <!-- Tested products -->
+  <section class="tested-products-intro" aria-labelledby="testedProductsTitle">
+    <div class="section-divider"><span id="testedProductsTitle">Products Remy Tested</span></div>
+    <p class="tested-products-copy">Honest notes from products Remy has actually tried.</p>
   </section>
 
   <!-- Search + Filter -->
