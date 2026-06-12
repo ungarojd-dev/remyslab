@@ -8,6 +8,7 @@ Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a 
 
 - [Remy's Lab home](https://remyslab.com/): Current product links, discount codes, and affiliate disclosure.
 - [Lab Notes](https://remyslab.com/blog/): Written notes after Remy actually uses a product.
+- [Discount Codes](https://remyslab.com/codes/): Current partner discount codes from Pack Leashes, Brooks & Roo, and Le Puppino.
 - [Dog Owner Guides](https://remyslab.com/guides/): Practical evergreen answers for common dog owner problems.
 
 ## Lab Notes
