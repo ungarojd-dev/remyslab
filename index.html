@@ -148,29 +148,20 @@ img{display:block;max-width:100%}
 .code-soon em{font-family:"DM Mono",monospace;font-size:12px;color:#b0a898;font-style:normal}
 
 /* ── Link hub rows + accordion panels ── */
-.home-menu{display:grid;gap:14px;margin-top:2px}
-.hub-group{position:relative;display:grid;gap:9px;padding:12px;border:1px solid var(--line);border-radius:22px;box-shadow:0 8px 22px rgba(27,23,19,.045);overflow:hidden}
-.hub-group::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
-.deals-group{background:linear-gradient(180deg,#fff9e8 0%,#fffdf8 100%);border-color:var(--gold-border)}
-.deals-group::before{background:var(--gold)}
-.tests-group{background:linear-gradient(180deg,#f2f7f3 0%,#fcfdfb 100%);border-color:rgba(31,58,46,.2)}
-.tests-group::before{background:var(--green)}
-.explore-group{background:linear-gradient(180deg,#f8f4ee 0%,#fffdfa 100%);border-color:#dfd4c5}
-.explore-group::before{background:#c6b59f}
-.hub-group-header{display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:9px;padding:3px 2px 1px}
-.hub-group-icon{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;background:rgba(255,255,255,.78);border:1px solid rgba(27,23,19,.08)}
-.hub-group-copy{min-width:0}
-.hub-group-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);line-height:1.2;margin-bottom:2px}
-.hub-group-title{font-size:15px;font-weight:800;color:var(--text);line-height:1.2;margin:0}
-.hub-group-desc{font-size:11px;color:var(--muted);line-height:1.4;margin-top:2px}
+.home-menu{display:grid;gap:14px;margin-top:4px}
+.home-section{display:grid;gap:8px;padding:10px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.35)}
+.home-section-codes{background:linear-gradient(180deg,#fffaf0 0%,rgba(255,255,255,.55) 100%);border-color:#ead8a3}
+.home-section-products{background:linear-gradient(180deg,#f5faf6 0%,rgba(255,255,255,.55) 100%);border-color:#dbe7dc}
+.home-section-more{background:linear-gradient(180deg,#f8f7f3 0%,rgba(255,255,255,.55) 100%);border-color:#e7dfd1}
+.home-section-label{display:flex;align-items:center;gap:9px;padding:0 4px 1px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8b7a56}
+.home-section-label::before{content:"";width:10px;height:10px;border-radius:999px;background:currentColor;opacity:.85;box-shadow:0 0 0 4px rgba(255,255,255,.6)}
+.home-section-products .home-section-label{color:#5f7b66}
+.home-section-more .home-section-label{color:#8a8378}
 .home-menu-item{display:grid;gap:7px}
-.explore-links{display:grid;gap:7px}
 .home-menu-row{width:100%;appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:11px 12px;display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:11px;text-align:left;font-family:"DM Sans",sans-serif;color:var(--text);box-shadow:0 4px 14px rgba(27,23,19,.045);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;cursor:pointer}
 .home-menu-row:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(27,23,19,.075);border-color:#d2c4b1}
 .home-menu-row.is-open{border-color:var(--gold-border);background:linear-gradient(135deg,#fffdfa 0%,#fff9e9 100%)}
-.deals-group .home-menu-row{border-color:#ead08a;background:#fffefb}
-.tests-group .home-menu-row{border-color:rgba(31,58,46,.17);background:#fff}
-.explore-group .home-menu-row{background:rgba(255,255,255,.78);border-color:#e3d9cc}
+.home-section-products .home-menu-row.is-open{border-color:#cfe0d2;background:linear-gradient(135deg,#fffdfa 0%,#f4faf5 100%)}
 .home-menu-icon{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(27,23,19,.035)}
 .home-menu-copy{min-width:0;display:flex;flex-direction:column;gap:1px}
 .home-menu-title{font-size:14px;font-weight:800;line-height:1.2;color:var(--text)}
@@ -239,18 +230,14 @@ img{display:block;max-width:100%}
 @media(max-width:420px){
   .page{padding:16px 12px 24px}
   .nav-logo span{display:none}
-  .home-menu{gap:12px}
-  .hub-group{padding:10px;border-radius:19px;gap:8px}
-  .hub-group-header{grid-template-columns:30px minmax(0,1fr);gap:8px;padding:3px 1px 0}
-  .hub-group-icon{width:30px;height:30px;border-radius:10px;font-size:15px}
-  .hub-group-title{font-size:14px}
-  .hub-group-desc{font-size:10px}
   .nav-tab{font-size:12px;padding:6px 10px}
   .home-direct-row.tiktok-row{grid-template-columns:50px minmax(0,1fr) auto;padding:8px 10px 8px 8px}
   .tiktok-row-avatar-wrap,.tiktok-row-avatar{width:50px;height:50px}
   .tiktok-follow-pill{font-size:9px;padding:6px 8px}
   .tiktok-row-end{gap:5px}
   .home-menu-row{grid-template-columns:38px minmax(0,1fr) auto;gap:9px;padding:10px}
+  .home-section{padding:8px;border-radius:20px;gap:7px}
+  .home-section-label{font-size:10px;padding:0 3px 1px}
   .home-menu-icon{width:38px;height:38px;border-radius:12px;font-size:18px}
   .home-menu-count{font-size:9px;padding:5px 7px}
   .home-menu-end{gap:5px}
@@ -275,7 +262,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div class="nav-tabs" role="tablist">
       <a class="nav-tab active" href="/" role="tab" aria-current="page">Links</a>
-      <a class="nav-tab" href="/codes/" role="tab">Codes</a>
       <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
       <a class="nav-tab" href="/guides/" role="tab">Guides</a>
     </div>
@@ -291,37 +277,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Link hub -->
   <section class="home-menu" aria-label="Remy's Lab quick links">
 
-    <section class="hub-group deals-group" aria-labelledby="dealsGroupTitle">
-      <header class="hub-group-header">
-        <span class="hub-group-icon" aria-hidden="true">🏷️</span>
-        <span class="hub-group-copy">
-          <span class="hub-group-kicker">Save if it helps</span>
-          <h2 class="hub-group-title" id="dealsGroupTitle">Discount Codes</h2>
-          <p class="hub-group-desc">Current partner codes in one easy place.</p>
-        </span>
-      </header>
-      <a class="home-menu-row home-direct-row" href="/codes/">
-        <span class="home-menu-icon" aria-hidden="true">🧪</span>
+    <div class="home-section home-section-codes" aria-label="Deals and codes section">
+      <div class="home-section-label">Deals &amp; Codes</div>
+      <div class="home-menu-item">
+      <button class="home-menu-row accordion-toggle is-open" type="button" data-accordion-toggle="currentCodesPanel" aria-expanded="true" aria-controls="currentCodesPanel">
+        <span class="home-menu-icon" aria-hidden="true">$</span>
         <span class="home-menu-copy">
-          <span class="home-menu-title">View All Discount Codes</span>
-          <span class="home-menu-subtitle">Pack Leashes, Brooks &amp; Roo, and Le Puppino</span>
+          <span class="home-menu-title">Current Discount Codes</span>
+          <span class="home-menu-subtitle">Partner codes from brands we work with</span>
         </span>
         <span class="home-menu-end">
-          <span class="home-menu-count">3 active codes</span>
-          <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m7.5 5 5 5-5 5"/></svg></span>
+          <span class="home-menu-count" id="currentCodesCount">3 active codes</span>
+          <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
         </span>
-      </a>
-    </section>
+      </button>
+      <div class="accordion-panel" id="currentCodesPanel">
+        <p class="codes-panel-note">Use one if it helps, no pressure.</p>
+        <div class="codes-track" aria-label="Current discount codes">
+      <article class="partner-code-card">
+        <span class="logo-box partner-logo"><img src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo" width="225" height="225" loading="lazy" decoding="async"/></span>
+        <span class="partner-copy">
+          <h2>Pack Leashes</h2>
+          <span class="partner-offer">20% off sitewide</span>
+          <strong class="partner-code-value">REMYSLAB20</strong>
+        </span>
+        <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB20" data-product="Pack Leashes" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pack Leashes discount code REMYSLAB20">Copy code</button>
+        <a class="partner-visit affiliate-link" href="https://packleashes.com/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored"
+           data-product="Pack Leashes" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit</a>
+      </article>
+      <article class="partner-code-card">
+        <span class="logo-box partner-logo"><img src="/assets/logos/brooks-and-roo-logo.jpg" alt="Brooks and Roo logo" width="320" height="160" loading="lazy" decoding="async"/></span>
+        <span class="partner-copy">
+          <h2>Brooks &amp; Roo</h2>
+          <span class="partner-offer">15% off sitewide</span>
+          <strong class="partner-code-value">REMYSLAB15</strong>
+        </span>
+        <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB15" data-product="Brooks &amp; Roo" data-category="partner_store" data-placement="current_codes" aria-label="Copy Brooks and Roo discount code REMYSLAB15">Copy code</button>
+        <a class="partner-visit affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored"
+           data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit</a>
+      </article>
+      <article class="partner-code-card">
+        <span class="logo-box partner-logo"><img src="/assets/logos/le-puppino-logo.svg" alt="Le Puppino logo" width="320" height="320" loading="lazy" decoding="async"/></span>
+        <span class="partner-copy">
+          <h2>Le Puppino</h2>
+          <span class="partner-offer">40% off sitewide</span>
+          <strong class="partner-code-value">REMYSLAB40</strong>
+        </span>
+        <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB40" data-product="Le Puppino" data-category="partner_store" data-placement="current_codes" aria-label="Copy Le Puppino discount code REMYSLAB40">Copy code</button>
+        <a class="partner-visit affiliate-link" href="https://lepuppino.com/?ref=remyslab" target="_blank" rel="nofollow sponsored"
+           data-product="Le Puppino" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="REMYSLAB40" data-network="Le Puppino">Visit</a>
+      </article>
+    </div>
+      </div>
+    </div>
 
-    <section class="hub-group tests-group" aria-labelledby="testsGroupTitle">
-      <header class="hub-group-header">
-        <span class="hub-group-icon" aria-hidden="true">🐾</span>
-        <span class="hub-group-copy">
-          <span class="hub-group-kicker">Actual Remy testing</span>
-          <h2 class="hub-group-title" id="testsGroupTitle">Lab-Tested Products</h2>
-          <p class="hub-group-desc">Search the products Remy has actually used.</p>
-        </span>
-      </header>
+      </div>
+    </div>
+
+    <div class="home-section home-section-products" aria-label="Lab tested products section">
+      <div class="home-section-label">Lab-Tested Products</div>
       <div class="home-menu-item">
       <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="testedProductsPanel" aria-expanded="false" aria-controls="testedProductsPanel">
         <span class="home-menu-icon" aria-hidden="true">🐾</span>
@@ -457,18 +474,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
       </div>
     </div>
-    </section>
 
-    <section class="hub-group explore-group" aria-labelledby="exploreGroupTitle">
-      <header class="hub-group-header">
-        <span class="hub-group-icon" aria-hidden="true">🧪</span>
-        <span class="hub-group-copy">
-          <span class="hub-group-kicker">Keep exploring</span>
-          <h2 class="hub-group-title" id="exploreGroupTitle">More From the Lab</h2>
-          <p class="hub-group-desc">Full notes, useful guides, and new tests on TikTok.</p>
-        </span>
-      </header>
-      <div class="explore-links">
+      </div>
+    </div>
+
+    <div class="home-section home-section-more" aria-label="More from the lab section">
+      <div class="home-section-label">More From the Lab</div>
+
     <a class="home-menu-row home-direct-row" href="/blog/">
       <span class="home-menu-icon" aria-hidden="true">📋</span>
       <span class="home-menu-copy">
@@ -501,9 +513,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m7.5 5 5 5-5 5"/></svg></span>
       </span>
     </a>
-      </div>
-    </section>
 
+    </div>
   </section>
 
   <section class="visually-hidden" aria-label="About Remys Lab">
@@ -515,7 +526,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="/privacy.html">Privacy</a>
     <a href="/terms.html">Terms</a>
     <a href="/disclaimer.html">Disclosure</a>
-    <a href="/codes/">Discount Codes</a>
     <a href="/guides/">Guides</a>
     <a href="/llms.txt">LLMs.txt</a>
   </nav>
@@ -590,8 +600,11 @@ document.addEventListener('click',function(e){
       panel.hidden=!willOpen;
     });
   });
+  var codeCount=document.querySelectorAll('#currentCodesPanel .partner-code-card').length;
   var productCount=document.querySelectorAll('#testedProductsPanel .product-group[data-category]').length;
+  var codesLabel=document.getElementById('currentCodesCount');
   var productsLabel=document.getElementById('testedProductsCount');
+  if(codesLabel)codesLabel.textContent=codeCount+' active code'+(codeCount===1?'':'s');
   if(productsLabel)productsLabel.textContent=productCount+' test'+(productCount===1?'':'s')+' filed';
 })();
 
