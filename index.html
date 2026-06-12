@@ -159,33 +159,52 @@ img{display:block;max-width:100%}
 .code-soon span{font-size:12px;color:var(--muted)}
 .code-soon em{font-family:"DM Mono",monospace;font-size:12px;color:#b0a898;font-style:normal}
 
+/* ── Link hub rows + accordion panels ── */
+.home-menu{display:grid;gap:9px;margin-top:2px}
+.home-menu-item{display:grid;gap:7px}
+.home-menu-row{width:100%;appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:11px 12px;display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:11px;text-align:left;font-family:"DM Sans",sans-serif;color:var(--text);box-shadow:0 4px 14px rgba(27,23,19,.045);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;cursor:pointer}
+.home-menu-row:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(27,23,19,.075);border-color:#d2c4b1}
+.home-menu-row.is-open{border-color:var(--gold-border);background:linear-gradient(135deg,#fffdfa 0%,#fff9e9 100%)}
+.home-menu-icon{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(27,23,19,.035)}
+.home-menu-copy{min-width:0;display:flex;flex-direction:column;gap:1px}
+.home-menu-title{font-size:14px;font-weight:800;line-height:1.2;color:var(--text)}
+.home-menu-subtitle{font-size:11px;color:var(--muted);line-height:1.35}
+.home-menu-end{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.home-menu-count{font-size:10px;font-weight:800;line-height:1;color:var(--green);background:var(--approved-bg);border:1px solid var(--approved-border);border-radius:999px;padding:6px 8px;white-space:nowrap}
+.home-menu-chevron{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--green);transition:transform .18s ease;flex-shrink:0}
+.home-menu-chevron svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.35;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.accordion-toggle[aria-expanded="true"] .home-menu-chevron{transform:rotate(180deg)}
+.accordion-panel{display:grid;gap:7px;padding:0 1px 2px}
+.accordion-panel[hidden]{display:none!important}
+.codes-panel-note{font-size:11px;color:var(--muted);line-height:1.4;margin:0 3px}
+.home-direct-row{cursor:pointer}
+.home-direct-row .home-menu-chevron{transform:none}
+.home-direct-row.tiktok-row{background:#111;color:#fff;border-color:#111}
+.home-direct-row.tiktok-row .home-menu-title{color:#fff}
+.home-direct-row.tiktok-row .home-menu-subtitle{color:rgba(255,255,255,.62)}
+.home-direct-row.tiktok-row .home-menu-icon{background:#1b1b1b;border-color:rgba(255,255,255,.14)}
+.home-direct-row.tiktok-row .home-menu-chevron{color:#fff}
+.products-panel{gap:0}
+.products-panel .search-filter-wrap{margin-top:0}
+.products-panel .results-line{margin-bottom:10px}
+
 /* ── Current codes ── */
-.codes-section{display:grid;gap:7px;margin-bottom:4px}
-.codes-intro-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 2px}
+.codes-section{display:grid;gap:7px;margin-bottom:6px}
+.codes-intro-row{margin:0 2px 2px}
 .codes-intro{font-size:12px;color:var(--muted);line-height:1.45}
-.codes-swipe-hint{flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
-.codes-viewport{position:relative;margin-right:-16px;overflow:hidden}
-.codes-viewport::after{content:"";position:absolute;top:0;right:0;bottom:4px;width:34px;background:linear-gradient(to right,transparent,var(--bg) 84%);pointer-events:none;transition:opacity .18s ease}
-.codes-viewport.at-end::after{opacity:0}
-.codes-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:0;padding:0 34px 4px 0;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
-.codes-track::-webkit-scrollbar{display:none}
-.partner-code-card{position:relative;display:grid;gap:10px;flex:0 0 calc(100% - 38px);scroll-snap-align:start;background:linear-gradient(180deg,#fffdf7 0%,var(--surface) 100%);border:1px solid var(--gold-border);border-radius:18px;padding:15px 13px 13px;box-shadow:0 4px 16px rgba(27,23,19,.04);overflow:hidden}
-.partner-code-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
-.partner-code-main{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:10px}
-.partner-logo{padding:4px;background:#fff;border-color:#eadff0}
-.partner-logo img{max-width:100%;max-height:40px;object-fit:contain}
-.partner-copy{min-width:0}
-.partner-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:1px}
-.partner-copy h2{font-size:14px;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:1px}
-.partner-copy p{font-size:11px;color:var(--muted);line-height:1.4}
-.partner-visit{font-size:11px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 10px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
-.partner-note{font-size:11px;color:var(--muted);line-height:1.45;padding:0 2px}
-.codes-controls{display:flex;align-items:center;justify-content:center;gap:8px;margin:2px 0 3px}
-.codes-arrow-btn{appearance:none;width:34px;height:34px;border:1px solid var(--gold-border);border-radius:999px;background:var(--surface);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(27,23,19,.04);transition:transform .16s ease,box-shadow .16s ease,background .16s ease,color .16s ease,border-color .16s ease}
-.codes-arrow-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(27,23,19,.08);background:#fff8e3;border-color:#d8bb57}
-.codes-arrow-btn[disabled]{opacity:.45;cursor:default;transform:none;box-shadow:none;background:var(--surface)}
-.codes-arrow-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.codes-control-copy{font-size:11px;font-weight:700;color:var(--muted)}
+.codes-track{display:grid;gap:7px}
+.partner-code-card{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr) auto auto;align-items:center;gap:8px;background:linear-gradient(180deg,#fffdf7 0%,var(--surface) 100%);border:1px solid var(--gold-border);border-radius:14px;padding:9px 9px 9px 8px;box-shadow:0 3px 10px rgba(27,23,19,.035);overflow:hidden}
+.partner-code-card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--gold)}
+.partner-logo{width:38px;height:38px;padding:3px;background:#fff;border-color:#eadff0;border-radius:11px}
+.partner-logo img{width:100%;height:100%;object-fit:contain}
+.partner-copy{min-width:0;display:flex;flex-direction:column;gap:0}
+.partner-copy h2{font-size:13px;font-weight:800;line-height:1.18;color:var(--text)}
+.partner-offer{font-size:10px;color:var(--muted);line-height:1.3}
+.partner-code-value{font-family:"DM Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.045em;color:var(--green);line-height:1.35}
+.partner-copy-btn{appearance:none;font-family:"DM Sans",sans-serif;font-size:10px;font-weight:800;color:#fff;background:var(--gold);border:none;border-radius:999px;padding:7px 9px;cursor:pointer;white-space:nowrap;transition:background .15s ease}
+.partner-copy-btn:hover{background:#a87508}
+.partner-copy-btn.copied{background:var(--green)}
+.partner-visit{font-size:10px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 9px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
 
 /* Section divider */
 .section-divider{display:flex;align-items:center;gap:10px;margin:4px 0 2px}
@@ -214,6 +233,10 @@ img{display:block;max-width:100%}
   .hero-follow-avatar-wrap,.hero-follow-avatar{width:52px;height:52px}
   .hero-follow-sub{font-size:11px}
   .hero-follow-cta{padding:7px 10px;font-size:10px}
+  .home-menu-row{grid-template-columns:38px minmax(0,1fr) auto;gap:9px;padding:10px}
+  .home-menu-icon{width:38px;height:38px;border-radius:12px;font-size:18px}
+  .home-menu-count{font-size:9px;padding:5px 7px}
+  .home-menu-end{gap:5px}
 }
 @media(prefers-reduced-motion:reduce){
   .hero-follow-avatar-wrap{animation:none}
@@ -259,89 +282,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
   </section>
 
-  <!-- Current partner codes -->
-  <section class="codes-section" aria-labelledby="currentCodesTitle">
-    <div class="section-divider"><span id="currentCodesTitle">Current Codes</span></div>
-    <div class="codes-intro-row">
-      <p class="codes-intro">Codes from brands we work with. Use one if it helps, no pressure.</p>
-      <span class="codes-swipe-hint" aria-hidden="true">Swipe or tap the arrow</span>
+  <!-- Link hub -->
+  <section class="home-menu" aria-label="Remy's Lab quick links">
+
+    <div class="home-menu-item">
+      <button class="home-menu-row accordion-toggle is-open" type="button" data-accordion-toggle="currentCodesPanel" aria-expanded="true" aria-controls="currentCodesPanel">
+        <span class="home-menu-icon" aria-hidden="true">🧪</span>
+        <span class="home-menu-copy">
+          <span class="home-menu-title">Current Discount Codes</span>
+          <span class="home-menu-subtitle">Partner codes from brands we work with</span>
+        </span>
+        <span class="home-menu-end">
+          <span class="home-menu-count" id="currentCodesCount">3 active codes</span>
+          <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+        </span>
+      </button>
+      <div class="accordion-panel" id="currentCodesPanel">
+        <p class="codes-panel-note">Use one if it helps, no pressure.</p>
+        <div class="codes-track" aria-label="Current discount codes">
+      <article class="partner-code-card">
+        <span class="logo-box partner-logo"><img src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo" width="225" height="225" loading="lazy" decoding="async"/></span>
+        <span class="partner-copy">
+          <h2>Pack Leashes</h2>
+          <span class="partner-offer">20% off sitewide</span>
+          <strong class="partner-code-value">REMYSLAB20</strong>
+        </span>
+        <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB20" data-product="Pack Leashes" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pack Leashes discount code REMYSLAB20">Copy code</button>
+        <a class="partner-visit affiliate-link" href="https://packleashes.com/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored"
+           data-product="Pack Leashes" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit</a>
+      </article>
+      <article class="partner-code-card">
+        <span class="logo-box partner-logo"><img src="/assets/logos/brooks-and-roo-logo.jpg" alt="Brooks and Roo logo" width="320" height="160" loading="lazy" decoding="async"/></span>
+        <span class="partner-copy">
+          <h2>Brooks &amp; Roo</h2>
+          <span class="partner-offer">15% off sitewide</span>
+          <strong class="partner-code-value">REMYSLAB15</strong>
+        </span>
+        <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB15" data-product="Brooks &amp; Roo" data-category="partner_store" data-placement="current_codes" aria-label="Copy Brooks and Roo discount code REMYSLAB15">Copy code</button>
+        <a class="partner-visit affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored"
+           data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit</a>
+      </article>
+      <article class="partner-code-card">
+        <span class="logo-box partner-logo"><img src="/assets/logos/le-puppino-logo.svg" alt="Le Puppino logo" width="320" height="320" loading="lazy" decoding="async"/></span>
+        <span class="partner-copy">
+          <h2>Le Puppino</h2>
+          <span class="partner-offer">40% off sitewide</span>
+          <strong class="partner-code-value">REMYSLAB40</strong>
+        </span>
+        <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB40" data-product="Le Puppino" data-category="partner_store" data-placement="current_codes" aria-label="Copy Le Puppino discount code REMYSLAB40">Copy code</button>
+        <a class="partner-visit affiliate-link" href="https://lepuppino.com/?ref=remyslab" target="_blank" rel="nofollow sponsored"
+           data-product="Le Puppino" data-category="partner_store" data-result="current_partner"
+           data-placement="current_codes" data-discount="REMYSLAB40" data-network="Le Puppino">Visit</a>
+      </article>
     </div>
-    <div class="codes-viewport" id="codesViewport">
-      <div class="codes-track" id="codesTrack" aria-label="Current discount codes">
-        <article class="partner-code-card">
-          <div class="partner-code-main">
-            <span class="logo-box partner-logo"><img src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo" width="225" height="225" loading="lazy" decoding="async"/></span>
-            <span class="partner-copy">
-              <span class="partner-kicker">Current partner</span>
-              <h2>Pack Leashes</h2>
-              <p>20% off sitewide</p>
-            </span>
-            <a class="partner-visit affiliate-link" href="https://www.packleashes.com/" target="_blank" rel="nofollow sponsored"
-               data-product="Pack Leashes" data-category="partner_store" data-result="current_partner"
-               data-placement="current_codes" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit</a>
-          </div>
-          <p class="partner-note">Friends and family code. Use it if you buy from Pack Leashes.</p>
-          <button class="copy-code-button" type="button" data-code="REMYSLAB20" data-product="Pack Leashes" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pack Leashes discount code REMYSLAB20">
-            <span class="btn-left"><span class="btn-label">20% off sitewide</span><strong>REMYSLAB20</strong></span>
-            <span class="btn-cta">Copy code</span>
-          </button>
-        </article>
-        <article class="partner-code-card">
-          <div class="partner-code-main">
-            <span class="logo-box partner-logo"><img src="/assets/logos/brooks-and-roo-logo.jpg" alt="Brooks and Roo logo" width="320" height="160" loading="lazy" decoding="async"/></span>
-            <span class="partner-copy">
-              <span class="partner-kicker">Current partner</span>
-              <h2>Brooks &amp; Roo</h2>
-              <p>15% off sitewide</p>
-            </span>
-            <a class="partner-visit affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored"
-               data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner"
-               data-placement="current_codes" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit</a>
-          </div>
-          <p class="partner-note">Use the code if you buy from Brooks &amp; Roo.</p>
-          <button class="copy-code-button" type="button" data-code="REMYSLAB15" data-product="Brooks &amp; Roo" data-category="partner_store" data-placement="current_codes" aria-label="Copy Brooks and Roo discount code REMYSLAB15">
-            <span class="btn-left"><span class="btn-label">15% off sitewide</span><strong>REMYSLAB15</strong></span>
-            <span class="btn-cta">Copy code</span>
-          </button>
-        </article>
-        <article class="partner-code-card">
-          <div class="partner-code-main">
-            <span class="logo-box partner-logo"><img src="/assets/logos/le-puppino-logo.svg" alt="Le Puppino logo" width="320" height="320" loading="lazy" decoding="async"/></span>
-            <span class="partner-copy">
-              <span class="partner-kicker">Current partner</span>
-              <h2>Le Puppino</h2>
-              <p>40% off sitewide</p>
-            </span>
-            <a class="partner-visit affiliate-link" href="https://lepuppino.com/?ref=remyslab" target="_blank" rel="nofollow sponsored"
-               data-product="Le Puppino" data-category="partner_store" data-result="current_partner"
-               data-placement="current_codes" data-discount="REMYSLAB40" data-network="Le Puppino">Visit</a>
-          </div>
-          <p class="partner-note">Storewide code. Individual products will get notes after Remy tests them.</p>
-          <button class="copy-code-button" type="button" data-code="REMYSLAB40" data-product="Le Puppino" data-category="partner_store" data-placement="current_codes" aria-label="Copy Le Puppino discount code REMYSLAB40">
-            <span class="btn-left"><span class="btn-label">40% off sitewide</span><strong>REMYSLAB40</strong></span>
-            <span class="btn-cta">Copy code</span>
-          </button>
-        </article>
       </div>
     </div>
-    <div class="codes-controls" aria-label="Current code navigation">
-      <button class="codes-arrow-btn" type="button" id="codesPrev" aria-label="Show previous discount code" disabled>
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg>
-      </button>
-      <span class="codes-control-copy" id="codesControlCopy">1 of 3</span>
-      <button class="codes-arrow-btn" type="button" id="codesNext" aria-label="Show next discount code">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg>
-      </button>
-    </div>
-  </section>
 
-  <!-- Tested products -->
-  <section class="tested-products-intro" aria-labelledby="testedProductsTitle">
-    <div class="section-divider"><span id="testedProductsTitle">Products Remy Tested</span></div>
-    <p class="tested-products-copy">Honest notes from products Remy has actually tried.</p>
-  </section>
-
-  <!-- Search + Filter -->
+    <div class="home-menu-item">
+      <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="testedProductsPanel" aria-expanded="false" aria-controls="testedProductsPanel">
+        <span class="home-menu-icon" aria-hidden="true">🐾</span>
+        <span class="home-menu-copy">
+          <span class="home-menu-title">Products Remy Tested</span>
+          <span class="home-menu-subtitle">Honest notes from products Remy actually tried</span>
+        </span>
+        <span class="home-menu-end">
+          <span class="home-menu-count" id="testedProductsCount">5 tests filed</span>
+          <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+        </span>
+      </button>
+      <div class="accordion-panel products-panel" id="testedProductsPanel" hidden>
   <div class="search-filter-wrap">
     <div class="search-box">
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zm-.666 3.42a4.5 4.5 0 1 1 .707-.707l2.873 2.872a.5.5 0 1 1-.707.707L9.334 9.92z" fill="currentColor"/></svg>
@@ -462,6 +473,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <strong>🧪</strong>
     No tests found - Remy's working on it.
   </div>
+      </div>
+    </div>
+
+    <a class="home-menu-row home-direct-row" href="/blog/">
+      <span class="home-menu-icon" aria-hidden="true">📋</span>
+      <span class="home-menu-copy">
+        <span class="home-menu-title">Lab Notes</span>
+        <span class="home-menu-subtitle">Read the full test breakdowns</span>
+      </span>
+      <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m7.5 5 5 5-5 5"/></svg></span>
+    </a>
+
+    <a class="home-menu-row home-direct-row" href="/guides/">
+      <span class="home-menu-icon" aria-hidden="true">📚</span>
+      <span class="home-menu-copy">
+        <span class="home-menu-title">Dog Owner Guides</span>
+        <span class="home-menu-subtitle">Useful answers without the fluff</span>
+      </span>
+      <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m7.5 5 5 5-5 5"/></svg></span>
+    </a>
+
+    <a class="home-menu-row home-direct-row tiktok-row" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" aria-label="Watch Remy on TikTok">
+      <span class="home-menu-icon" aria-hidden="true">🎵</span>
+      <span class="home-menu-copy">
+        <span class="home-menu-title">Watch Remy on TikTok</span>
+        <span class="home-menu-subtitle">@remy.lab</span>
+      </span>
+      <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m7.5 5 5 5-5 5"/></svg></span>
+    </a>
+
+  </section>
 
   <section class="visually-hidden" aria-label="About Remys Lab">
     <h2>What is Remy's Lab?</h2>
@@ -535,44 +577,23 @@ document.addEventListener('click',function(e){
 });
 
 (function(){
-  var track=document.getElementById('codesTrack');
-  var viewport=document.getElementById('codesViewport');
-  var prevBtn=document.getElementById('codesPrev');
-  var nextBtn=document.getElementById('codesNext');
-  var controlCopy=document.getElementById('codesControlCopy');
-  if(!track||!viewport||!prevBtn||!nextBtn||!controlCopy)return;
-  var cards=Array.prototype.slice.call(track.querySelectorAll('.partner-code-card'));
-  if(cards.length<2){
-    var controls=document.querySelector('.codes-controls');
-    if(controls)controls.style.display='none';
-    return;
-  }
-  function getNearestIndex(){
-    var nearest=0;
-    var closest=Infinity;
-    cards.forEach(function(card,index){
-      var distance=Math.abs(card.offsetLeft-track.scrollLeft);
-      if(distance<closest){closest=distance;nearest=index;}
+  var toggles=document.querySelectorAll('[data-accordion-toggle]');
+  toggles.forEach(function(toggle){
+    var panel=document.getElementById(toggle.dataset.accordionToggle);
+    if(!panel)return;
+    toggle.addEventListener('click',function(){
+      var willOpen=toggle.getAttribute('aria-expanded')!=='true';
+      toggle.setAttribute('aria-expanded',willOpen?'true':'false');
+      toggle.classList.toggle('is-open',willOpen);
+      panel.hidden=!willOpen;
     });
-    return nearest;
-  }
-  function scrollToIndex(index){
-    var safe=Math.max(0,Math.min(cards.length-1,index));
-    track.scrollTo({left:cards[safe].offsetLeft,behavior:'smooth'});
-  }
-  function updateCodesState(){
-    var current=getNearestIndex();
-    var atEnd=track.scrollLeft+track.clientWidth>=track.scrollWidth-4;
-    viewport.classList.toggle('at-end',atEnd);
-    controlCopy.textContent=(current+1)+' of '+cards.length;
-    prevBtn.disabled=current===0;
-    nextBtn.disabled=current===cards.length-1;
-  }
-  prevBtn.addEventListener('click',function(){scrollToIndex(getNearestIndex()-1);});
-  nextBtn.addEventListener('click',function(){scrollToIndex(getNearestIndex()+1);});
-  track.addEventListener('scroll',updateCodesState,{passive:true});
-  window.addEventListener('resize',updateCodesState);
-  updateCodesState();
+  });
+  var codeCount=document.querySelectorAll('#currentCodesPanel .partner-code-card').length;
+  var productCount=document.querySelectorAll('#testedProductsPanel .product-group[data-category]').length;
+  var codesLabel=document.getElementById('currentCodesCount');
+  var productsLabel=document.getElementById('testedProductsCount');
+  if(codesLabel)codesLabel.textContent=codeCount+' active code'+(codeCount===1?'':'s');
+  if(productsLabel)productsLabel.textContent=productCount+' test'+(productCount===1?'':'s')+' filed';
 })();
 
 (function(){
