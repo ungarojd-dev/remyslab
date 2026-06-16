@@ -186,23 +186,27 @@ img{display:block;max-width:100%}
 .tiktok-follow-pill{font-size:10px;font-weight:800;color:#111;background:#fff;border-radius:999px;padding:7px 10px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .home-direct-row.tiktok-row .home-menu-chevron{color:#fff}
 @keyframes tiktokAvatarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.products-panel{min-width:0;max-width:100%;overflow:hidden;display:grid;gap:10px;margin:8px 4px 4px 10px;padding:10px 10px 10px 12px;border:1px solid #d9e4dc;border-left:4px solid #b8d0bf;border-radius:18px;background:linear-gradient(180deg,rgba(244,250,245,.96) 0%,rgba(255,255,255,.92) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.products-panel{min-width:0;max-width:100%;overflow:hidden;display:grid;gap:10px;margin:8px 4px 4px 12px;padding:10px 10px 10px 12px;border:1.5px solid #d9e4dc;border-left:6px solid #b8d0bf;border-radius:18px;background:linear-gradient(180deg,rgba(244,250,245,.96) 0%,rgba(255,255,255,.92) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 14px rgba(27,23,19,.035)}
 .products-panel .link-list{gap:8px}
 .products-panel .link-card{box-shadow:0 3px 10px rgba(27,23,19,.035)}
 .products-panel .search-filter-wrap{margin-top:0}
 .products-panel .results-line{margin-bottom:10px}
 
-/* Category accent colors, subtle enough to still feel like Remy's Lab */
-.home-section-products .home-menu-item{--cat-bg:#f4faf5;--cat-border:#cfe0d2;--cat-accent:#6f9a7a;--cat-icon:#f4faf5;--cat-panel:#f4faf5}
-.home-section-products .home-menu-row{border-color:var(--cat-border);background:linear-gradient(135deg,#fffdfa 0%,var(--cat-bg) 100%)}
-.home-section-products .home-menu-row.is-open{border-color:var(--cat-accent);box-shadow:0 8px 20px rgba(27,23,19,.065), inset 4px 0 0 var(--cat-accent)}
-.home-section-products .home-menu-icon{background:var(--cat-icon);border-color:var(--cat-border)}
-.home-section-products .home-menu-count{background:var(--cat-bg);border-color:var(--cat-border);color:var(--green)}
-.home-section-products .products-panel{border-color:var(--cat-border);border-left-color:var(--cat-accent);background:linear-gradient(180deg,var(--cat-panel) 0%,rgba(255,255,255,.94) 100%)}
-.category-treats{--cat-bg:#fff8ea;--cat-border:#efd9aa;--cat-accent:#c8920a;--cat-icon:#fff8ea;--cat-panel:#fff9ed}
-.category-toys{--cat-bg:#f2faed;--cat-border:#cfe5c2;--cat-accent:#7aa95c;--cat-icon:#f2faed;--cat-panel:#f5fbf0}
-.category-walkgear{--cat-bg:#fff4ed;--cat-border:#eccab7;--cat-accent:#d98754;--cat-icon:#fff4ed;--cat-panel:#fff6f0}
-.category-cleanup{--cat-bg:#eef8fb;--cat-border:#c4dfe8;--cat-accent:#5796aa;--cat-icon:#eef8fb;--cat-panel:#f1f9fb}
+/* Category color accents, intentionally visible but still soft */
+.home-section-products .home-menu-item{--cat-soft:#f4faf5;--cat-mid:#d7e8dc;--cat-strong:#6f9a7a;--cat-title:#1f3a2e;--cat-panel:#f4faf5;--cat-rgb:111,154,122}
+.home-section-products .home-menu-row{position:relative;overflow:hidden;border-color:var(--cat-mid);background:linear-gradient(135deg,#fffdfa 0%,var(--cat-soft) 100%);box-shadow:0 4px 14px rgba(27,23,19,.045)}
+.home-section-products .home-menu-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:9px;background:var(--cat-strong);opacity:1}
+.home-section-products .home-menu-row.is-open{border-color:var(--cat-strong);box-shadow:0 8px 20px rgba(27,23,19,.07),0 0 0 3px rgba(var(--cat-rgb),.13)}
+.home-section-products .home-menu-item .home-menu-row.is-open{background:linear-gradient(135deg,#fffdfa 0%,var(--cat-soft) 100%)}
+.home-section-products .home-menu-icon{background:var(--cat-soft);border-color:var(--cat-mid);box-shadow:0 2px 8px rgba(var(--cat-rgb),.14)}
+.home-section-products .home-menu-title{color:var(--cat-title)}
+.home-section-products .home-menu-count{background:#fff;border-color:var(--cat-mid);color:var(--cat-title)}
+.home-section-products .products-panel{border-color:var(--cat-mid);border-left-color:var(--cat-strong);background:linear-gradient(180deg,var(--cat-panel) 0%,rgba(255,255,255,.96) 100%)}
+.home-section-products .products-panel .link-card{border-color:var(--cat-mid)}
+.home-section-products .category-treats{--cat-soft:#fdefc0;--cat-mid:#d9a720;--cat-strong:#b87d00;--cat-title:#5c3c00;--cat-panel:#fef5d0;--cat-rgb:184,125,0}
+.home-section-products .category-toys{--cat-soft:#cff0b8;--cat-mid:#7ec452;--cat-strong:#4e8c28;--cat-title:#275010;--cat-panel:#dff5c8;--cat-rgb:78,140,40}
+.home-section-products .category-walkgear{--cat-soft:#fcd9b8;--cat-mid:#d47830;--cat-strong:#b05818;--cat-title:#6b2d08;--cat-panel:#fde4c4;--cat-rgb:176,88,24}
+.home-section-products .category-cleanup{--cat-soft:#b8e8f4;--cat-mid:#3a9dc0;--cat-strong:#1a7a9e;--cat-title:#0d4d66;--cat-panel:#cdf0fa;--cat-rgb:26,122,158}
 
 /* ── Current codes ── */
 .codes-section{display:grid;gap:7px;margin-bottom:6px}
@@ -246,7 +250,8 @@ img{display:block;max-width:100%}
   .nav-logo span{display:none}
   .nav-tab{font-size:12px;padding:6px 9px}
   .home-section,.accordion-panel,.codes-track,.products-panel{min-width:0;max-width:100%;overflow:hidden}
-  .products-panel{margin:7px 2px 4px 8px;padding:8px 8px 8px 10px;border-radius:16px}
+  .products-panel{margin:7px 2px 4px 10px;padding:8px 8px 8px 10px;border-radius:16px;border-left-width:6px}
+  .home-section-products .home-menu-row::before{width:8px}
   .home-direct-row.tiktok-row{grid-template-columns:48px minmax(0,1fr) auto;padding:8px 9px 8px 8px}
   .tiktok-row-avatar-wrap,.tiktok-row-avatar{width:48px;height:48px}
   .tiktok-follow-pill{font-size:9px;padding:6px 8px}
@@ -374,7 +379,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="link-card affiliate-link" href="https://amzn.to/4xgL7NE" target="_blank" rel="nofollow sponsored"
                  data-product="Mighty Paw Naturals 12-Inch Bully Sticks" data-category="treats" data-result="approved"
                  data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
-                <span class="lab-badge approved">🦴 Remy approved</span>
                 <span class="logo-box product-thumb"><img src="/assets/products/mighty-paw-bully-sticks.jpg" alt="Mighty Paw Naturals bully sticks bag and chews" width="225" height="225" loading="lazy" decoding="async"/></span>
                 <span class="link-copy">
                   <h2>Mighty Paw Bully Sticks</h2>
@@ -405,7 +409,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="link-card affiliate-link" href="https://amzn.to/3PPRqag" target="_blank" rel="nofollow sponsored"
                  data-product="Potaroma Dog Puzzle Toy 2 Levels" data-category="toys" data-result="approved"
                  data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
-                <span class="lab-badge approved">🦴 Remy approved</span>
                 <span class="logo-box product-thumb"><img src="/assets/products/potaroma-dog-puzzle-toy.png" alt="Yellow and teal Potaroma dog puzzle toy with food compartments and sliding covers" width="284" height="284" loading="lazy" decoding="async"/></span>
                 <span class="link-copy">
                   <h2>Potaroma Dog Puzzle Toy</h2>
@@ -434,7 +437,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <section aria-label="Leashes and walk gear" class="link-list">
             <div class="product-group" data-category="gear">
               <div class="link-card has-code">
-                <span class="lab-badge approved">🦴 Remy approved</span>
                 <span class="logo-box product-thumb"><img src="/assets/products/pack-leashes-dino-collar-set.jpg" alt="Pack Leashes dinosaur print leash, bowtie collar, and matching poop bag holder" width="452" height="452" loading="lazy" decoding="async"/></span>
                 <span class="link-copy">
                   <h2>Pack Leashes Dino Collar Set</h2>
@@ -474,7 +476,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="link-card affiliate-link" href="https://www.amazon.com/BLACK-DECKER-Remover-Roller-HMSCT0001/dp/B09YN468KG/ref=sr_1_1?crid=29G1RN859PNOC&amp;dib=eyJ2IjoiMSJ9.RBL-ZDZfJl2DsmHj9oy3rhRtKjhw-QnWWItWwOy8t6Tr325Q8aE-F0advMbsTWvlhCd2PMrVHAxvkQQkXC4Z8jp2OcPThGSnuwDmVr53YwqL3nHGiJ7T6WzqLfRUDjIA3ABtAGGnuF1cGS6nl8OcdDSldstaH7T-EGH3iH0A2YZTYWjw43kx4TC-eyIdG-N0_Bey7_EIWi6dqd7UGli2ox78jv6DGEJCJBL-Fr_FQWg0fso_wpGNZ8Io09Zfd9YZobpTQOiKPWZOP2xTH9GeK06bFl4jwwzzpME_r_Ek0C4._pqkCHPunY1QdqMMfMdVIP3MmX71Wre_qUoBLwVIHnA&amp;dib_tag=se&amp;keywords=black+and+decker+pet+hair+removal+tool&amp;qid=1780100755&amp;sprefix=black+and+decker+pet%2Caps%2C406&amp;sr=8-1" target="_blank" rel="nofollow sponsored"
                  data-product="BLACK+DECKER Pet Hair Roller" data-category="cleaning" data-result="approved"
                  data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
-                <span class="lab-badge approved">🦴 Remy approved</span>
                 <span class="logo-box product-thumb"><img src="/assets/products/black-decker-pet-hair-remover.jpg" alt="BLACK+DECKER reusable pet hair remover roller" width="225" height="225" loading="lazy" decoding="async"/></span>
                 <span class="link-copy">
                   <h2>BLACK+DECKER Pet Hair Roller</h2>
@@ -487,7 +488,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="link-card affiliate-link" href="https://amzn.to/4o3ZtNl" target="_blank" rel="nofollow sponsored"
                  data-product="FURemover Pet Hair Removal Rubber Broom" data-category="cleaning" data-result="approved"
                  data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
-                <span class="lab-badge approved">🦴 Remy approved</span>
                 <span class="logo-box product-thumb"><img src="/assets/products/furemover-pet-broom.jpg" alt="FURemover rubber pet hair broom head" width="225" height="225" loading="lazy" decoding="async"/></span>
                 <span class="link-copy">
                   <h2>FURemover Rubber Broom</h2>
