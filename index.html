@@ -192,6 +192,18 @@ img{display:block;max-width:100%}
 .products-panel .search-filter-wrap{margin-top:0}
 .products-panel .results-line{margin-bottom:10px}
 
+/* Category accent colors, subtle enough to still feel like Remy's Lab */
+.home-section-products .home-menu-item{--cat-bg:#f4faf5;--cat-border:#cfe0d2;--cat-accent:#6f9a7a;--cat-icon:#f4faf5;--cat-panel:#f4faf5}
+.home-section-products .home-menu-row{border-color:var(--cat-border);background:linear-gradient(135deg,#fffdfa 0%,var(--cat-bg) 100%)}
+.home-section-products .home-menu-row.is-open{border-color:var(--cat-accent);box-shadow:0 8px 20px rgba(27,23,19,.065), inset 4px 0 0 var(--cat-accent)}
+.home-section-products .home-menu-icon{background:var(--cat-icon);border-color:var(--cat-border)}
+.home-section-products .home-menu-count{background:var(--cat-bg);border-color:var(--cat-border);color:var(--green)}
+.home-section-products .products-panel{border-color:var(--cat-border);border-left-color:var(--cat-accent);background:linear-gradient(180deg,var(--cat-panel) 0%,rgba(255,255,255,.94) 100%)}
+.category-treats{--cat-bg:#fff8ea;--cat-border:#efd9aa;--cat-accent:#c8920a;--cat-icon:#fff8ea;--cat-panel:#fff9ed}
+.category-toys{--cat-bg:#f2faed;--cat-border:#cfe5c2;--cat-accent:#7aa95c;--cat-icon:#f2faed;--cat-panel:#f5fbf0}
+.category-walkgear{--cat-bg:#fff4ed;--cat-border:#eccab7;--cat-accent:#d98754;--cat-icon:#fff4ed;--cat-panel:#fff6f0}
+.category-cleanup{--cat-bg:#eef8fb;--cat-border:#c4dfe8;--cat-accent:#5796aa;--cat-icon:#eef8fb;--cat-panel:#f1f9fb}
+
 /* ── Current codes ── */
 .codes-section{display:grid;gap:7px;margin-bottom:6px}
 .codes-intro-row{margin:0 2px 2px}
@@ -344,7 +356,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="home-section home-section-products" aria-label="Remy's tested picks section">
       <div class="home-section-label">Remy's Tested Picks</div>
 
-      <div class="home-menu-item">
+      <div class="home-menu-item category-treats">
         <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="treatsPanel" aria-expanded="false" aria-controls="treatsPanel">
           <span class="home-menu-icon" aria-hidden="true">🦴</span>
           <span class="home-menu-copy">
@@ -375,7 +387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <div class="home-menu-item">
+      <div class="home-menu-item category-toys">
         <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="toysPanel" aria-expanded="false" aria-controls="toysPanel">
           <span class="home-menu-icon" aria-hidden="true">🧩</span>
           <span class="home-menu-copy">
@@ -406,7 +418,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <div class="home-menu-item">
+      <div class="home-menu-item category-walkgear">
         <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="walkGearPanel" aria-expanded="false" aria-controls="walkGearPanel">
           <span class="home-menu-icon" aria-hidden="true">🦮</span>
           <span class="home-menu-copy">
@@ -444,7 +456,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <div class="home-menu-item">
+      <div class="home-menu-item category-cleanup">
         <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="cleanupPanel" aria-expanded="false" aria-controls="cleanupPanel">
           <span class="home-menu-icon" aria-hidden="true">🧹</span>
           <span class="home-menu-copy">
