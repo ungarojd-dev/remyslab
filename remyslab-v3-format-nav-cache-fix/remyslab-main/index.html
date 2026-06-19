@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TS4KTRPL');</script>
+<!-- End Google Tag Manager -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Remy's Lab | Dog Products Tested by an Actual Lab</title>
+<meta name="description" content="Remy's Lab is a simple link-in-bio page from @remy.lab with dog product test notes, current product notes, dog gear codes, and simple test links from Remy, a yellow Lab."/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<link rel="canonical" href="https://remyslab.com/"/>
+<link rel="icon" type="image/png" href="/assets/icons/favicon-remy-scientist-transparent-v2.png"/>
+<meta name="theme-color" content="#f7f5ef"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Remy's Lab"/>
+<meta property="og:title" content="Remy's Lab | Dog Products Tested by an Actual Lab"/>
+<meta property="og:description" content="Products, codes, and test notes from @remy.lab."/>
+<meta property="og:url" content="https://remyslab.com/"/>
+<meta property="og:image" content="https://remyslab.com/assets/logos/remys-lab-logo-science-dog-transparent-v2.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Remy's Lab | Dog Products Tested by an Actual Lab"/>
+<meta name="twitter:description" content="Products, codes, and test notes from @remy.lab."/>
+<meta name="twitter:image" content="https://remyslab.com/assets/logos/remys-lab-logo-science-dog-transparent-v2.png"/>
+<meta name="p:domain_verify" content="2bfc04dcce5ed2b28659d89cef90bf5a"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@500&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@500&display=swap"/></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type":"Organization","@id":"https://remyslab.com/#organization","name":"Remy's Lab","url":"https://remyslab.com/","logo":"https://remyslab.com/assets/logos/remys-lab-logo-science-dog-transparent-v2.png","sameAs":["https://www.tiktok.com/@remy.lab"],"description":"Remy's Lab shares dog product test notes, dog gear codes, and simple product links from Remy, a yellow Labrador."},
+    {"@type":"WebSite","@id":"https://remyslab.com/#website","url":"https://remyslab.com/","name":"Remy's Lab","description":"Dog products tested by an actual Lab.","publisher":{"@id":"https://remyslab.com/#organization"},"inLanguage":"en-US"},
+    {"@type":"WebPage","@id":"https://remyslab.com/#webpage","url":"https://remyslab.com/","name":"Remy's Lab | Dog Products Tested by an Actual Lab","description":"A link-in-bio style page for dog product test notes, partner links, and discount codes from @remy.lab.","isPartOf":{"@id":"https://remyslab.com/#website"},"about":[{"@type":"Thing","name":"dog product testing"},{"@type":"Thing","name":"dog gear discount codes"},{"@type":"Thing","name":"dog product reviews"}],"primaryImageOfPage":"https://remyslab.com/assets/logos/remys-lab-logo-science-dog-transparent-v2.png","inLanguage":"en-US"}
+  ]
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-family:"DM Sans",system-ui,-apple-system,sans-serif;background:#f7f5ef;color:#1b1713;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;overflow-x:clip}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;height:auto}
+:root{
+  --bg:#f7f5ef;--surface:#fffdfa;--line:#e4dccf;
+  --green:#1f3a2e;--gold:#c8920a;--gold-light:#fff8e3;--gold-border:#e7cf7a;
+  --text:#1b1713;--muted:#6c665d;
+  --approved-bg:#ecf5ee;--approved-border:rgba(31,58,46,.18);--approved-text:#1f3a2e;
+  --testing-bg:#fff8e3;--testing-border:#e7cf7a;--testing-text:#7a5c00;
+  --pass-bg:#fdf0f0;--pass-border:#f0c0c0;--pass-text:#8b2020;
+}
+.page{width:min(100%,540px);max-width:100%;margin:0 auto;padding:20px 16px 24px;overflow-x:clip}
+
+/* ── Nav ── */
+.site-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:8px}
+.nav-logo{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none}
+.nav-logo img{width:36px;height:36px;object-fit:contain}
+.nav-logo span{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.02em}
+.nav-tabs{display:flex;align-items:center;gap:4px}
+.nav-menu{position:relative}
+.nav-tab{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent;text-decoration:none;transition:all .15s ease;white-space:nowrap}
+.nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}
+.nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.nav-dropdown{position:absolute;top:calc(100% + 8px);right:0;display:none;min-width:190px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:15px;box-shadow:0 14px 34px rgba(27,23,19,.14);z-index:50}
+.nav-menu:hover .nav-dropdown,.nav-menu:focus-within .nav-dropdown{display:grid;gap:3px}
+.nav-dropdown a{display:block;padding:8px 10px;border-radius:10px;color:var(--text);font-size:12px;font-weight:800;text-align:left}
+.nav-dropdown a:hover{background:var(--bg);color:var(--green)}
+
+/* ── Hero ── */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 0 18px}
+.hero-logo{width:min(100%,340px);height:auto;margin:0 auto 8px;object-fit:contain;aspect-ratio:2172/724}
+.tagline{font-size:15px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.intro{font-size:13px;color:#575046;max-width:380px}
+.intro a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+/* ── Tested product heading ── */
+.tested-products-intro{display:grid;gap:5px;margin:7px 0 0}
+.tested-products-copy{font-size:12px;color:var(--muted);line-height:1.45;margin:0 2px}
+
+/* ── Search + Filter wrap ── */
+.search-filter-wrap{position:sticky;top:0;z-index:10;width:100%;max-width:100%;min-width:0;background:var(--bg);padding:10px 0 12px;display:flex;flex-direction:column;gap:8px}.filter-fade-wrap{position:relative;width:100%;max-width:100%;min-width:0;overflow:hidden}.filter-fade-wrap::after{content:"";position:absolute;top:0;right:0;bottom:4px;width:48px;background:linear-gradient(to right,transparent,var(--bg) 70%);pointer-events:none;z-index:1;transition:opacity .2s ease}.filter-fade-wrap.at-end::after{opacity:0}.scroll-hint{position:absolute;right:4px;top:50%;transform:translateY(-50%);z-index:2;pointer-events:none;color:var(--muted);font-size:13px;transition:opacity .2s ease;line-height:1}.filter-fade-wrap.at-end .scroll-hint{opacity:0}
+
+/* Search */
+.search-box{position:relative}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;flex-shrink:0}
+.search-input{width:100%;font-family:"DM Sans",sans-serif;font-size:13px;font-weight:500;padding:10px 12px 10px 36px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);outline:none;transition:border-color .15s ease,box-shadow .15s ease;-webkit-appearance:none}
+.search-input::placeholder{color:#b0a898}
+.search-input:focus{border-color:#c8b89a;box-shadow:0 0 0 3px rgba(31,58,46,.06)}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px;display:none;line-height:1}
+.search-clear.visible{display:block}
+
+/* Filter pills */
+.filter-bar{display:flex;width:100%;max-width:100%;min-width:0;gap:6px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:2px}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-pill{flex-shrink:0;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:700;padding:7px 11px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s ease;white-space:nowrap}
+.filter-pill:hover{border-color:#c8b89a;color:var(--text)}
+.filter-pill.active{background:var(--green);border-color:var(--green);color:#fff}
+.filter-pill .pill-count{font-size:10px;opacity:.7;margin-left:2px}
+
+/* Results line */
+.results-line{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:500;min-height:18px}
+
+/* ── Link list ── */
+.link-list{display:grid;width:100%;max-width:100%;min-width:0;gap:10px}
+.product-group{display:grid;width:100%;max-width:100%;min-width:0;gap:6px}
+
+/* ── Product card ── */
+.link-card{width:100%;max-width:100%;min-width:0;display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:13px 13px 13px;box-shadow:0 4px 16px rgba(27,23,19,.04);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;position:relative}
+.link-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(27,23,19,.07);border-color:#d2c4b1}
+.link-card.has-code{grid-template-columns:46px 1fr auto;grid-template-rows:auto auto;padding-bottom:12px}
+.link-card.has-code .card-code-row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px;padding-top:9px;border-top:1px solid var(--line)}
+.link-card.has-code .card-code-details{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
+.link-card.has-code .card-code-row .code-label{display:block;font-size:10px;font-weight:600;color:var(--muted);line-height:1.3}
+.link-card.has-code .card-code-row .code-value{display:block;font-family:"DM Mono",monospace;font-size:13px;font-weight:500;letter-spacing:.05em;color:var(--green);line-height:1.25}
+.link-card.has-code .card-code-row .code-copy-btn{appearance:none;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:800;color:#fff;background:var(--gold);border:none;border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .15s ease}
+.link-card.has-code .card-code-row .code-copy-btn:hover{background:#a87508}
+.link-card.has-code .card-code-row .code-copy-btn.copied{background:var(--green)}
+
+/* Lab badge */
+.lab-badge{position:absolute;top:-1px;right:12px;font-family:"DM Mono",monospace;font-size:8.5px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:0 0 7px 7px;border:1px solid transparent;border-top:none}
+.lab-badge.approved{background:var(--approved-bg);color:var(--approved-text);border-color:var(--approved-border)}
+.lab-badge.testing{background:var(--testing-bg);color:var(--testing-text);border-color:var(--testing-border)}
+.lab-badge.pass{background:var(--pass-bg);color:var(--pass-text);border-color:var(--pass-border)}
+
+.logo-box{width:46px;height:46px;border-radius:12px;background:#fff;border:1px solid #ece4d8;display:flex;align-items:center;justify-content:center;padding:6px;overflow:hidden;flex-shrink:0}
+.logo-box img{max-width:100%;max-height:38px;object-fit:contain}
+.product-thumb{padding:2px}
+.product-thumb img{width:100%;height:100%;max-height:none;object-fit:contain}
+.link-copy{min-width:0}
+.link-copy h2{font-size:14px;font-weight:700;line-height:1.2;color:var(--text);margin-bottom:1px}
+.link-copy p{font-size:11px;color:var(--muted);line-height:1.4}
+.link-action{font-size:11px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 10px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
+
+/* ── Copy code button ── */
+.copy-code-button{width:100%;appearance:none;border:1.5px dashed var(--gold-border);background:var(--gold-light);color:var(--green);border-radius:16px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-family:"DM Sans",inherit;box-shadow:0 3px 10px rgba(27,23,19,.03);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+.copy-code-button:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(27,23,19,.06);border-color:#c8920a;background:#fff4ce}
+.copy-code-button .btn-left{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.copy-code-button .btn-label{font-size:11px;font-weight:600;color:var(--muted)}
+.copy-code-button strong{font-family:"DM Mono",monospace;font-size:15px;letter-spacing:.06em;color:var(--green)}
+.copy-code-button .btn-cta{font-size:11px;font-weight:800;color:#fff;background:var(--gold);border-radius:999px;padding:6px 12px;white-space:nowrap;flex-shrink:0}
+.copy-code-button.copied{background:#ecf5ee;border-style:solid;border-color:rgba(31,58,46,.22)}
+.copy-code-button.copied .btn-cta{background:var(--green)}
+
+/* Coming soon strip */
+.code-soon{width:100%;border:1.5px dashed #ddd7ce;background:#faf8f4;border-radius:16px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.code-soon span{font-size:12px;color:var(--muted)}
+.code-soon em{font-family:"DM Mono",monospace;font-size:12px;color:#b0a898;font-style:normal}
+
+/* ── Link hub rows + accordion panels ── */
+.home-menu{display:grid;width:100%;max-width:100%;min-width:0;gap:14px;margin-top:4px}
+.home-section{display:grid;width:100%;max-width:100%;min-width:0;gap:8px;padding:10px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.35)}
+.home-section-codes{background:linear-gradient(180deg,#fffaf0 0%,rgba(255,255,255,.55) 100%);border-color:#ead8a3}
+.home-section-products{background:linear-gradient(180deg,#f5faf6 0%,rgba(255,255,255,.55) 100%);border-color:#dbe7dc}
+.home-section-more{background:linear-gradient(180deg,#f8f7f3 0%,rgba(255,255,255,.55) 100%);border-color:#e7dfd1}
+.home-section-label{display:flex;align-items:center;gap:9px;padding:0 4px 1px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8b7a56}
+.home-section-label::before{content:"";width:10px;height:10px;border-radius:999px;background:currentColor;opacity:.85;box-shadow:0 0 0 4px rgba(255,255,255,.6)}
+.home-section-products .home-section-label{color:#5f7b66}
+.home-section-more .home-section-label{color:#8a8378}
+.home-menu-item{display:grid;width:100%;max-width:100%;min-width:0;gap:7px}
+.home-menu-row{width:100%;appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:11px 12px;display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:11px;text-align:left;font-family:"DM Sans",sans-serif;color:var(--text);box-shadow:0 4px 14px rgba(27,23,19,.045);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;cursor:pointer}
+.home-menu-row:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(27,23,19,.075);border-color:#d2c4b1}
+.home-menu-row.is-open{border-color:var(--gold-border);background:linear-gradient(135deg,#fffdfa 0%,#fff9e9 100%)}
+.home-section-products .home-menu-row.is-open{border-color:#cfe0d2;background:linear-gradient(135deg,#fffdfa 0%,#f4faf5 100%)}
+.home-menu-icon{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(27,23,19,.035)}
+.home-menu-copy{min-width:0;display:flex;flex-direction:column;gap:1px}
+.home-menu-title{font-size:14px;font-weight:800;line-height:1.2;color:var(--text)}
+.home-menu-subtitle{font-size:11px;color:var(--muted);line-height:1.35}
+.home-menu-end{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.home-menu-count{font-size:10px;font-weight:800;line-height:1;color:var(--green);background:var(--approved-bg);border:1px solid var(--approved-border);border-radius:999px;padding:6px 8px;white-space:nowrap}
+.home-menu-chevron{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--green);transition:transform .18s ease;flex-shrink:0}
+.home-menu-chevron svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.35;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.accordion-toggle[aria-expanded="true"] .home-menu-chevron{transform:rotate(180deg)}
+.accordion-panel{display:grid;width:100%;max-width:100%;min-width:0;gap:7px;padding:0 1px 2px}
+.accordion-panel[hidden]{display:none!important}
+.codes-panel-note{font-size:11px;color:var(--muted);line-height:1.4;margin:0 3px}
+.home-direct-row{cursor:pointer}
+.home-direct-row .home-menu-chevron{transform:none}
+.home-direct-row.tiktok-row{background:#111;color:#fff;border-color:#111;grid-template-columns:54px minmax(0,1fr) auto;padding:9px 12px 9px 9px}
+.home-direct-row.tiktok-row .home-menu-title{color:#fff}
+.home-direct-row.tiktok-row .home-menu-subtitle{color:rgba(255,255,255,.68)}
+.tiktok-row-avatar-wrap{position:relative;width:54px;height:54px;flex-shrink:0;animation:tiktokAvatarFloat 3.1s ease-in-out infinite}
+.tiktok-row-avatar{width:54px;height:54px;border-radius:15px;object-fit:cover;border:2px solid rgba(255,255,255,.92);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.tiktok-row-badge{position:absolute;right:-5px;bottom:-3px;background:#111;color:#fff;border-radius:999px;padding:3px 6px;font-size:8px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.26)}
+.tiktok-row-end{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tiktok-follow-pill{font-size:10px;font-weight:800;color:#111;background:#fff;border-radius:999px;padding:7px 10px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.home-direct-row.tiktok-row .home-menu-chevron{color:#fff}
+@keyframes tiktokAvatarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.products-panel{min-width:0;max-width:100%;overflow:hidden;display:grid;gap:10px;margin:8px 4px 4px 12px;padding:10px 10px 10px 12px;border:1.5px solid #d9e4dc;border-left:6px solid #b8d0bf;border-radius:18px;background:linear-gradient(180deg,rgba(244,250,245,.96) 0%,rgba(255,255,255,.92) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 14px rgba(27,23,19,.035)}
+.products-panel .link-list{gap:8px}
+.products-panel .link-card{box-shadow:0 3px 10px rgba(27,23,19,.035)}
+.products-panel .search-filter-wrap{margin-top:0}
+.products-panel .results-line{margin-bottom:10px}
+
+/* Category color accents, intentionally visible but still soft */
+.home-section-products .home-menu-item{--cat-soft:#f4faf5;--cat-mid:#d7e8dc;--cat-strong:#6f9a7a;--cat-title:#1f3a2e;--cat-panel:#f4faf5;--cat-rgb:111,154,122}
+.home-section-products .home-menu-row{position:relative;overflow:hidden;border-color:var(--cat-mid);background:linear-gradient(135deg,#fffdfa 0%,var(--cat-soft) 100%);box-shadow:0 4px 14px rgba(27,23,19,.045)}
+.home-section-products .home-menu-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:9px;background:var(--cat-strong);opacity:1}
+.home-section-products .home-menu-row.is-open{border-color:var(--cat-strong);box-shadow:0 8px 20px rgba(27,23,19,.07),0 0 0 3px rgba(var(--cat-rgb),.13)}
+.home-section-products .home-menu-item .home-menu-row.is-open{background:linear-gradient(135deg,#fffdfa 0%,var(--cat-soft) 100%)}
+.home-section-products .home-menu-icon{background:var(--cat-soft);border-color:var(--cat-mid);box-shadow:0 2px 8px rgba(var(--cat-rgb),.14)}
+.home-section-products .home-menu-title{color:var(--cat-title)}
+.home-section-products .home-menu-count{background:#fff;border-color:var(--cat-mid);color:var(--cat-title)}
+.home-section-products .products-panel{border-color:var(--cat-mid);border-left-color:var(--cat-strong);background:linear-gradient(180deg,var(--cat-panel) 0%,rgba(255,255,255,.96) 100%)}
+.home-section-products .products-panel .link-card{border-color:var(--cat-mid)}
+.home-section-products .category-treats{--cat-soft:#fdefc0;--cat-mid:#d9a720;--cat-strong:#b87d00;--cat-title:#5c3c00;--cat-panel:#fef5d0;--cat-rgb:184,125,0}
+.home-section-products .category-toys{--cat-soft:#cff0b8;--cat-mid:#7ec452;--cat-strong:#4e8c28;--cat-title:#275010;--cat-panel:#dff5c8;--cat-rgb:78,140,40}
+.home-section-products .category-walkgear{--cat-soft:#fcd9b8;--cat-mid:#d47830;--cat-strong:#b05818;--cat-title:#6b2d08;--cat-panel:#fde4c4;--cat-rgb:176,88,24}
+.home-section-products .category-cleanup{--cat-soft:#b8e8f4;--cat-mid:#3a9dc0;--cat-strong:#1a7a9e;--cat-title:#0d4d66;--cat-panel:#cdf0fa;--cat-rgb:26,122,158}
+
+/* ── Current codes ── */
+.codes-section{display:grid;gap:7px;margin-bottom:6px}
+.codes-intro-row{margin:0 2px 2px}
+.codes-intro{font-size:12px;color:var(--muted);line-height:1.45}
+.codes-track{display:grid;gap:7px}
+.partner-code-card{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr) auto auto;align-items:center;gap:8px;background:linear-gradient(180deg,#fffdf7 0%,var(--surface) 100%);border:1px solid var(--gold-border);border-radius:14px;padding:9px 9px 9px 8px;box-shadow:0 3px 10px rgba(27,23,19,.035);overflow:hidden}
+.partner-code-card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--gold)}
+.partner-logo{width:38px;height:38px;padding:3px;background:#fff;border-color:#eadff0;border-radius:11px}
+.partner-logo img{width:100%;height:100%;object-fit:contain}
+.partner-copy{min-width:0;display:flex;flex-direction:column;gap:0}
+.partner-copy h2{font-size:13px;font-weight:800;line-height:1.18;color:var(--text)}
+.partner-offer{font-size:10px;color:var(--muted);line-height:1.3}
+.partner-note-link{display:inline-flex;margin-top:2px;font-size:10px;font-weight:800;color:var(--green);text-decoration:underline;text-underline-offset:2px}
+.partner-logo-text{font-family:"DM Mono",monospace;font-size:13px;font-weight:800;color:var(--green);letter-spacing:.03em}
+.partner-code-value{font-family:"DM Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.045em;color:var(--green);line-height:1.35}
+.partner-copy-btn{appearance:none;font-family:"DM Sans",sans-serif;font-size:10px;font-weight:800;color:#fff;background:var(--gold);border:none;border-radius:999px;padding:7px 9px;cursor:pointer;white-space:nowrap;transition:background .15s ease}
+.partner-copy-btn:hover{background:#a87508}
+.partner-copy-btn.copied{background:var(--green)}
+.partner-visit{font-size:10px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:7px 9px;white-space:nowrap;letter-spacing:.02em;flex-shrink:0}
+
+/* Section divider */
+.section-divider{display:flex;align-items:center;gap:10px;margin:4px 0 2px}
+.section-divider span{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b0a898;white-space:nowrap}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+
+/* Empty state */
+.empty-state{text-align:center;padding:32px 16px;color:var(--muted);font-size:14px}
+.empty-state strong{display:block;font-size:28px;margin-bottom:8px}
+
+/* Footer */
+.footer{margin-top:20px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:11px;color:#9e9088}
+.footer a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ── Sticky disclosure banner ── */
+.disclosure-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(247,245,239,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px;text-align:center;font-size:11px;color:#9e9088;line-height:1.5}
+.disclosure-bar a{color:var(--green);text-decoration:underline;text-underline-offset:2px;font-weight:600}
+
+/* Mobile */
+@media(max-width:520px){
+  .page{padding:16px 10px 24px}
+  .nav-logo span{display:none}
+  .nav-tab{font-size:12px;padding:6px 9px}
+  .home-section,.accordion-panel,.codes-track,.products-panel{min-width:0;max-width:100%;overflow:hidden}
+  .products-panel{margin:7px 2px 4px 10px;padding:8px 8px 8px 10px;border-radius:16px;border-left-width:6px}
+  .home-section-products .home-menu-row::before{width:8px}
+  .home-direct-row.tiktok-row{grid-template-columns:48px minmax(0,1fr) auto;padding:8px 9px 8px 8px}
+  .tiktok-row-avatar-wrap,.tiktok-row-avatar{width:48px;height:48px}
+  .tiktok-follow-pill{font-size:9px;padding:6px 8px}
+  .tiktok-row-end{gap:4px}
+  .home-menu-row{grid-template-columns:38px minmax(0,1fr) auto;gap:8px;padding:9px}
+  .home-section{padding:7px;border-radius:18px;gap:7px}
+  .home-section-label{font-size:10px;padding:0 3px 1px}
+  .home-menu-icon{width:38px;height:38px;border-radius:12px;font-size:18px}
+  .home-menu-count{display:none}
+  .home-menu-end{gap:3px}
+  .partner-code-card{grid-template-columns:34px minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:7px;row-gap:4px;padding:8px 7px}
+  .partner-logo{grid-column:1;grid-row:1/3;width:34px;height:34px;align-self:center}
+  .partner-copy{grid-column:2;grid-row:1/3;align-self:center}
+  .partner-copy-btn{grid-column:3;grid-row:1;justify-self:end;align-self:end}
+  .partner-visit{grid-column:3;grid-row:2;justify-self:end;align-self:start}
+  .partner-copy-btn,.partner-visit{font-size:9px;padding:5px 7px}
+  .partner-copy h2{font-size:12px}
+  .partner-offer,.partner-code-value{font-size:10px}
+  .partner-note-link{font-size:9px}
+  .search-filter-wrap{position:relative;top:auto}
+  .link-card{grid-template-columns:42px minmax(0,1fr);grid-template-rows:auto auto;gap:7px 8px;padding:10px}
+  .link-card .link-action{grid-column:2;grid-row:2;justify-self:end;padding:6px 9px;font-size:10px}
+  .link-card.has-code{grid-template-columns:42px minmax(0,1fr);grid-template-rows:auto auto auto}
+  .link-card.has-code .card-code-row{grid-column:1/-1;grid-row:3;gap:8px;flex-wrap:wrap}
+  .link-card.has-code .card-code-row .code-copy-btn{font-size:10px;padding:6px 9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tiktok-row-avatar-wrap{animation:none}
+}
+
+/* v4 nav visibility */
+.nav-menu>.nav-tab::after{content:"⌄";font-size:11px;line-height:1;margin-left:1px;opacity:.75}
+@media(max-width:560px){.nav-menu>.nav-tab::after{content:""}}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<main class="page">
+
+  <!-- Nav -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <a class="nav-logo" href="/">
+      <img src="/assets/icons/remys-lab-dog-scientist-icon-transparent-v2.png" alt="Remy's Lab" width="36" height="36"/>
+      <span>Remy's Lab</span>
+    </a>
+    <div class="nav-tabs">
+      <a class="nav-tab active" href="/" aria-current="page">Links</a>
+      <div class="nav-menu">
+        <a class="nav-tab" href="/codes/">Codes</a>
+        <div class="nav-dropdown" aria-label="Code pages">
+          <a href="/codes/">All codes</a>
+          <a href="/pack-leashes-code/">Pack Leashes</a>
+          <a href="/brooks-and-roo-code/">Brooks &amp; Roo</a>
+          <a href="/pupford-code/">Pupford</a>
+        </div>
+      </div>
+      <a class="nav-tab" href="/blog/">Lab Notes</a>
+      <a class="nav-tab" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="page-title">
+    <h1 id="page-title" class="visually-hidden">Remy's Lab</h1>
+    <img class="hero-logo" src="/assets/logos/remys-lab-logo-science-dog-transparent-v2.png" alt="Remy's Lab logo" width="2172" height="724" decoding="async" fetchpriority="high"/>
+    <p class="tagline">Dog products tested by an actual Lab 🧪</p>
+    <p class="intro">Test notes and honest product takes from <a href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener">@remy.lab</a>.</p>
+  </section>
+
+  <!-- Link hub -->
+  <section class="home-menu" aria-label="Remy's Lab quick links">
+
+    <div class="home-section home-section-codes" aria-label="Deals and codes section">
+      <div class="home-section-label">Deals &amp; Codes</div>
+      <div class="home-menu-item">
+        <button class="home-menu-row accordion-toggle is-open" type="button" data-accordion-toggle="currentCodesPanel" aria-expanded="true" aria-controls="currentCodesPanel">
+          <span class="home-menu-icon" aria-hidden="true">🏷️</span>
+          <span class="home-menu-copy">
+            <span class="home-menu-title">Current Discount Codes</span>
+            <span class="home-menu-subtitle">Codes from brands we currently work with</span>
+          </span>
+          <span class="home-menu-end">
+            <span class="home-menu-count" id="currentCodesCount">3 active codes</span>
+            <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+          </span>
+        </button>
+        <div class="accordion-panel" id="currentCodesPanel">
+          <p class="codes-panel-note">Use one if it helps, no pressure.</p>
+          <div class="codes-track" aria-label="Current discount codes">
+            <article class="partner-code-card">
+              <span class="logo-box partner-logo"><img src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo" width="225" height="225" loading="lazy" decoding="async"/></span>
+              <span class="partner-copy">
+                <h2>Pack Leashes</h2>
+                <span class="partner-offer">20% off sitewide</span>
+                <a class="partner-note-link" href="/pack-leashes-code/">Code notes</a>
+                <strong class="partner-code-value">REMYSLAB20</strong>
+              </span>
+              <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB20" data-product="Pack Leashes" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pack Leashes discount code REMYSLAB20">Grab code</button>
+              <a class="partner-visit affiliate-link" href="https://packleashes.com/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored"
+                 data-product="Pack Leashes" data-category="partner_store" data-result="current_partner"
+                 data-placement="current_codes" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit brand</a>
+            </article>
+            <article class="partner-code-card">
+              <span class="logo-box partner-logo"><img src="/assets/logos/brooks-and-roo-logo.jpg" alt="Brooks and Roo logo" width="320" height="160" loading="lazy" decoding="async"/></span>
+              <span class="partner-copy">
+                <h2>Brooks &amp; Roo</h2>
+                <span class="partner-offer">15% off sitewide</span>
+                <a class="partner-note-link" href="/brooks-and-roo-code/">Code notes</a>
+                <strong class="partner-code-value">REMYSLAB15</strong>
+              </span>
+              <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB15" data-product="Brooks &amp; Roo" data-category="partner_store" data-placement="current_codes" aria-label="Copy Brooks and Roo discount code REMYSLAB15">Grab code</button>
+              <a class="partner-visit affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored"
+                 data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner"
+                 data-placement="current_codes" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit brand</a>
+            </article>
+            <article class="partner-code-card">
+              <span class="logo-box partner-logo"><span class="partner-logo-text" aria-hidden="true">PF</span></span>
+              <span class="partner-copy">
+                <h2>Pupford</h2>
+                <span class="partner-offer">15% off sitewide</span>
+                <a class="partner-note-link" href="/pupford-code/">Code notes</a>
+                <strong class="partner-code-value">REMYSLAB15</strong>
+              </span>
+              <button class="code-copy-btn partner-copy-btn" type="button" data-code="REMYSLAB15" data-product="Pupford" data-category="partner_store" data-placement="current_codes" aria-label="Copy Pupford discount code REMYSLAB15">Grab code</button>
+              <a class="partner-visit affiliate-link" href="https://pupford.com/" target="_blank" rel="nofollow sponsored"
+                 data-product="Pupford" data-category="partner_store" data-result="current_partner"
+                 data-placement="current_codes" data-discount="REMYSLAB15" data-network="Pupford">Visit brand</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-section home-section-products" aria-label="Remy's tested picks section">
+      <div class="home-section-label">Remy's Favorites</div>
+
+      <div class="home-menu-item category-treats">
+        <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="treatsPanel" aria-expanded="false" aria-controls="treatsPanel">
+          <span class="home-menu-icon" aria-hidden="true">🦴</span>
+          <span class="home-menu-copy">
+            <span class="home-menu-title">Treats &amp; Chews</span>
+            <span class="home-menu-subtitle">Chews Remy gets excited about</span>
+          </span>
+          <span class="home-menu-end">
+            <span class="home-menu-count" id="treatsCount">1 product</span>
+            <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+          </span>
+        </button>
+        <div class="accordion-panel products-panel" id="treatsPanel" hidden>
+          <section aria-label="Treats and chews" class="link-list">
+            <div class="product-group" data-category="treats">
+              <a class="link-card affiliate-link" href="https://amzn.to/4xgL7NE" target="_blank" rel="nofollow sponsored"
+                 data-product="Mighty Paw Naturals 12-Inch Bully Sticks" data-category="treats" data-result="approved"
+                 data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
+                <span class="logo-box product-thumb"><img src="/assets/products/mighty-paw-bully-sticks.jpg" alt="Mighty Paw Naturals bully sticks bag and chews" width="225" height="225" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>Mighty Paw Bully Sticks</h2>
+                  <p>Single-ingredient chew. Remy knows the bag sound immediately.</p>
+                </span>
+                <span class="link-action">See product</span>
+              </a>
+            </div>
+            <div class="product-group" data-category="treats">
+              <a class="link-card affiliate-link" href="https://amzn.to/4fKFxgf" target="_blank" rel="nofollow sponsored"
+                 data-product="Wild Wolf 12-Inch Angus Bully Sticks" data-category="treats" data-result="approved"
+                 data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
+                <span class="logo-box product-thumb"><img src="/assets/products/wild-wolf-angus-bully-sticks.jpg" alt="Wild Wolf 12-inch Angus bully sticks bag" width="225" height="225" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>Wild Wolf Angus Bully Sticks</h2>
+                  <p>Remy's second favorite chew. USA-made Angus beef, lasts 1 to 1.5 hours.</p>
+                </span>
+                <span class="link-action">See product</span>
+              </a>
+            </div>
+            <div class="product-group" data-category="treats">
+              <a class="link-card affiliate-link" href="https://amzn.to/4viC4ui" target="_blank" rel="nofollow sponsored"
+                 data-product="USA Chicken Feet Dog Chew Value Pack" data-category="treats" data-result="approved"
+                 data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
+                <span class="logo-box product-thumb"><img src="/assets/products/usa-chicken-feet-dog-chew.jpg" alt="USA Chicken Feet natural dog chews value pack" width="225" height="225" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>USA Chicken Feet</h2>
+                  <p>Quick 20 to 25 minute chew. Low smell, good for teeth, versatile.</p>
+                </span>
+                <span class="link-action">See product</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="home-menu-item category-toys">
+        <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="toysPanel" aria-expanded="false" aria-controls="toysPanel">
+          <span class="home-menu-icon" aria-hidden="true">🧩</span>
+          <span class="home-menu-copy">
+            <span class="home-menu-title">Toys</span>
+            <span class="home-menu-subtitle">Stuff that keeps Remy busy for a bit</span>
+          </span>
+          <span class="home-menu-end">
+            <span class="home-menu-count" id="toysCount">1 product</span>
+            <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+          </span>
+        </button>
+        <div class="accordion-panel products-panel" id="toysPanel" hidden>
+          <section aria-label="Toys" class="link-list">
+            <div class="product-group" data-category="toys">
+              <a class="link-card affiliate-link" href="https://amzn.to/3PPRqag" target="_blank" rel="nofollow sponsored"
+                 data-product="Potaroma Dog Puzzle Toy 2 Levels" data-category="toys" data-result="approved"
+                 data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
+                <span class="logo-box product-thumb"><img src="/assets/products/potaroma-dog-puzzle-toy.png" alt="Yellow and teal Potaroma dog puzzle toy with food compartments and sliding covers" width="284" height="284" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>Potaroma Dog Puzzle Toy</h2>
+                  <p>Good mental work when you want to slow things down a little.</p>
+                </span>
+                <span class="link-action">See product</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="home-menu-item category-walkgear">
+        <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="walkGearPanel" aria-expanded="false" aria-controls="walkGearPanel">
+          <span class="home-menu-icon" aria-hidden="true">🦮</span>
+          <span class="home-menu-copy">
+            <span class="home-menu-title">Leashes &amp; Walk Gear</span>
+            <span class="home-menu-subtitle">Walk stuff Remy actually uses</span>
+          </span>
+          <span class="home-menu-end">
+            <span class="home-menu-count" id="walkGearCount">1 product</span>
+            <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+          </span>
+        </button>
+        <div class="accordion-panel products-panel" id="walkGearPanel" hidden>
+          <section aria-label="Leashes and walk gear" class="link-list">
+            <div class="product-group" data-category="gear">
+              <div class="link-card has-code">
+                <span class="logo-box product-thumb"><img src="/assets/products/pack-leashes-dino-collar-set.jpg" alt="Pack Leashes dinosaur print leash, bowtie collar, and matching poop bag holder" width="452" height="452" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>Pack Leashes Dino Collar Set</h2>
+                  <p>Adjustable collar set Remy wears. Clean hardware and fun print.</p>
+                </span>
+                <a class="link-action affiliate-link" href="https://www.packleashes.com/products/dinosaurs-leash-bowtie-collar?_pos=2&amp;_sid=33ce75543&amp;_ss=r" target="_blank" rel="nofollow sponsored"
+                   data-product="Pack Leashes Dino Leash + Bowtie Collar" data-category="gear" data-result="approved"
+                   data-placement="homepage_category" data-discount="REMYSLAB20" data-network="Pack Leashes">See product</a>
+                <div class="card-code-row">
+                  <span class="card-code-details">
+                    <span class="code-label">Use code if you buy</span>
+                    <span class="code-value">REMYSLAB20</span>
+                  </span>
+                  <button class="code-copy-btn" type="button" data-code="REMYSLAB20" data-product="Pack Leashes Dino Leash + Bowtie Collar" data-category="gear" data-placement="homepage_category">Grab code</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="home-menu-item category-cleanup">
+        <button class="home-menu-row accordion-toggle" type="button" data-accordion-toggle="cleanupPanel" aria-expanded="false" aria-controls="cleanupPanel">
+          <span class="home-menu-icon" aria-hidden="true">🧹</span>
+          <span class="home-menu-copy">
+            <span class="home-menu-title">Grooming &amp; Cleanup</span>
+            <span class="home-menu-subtitle">Stuff that helps with the dog hair situation</span>
+          </span>
+          <span class="home-menu-end">
+            <span class="home-menu-count" id="cleanupCount">2 products</span>
+            <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"/></svg></span>
+          </span>
+        </button>
+        <div class="accordion-panel products-panel" id="cleanupPanel" hidden>
+          <section aria-label="Grooming and cleanup" class="link-list">
+            <div class="product-group" data-category="cleaning">
+              <a class="link-card affiliate-link" href="https://www.amazon.com/BLACK-DECKER-Remover-Roller-HMSCT0001/dp/B09YN468KG/ref=sr_1_1?crid=29G1RN859PNOC&amp;dib=eyJ2IjoiMSJ9.RBL-ZDZfJl2DsmHj9oy3rhRtKjhw-QnWWItWwOy8t6Tr325Q8aE-F0advMbsTWvlhCd2PMrVHAxvkQQkXC4Z8jp2OcPThGSnuwDmVr53YwqL3nHGiJ7T6WzqLfRUDjIA3ABtAGGnuF1cGS6nl8OcdDSldstaH7T-EGH3iH0A2YZTYWjw43kx4TC-eyIdG-N0_Bey7_EIWi6dqd7UGli2ox78jv6DGEJCJBL-Fr_FQWg0fso_wpGNZ8Io09Zfd9YZobpTQOiKPWZOP2xTH9GeK06bFl4jwwzzpME_r_Ek0C4._pqkCHPunY1QdqMMfMdVIP3MmX71Wre_qUoBLwVIHnA&amp;dib_tag=se&amp;keywords=black+and+decker+pet+hair+removal+tool&amp;qid=1780100755&amp;sprefix=black+and+decker+pet%2Caps%2C406&amp;sr=8-1" target="_blank" rel="nofollow sponsored"
+                 data-product="BLACK+DECKER Pet Hair Roller" data-category="cleaning" data-result="approved"
+                 data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
+                <span class="logo-box product-thumb"><img src="/assets/products/black-decker-pet-hair-remover.jpg" alt="BLACK+DECKER reusable pet hair remover roller" width="225" height="225" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>BLACK+DECKER Pet Hair Roller</h2>
+                  <p>Reusable roller that works way better than burning through lint rollers.</p>
+                </span>
+                <span class="link-action">See product</span>
+              </a>
+            </div>
+            <div class="product-group" data-category="cleaning">
+              <a class="link-card affiliate-link" href="https://amzn.to/4o3ZtNl" target="_blank" rel="nofollow sponsored"
+                 data-product="FURemover Pet Hair Removal Rubber Broom" data-category="cleaning" data-result="approved"
+                 data-placement="homepage_category" data-discount="" data-network="Amazon Associates">
+                <span class="logo-box product-thumb"><img src="/assets/products/furemover-pet-broom.jpg" alt="FURemover rubber pet hair broom head" width="225" height="225" loading="lazy" decoding="async"/></span>
+                <span class="link-copy">
+                  <h2>FURemover Rubber Broom</h2>
+                  <p>Pulls a wild amount of hair out of carpet. Good results, definitely a workout.</p>
+                </span>
+                <span class="link-action">See product</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-section home-section-more" aria-label="Follow Remy section">
+      <div class="home-section-label">Follow Along</div>
+
+      <a class="home-menu-row home-direct-row tiktok-row" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" aria-label="Follow Remys Lab on TikTok">
+        <span class="tiktok-row-avatar-wrap">
+          <img class="tiktok-row-avatar" src="/assets/profile/remy-follow.jpg" alt="Remy smiling in the backyard" width="320" height="320" loading="lazy" decoding="async"/>
+          <span class="tiktok-row-badge" aria-hidden="true">TikTok</span>
+        </span>
+        <span class="home-menu-copy">
+          <span class="home-menu-title">Follow Remy on TikTok</span>
+          <span class="home-menu-subtitle">@remy.lab · Quick tests, honest notes, and Remy being Remy.</span>
+        </span>
+        <span class="tiktok-row-end">
+          <span class="tiktok-follow-pill">Follow</span>
+          <span class="home-menu-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m7.5 5 5 5-5 5"/></svg></span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <section class="visually-hidden" aria-label="About Remys Lab">
+    <h2>What is Remy's Lab?</h2>
+    <p>Remy's Lab is a dog product testing page connected to @remy.lab on TikTok. Remy, a yellow Labrador, tests dog products so dog owners can see current product notes, product notes, partner codes, and useful links in one simple place.</p>
+  </section>
+
+  <nav class="footer" aria-label="Footer links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/disclaimer.html">Disclosure</a>
+    <a href="/codes/">Codes</a>
+    <a href="/blog/">Lab Notes</a>
+    <a href="/dog-product-questions/">Dog Product Questions</a>
+    <a href="/guides/">Guides</a>
+    <a href="/llms.txt">LLMs.txt</a>
+  </nav>
+
+</main>
+
+<!-- Sticky affiliate disclosure bar -->
+<div class="disclosure-bar" role="contentinfo" aria-label="Affiliate disclosure">
+  Some links are affiliate links - Remy's Lab may earn a small commission if you buy. <a href="/disclaimer.html">Full disclosure</a>
+</div>
+
+<script>
+function getNetwork(url){
+  if(url.includes('amazon')||url.includes('amzn'))return 'Amazon Associates';
+  if(url.includes('clickbank'))return 'ClickBank';
+  if(url.includes('mavely'))return 'Mavely';
+  if(url.includes('packleashes'))return 'Pack Leashes';
+  if(url.includes('brooksandroo'))return 'Brooks & Roo';
+  if(url.includes('pupford'))return 'Pupford';
+  return 'Other';
+}
+
+function copyText(text){
+  if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(text);}
+  var area=document.createElement('textarea');
+  area.value=text;area.setAttribute('readonly','');area.style.position='absolute';area.style.left='-9999px';
+  document.body.appendChild(area);area.select();document.execCommand('copy');document.body.removeChild(area);
+  return Promise.resolve();
+}
+
+document.querySelectorAll('.copy-code-button, .code-copy-btn').forEach(function(button){
+  button.addEventListener('click',function(){
+    var code=button.dataset.code||'';
+    var product=button.dataset.product||"Remy's Lab";
+    if(!code)return;
+    copyText(code).then(function(){
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({event:'coupon_code_copy',product_name:product,product_category:button.dataset.category||'discount_code',button_text:button.textContent.trim(),button_location:button.dataset.placement||'remys_lab',discount_code:code});
+      var cta=button.querySelector('.btn-cta');
+      var label=button.querySelector('.btn-label');
+      button.classList.add('copied');
+      if(cta){cta.textContent='Copied ✓';}
+      else{button.textContent='Copied ✓';}
+      if(label)label.textContent='Code copied!';
+      setTimeout(function(){
+        button.classList.remove('copied');
+        if(cta){cta.textContent=button.classList.contains('partner-copy-btn')?'Grab code':'Grab code';}
+        else{button.textContent='Grab code';}
+        if(label)label.textContent='Discount code';
+      },1800);
+    });
+  });
+});
+
+document.addEventListener('click',function(e){
+  var link=e.target.closest('a.affiliate-link,a[rel*="sponsored"]');
+  if(!link)return;
+  var href=link.getAttribute('href')||'';
+  window.dataLayer=window.dataLayer||[];
+  window.dataLayer.push({event:'affiliate_click',product_name:link.dataset.product||link.textContent.trim(),product_category:link.dataset.category||'remys_lab',lab_result:link.dataset.result||'',button_text:link.textContent.trim(),button_location:link.dataset.placement||'remys_lab',affiliate_network:link.dataset.network||getNetwork(href),discount_code:link.dataset.discount||'',affiliate_url:href});
+});
+
+(function(){
+  var toggles=document.querySelectorAll('[data-accordion-toggle]');
+  toggles.forEach(function(toggle){
+    var panel=document.getElementById(toggle.dataset.accordionToggle);
+    if(!panel)return;
+    toggle.addEventListener('click',function(){
+      var willOpen=toggle.getAttribute('aria-expanded')!=='true';
+      toggle.setAttribute('aria-expanded',willOpen?'true':'false');
+      toggle.classList.toggle('is-open',willOpen);
+      panel.hidden=!willOpen;
+    });
+  });
+
+  var countMap=[
+    ['currentCodesCount','#currentCodesPanel .partner-code-card',' active code'],
+    ['treatsCount','#treatsPanel .product-group',' product'],
+    ['toysCount','#toysPanel .product-group',' product'],
+    ['walkGearCount','#walkGearPanel .product-group',' product'],
+    ['cleanupCount','#cleanupPanel .product-group',' product']
+  ];
+
+  countMap.forEach(function(item){
+    var label=document.getElementById(item[0]);
+    if(!label)return;
+    var count=document.querySelectorAll(item[1]).length;
+    label.textContent=count+item[2]+(count===1?'':'s');
+  });
+})();
+
+if(window.netlifyIdentity){
+  window.netlifyIdentity.on('init',function(user){
+    if(!user){window.netlifyIdentity.on('login',function(){document.location.href='/admin/';});}
+  });
+}
+</script>
+</body>
+</html>
