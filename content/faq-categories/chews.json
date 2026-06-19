@@ -1,0 +1,43 @@
+{
+  "title": "Dog Chews FAQ",
+  "slug": "chews",
+  "date": "2026-06-19",
+  "published": true,
+  "description": "Quick answers about bully sticks, chicken feet, chew time, smell, mess, and dog chew supervision from Remy's Lab.",
+  "category": "Chews",
+  "intro": "Chews are one of Remy's favorite test categories. These answers keep it practical, smell, mess, chew time, and whether the product actually keeps him busy.",
+  "entries": [
+    {
+      "question": "What is a bully stick?",
+      "answer": "A bully stick is a single ingredient style dog chew made from beef. Dog owners usually buy them because they can keep dogs busy longer than a regular treat. At Remy's Lab, we pay attention to odor, chew time, mess, and whether Remy stays interested.",
+      "related_lab_notes": [
+        "mighty-paw-naturals-bully-sticks-review",
+        "wild-wolf-angus-bully-sticks-review"
+      ]
+    },
+    {
+      "question": "How long should a bully stick last?",
+      "answer": "Chew time depends on the dog, the size of the stick, and how aggressive the chewer is. A young Lab can go through smaller chews quickly. That is why our Lab Notes include real chew time whenever we can, instead of just repeating the product listing.",
+      "related_lab_notes": [
+        "mighty-paw-naturals-bully-sticks-review",
+        "wild-wolf-angus-bully-sticks-review"
+      ]
+    },
+    {
+      "question": "Are bully sticks messy?",
+      "answer": "Some bully sticks can be messy or smelly, especially once the dog gets into the chew. Lower odor versions can help, but they are not always odor free. We usually test chews on surfaces that are easy to clean and avoid pretending any chew is perfectly clean.",
+      "related_lab_notes": [
+        "mighty-paw-naturals-bully-sticks-review"
+      ]
+    },
+    {
+      "question": "What makes a bully stick lower odor?",
+      "answer": "Lower odor bully sticks are processed to reduce smell, but that does not always mean no smell at all. The better question is whether the odor is manageable inside the house. That is one of the first things we pay attention to with Remy."
+    },
+    {
+      "question": "Should you supervise a dog with a chew?",
+      "answer": "Yes. Dogs should be supervised with chews, especially strong chewers or dogs that try to swallow pieces. Remy's Lab shares product notes, not medical advice, so ask your vet what chews are appropriate for your dog."
+    }
+  ],
+  "sort_order": 3
+}

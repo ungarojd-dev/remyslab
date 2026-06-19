@@ -1,0 +1,34 @@
+{
+  "title": "Toys & Enrichment FAQ",
+  "slug": "toys-enrichment",
+  "date": "2026-06-19",
+  "published": true,
+  "description": "Quick answers about dog puzzle toys, enrichment toys, and how Remy's Lab thinks about toy testing.",
+  "category": "Toys & Enrichment",
+  "intro": "Toys can be tough because a product might be great for one dog and boring for another. We focus on how long it holds Remy's attention and whether it feels worth keeping around.",
+  "entries": [
+    {
+      "question": "What is a dog enrichment toy?",
+      "answer": "A dog enrichment toy is a toy that gives the dog something to figure out, sniff, lick, chew, or work through. The goal is usually mental stimulation, not just throwing a toy across the room. At Remy's Lab, the test is simple, does it actually keep Remy busy or does he solve it and leave.",
+      "related_lab_notes": [
+        "potaroma-dog-puzzle-toy-review"
+      ]
+    },
+    {
+      "question": "What is a dog puzzle toy?",
+      "answer": "A dog puzzle toy is a toy where the dog has to move pieces, sniff, slide, or problem solve to get treats. They can be helpful for slowing a dog down and giving them something to do, but some dogs figure them out fast.",
+      "related_lab_notes": [
+        "potaroma-dog-puzzle-toy-review"
+      ]
+    },
+    {
+      "question": "Are puzzle toys good for Labs?",
+      "answer": "Puzzle toys can be good for Labs because many Labs are food motivated and enjoy figuring out how to get treats. The main thing to watch is difficulty. If it is too easy, the toy might only buy you a few minutes. If it is too hard, the dog may get frustrated."
+    },
+    {
+      "question": "How do you tell if a dog toy is too easy?",
+      "answer": "A toy is probably too easy if your dog solves it immediately every time and loses interest once the treats are gone. That does not make it useless, but it changes the job. It might be a quick snack activity instead of a longer enrichment toy."
+    }
+  ],
+  "sort_order": 4
+}

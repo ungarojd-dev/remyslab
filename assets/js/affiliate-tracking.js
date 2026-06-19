@@ -3,6 +3,7 @@
     if(url.indexOf('amazon')>-1||url.indexOf('amzn')>-1)return 'Amazon Associates';
     if(url.indexOf('packleashes')>-1)return 'Pack Leashes';
     if(url.indexOf('brooksandroo')>-1)return 'Brooks & Roo';
+    if(url.indexOf('pupford')>-1)return 'Pupford';
     return 'Other';
   }
   function copyText(text){

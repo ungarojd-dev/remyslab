@@ -1,0 +1,47 @@
+{
+  "title": "Grooming & Cleanup FAQ",
+  "slug": "grooming-cleanup",
+  "date": "2026-06-19",
+  "published": true,
+  "description": "Quick answers about pet hair rollers, rubber brooms, carpet rakes, and cleanup tools for dog hair from Remy's Lab.",
+  "category": "Grooming & Cleanup",
+  "intro": "Dog hair cleanup is where the test is brutally obvious. Either the tool grabs the hair, or it does not. These answers link to Remy's cleanup tests when we have them.",
+  "entries": [
+    {
+      "question": "What is a pet hair roller?",
+      "answer": "A pet hair roller is a tool made to pick up pet hair from furniture, bedding, clothes, and other fabric surfaces. Reusable rollers are different from sticky lint rollers because they do not need replacement sheets. We tested one with Remy's hair on couches, clothes, and a comforter.",
+      "related_lab_notes": [
+        "black-decker-pet-hair-roller-review"
+      ]
+    },
+    {
+      "question": "Are reusable pet hair rollers worth it?",
+      "answer": "A reusable pet hair roller can be worth it if you are constantly buying lint roller refills. The biggest benefit is that you can keep using it without sticky sheets. The tradeoff is that heavy fur areas may still need a few passes.",
+      "related_lab_notes": [
+        "black-decker-pet-hair-roller-review"
+      ]
+    },
+    {
+      "question": "What is a rubber pet broom?",
+      "answer": "A rubber pet broom uses rubber bristles to pull pet hair out of carpet, rugs, and some hard floor surfaces. It is usually more manual than vacuuming, but it can grab hair that stays trapped in carpet fibers.",
+      "related_lab_notes": [
+        "furemover-pet-hair-broom-review"
+      ]
+    },
+    {
+      "question": "Do rubber brooms work on carpet?",
+      "answer": "Rubber brooms can work on carpet, especially when dog hair is stuck deeper than the vacuum reaches. The honest downside is effort. It can be a workout if you are trying to do a large carpeted area by hand.",
+      "related_lab_notes": [
+        "furemover-pet-hair-broom-review"
+      ]
+    },
+    {
+      "question": "What helps get Lab hair out of rugs?",
+      "answer": "Start with a normal vacuum pass, then use a rubber rake or broom in short overlapping pulls to bring trapped hair to the surface. Gather the hair, then vacuum one more time. That is the method that showed the biggest difference in our Remy cleanup test.",
+      "related_lab_notes": [
+        "furemover-pet-hair-broom-review"
+      ]
+    }
+  ],
+  "sort_order": 5
+}

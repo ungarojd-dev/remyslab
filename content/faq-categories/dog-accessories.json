@@ -1,0 +1,36 @@
+{
+  "title": "Dog Accessories FAQ",
+  "slug": "dog-accessories",
+  "date": "2026-06-19",
+  "published": true,
+  "description": "Quick answers about dog bandanas, accessory fit, comfort, and practical dog lifestyle gear from Remy's Lab.",
+  "category": "Dog Accessories",
+  "intro": "Accessory content should stay honest. Cute matters, but fit, comfort, and whether the dog tolerates it matter more.",
+  "entries": [
+    {
+      "question": "Are dog bandanas safe?",
+      "answer": "Dog bandanas can be safe when they fit properly, are used with supervision, and do not restrict the dog's movement or breathing. The fit should be comfortable, not tight. If your dog chews fabric, pulls at it, or seems annoyed, skip it.",
+      "related_partner": "brooks-and-roo",
+      "related_lab_notes": []
+    },
+    {
+      "question": "How should a dog bandana fit?",
+      "answer": "A dog bandana should sit comfortably around the neck without being tight. You should be able to fit fingers between the bandana and the dog's neck. It should not hang so loose that it gets caught during play or chewing.",
+      "related_partner": "brooks-and-roo",
+      "related_lab_notes": []
+    },
+    {
+      "question": "What dog accessories are actually useful?",
+      "answer": "Useful dog accessories usually solve a real problem, help with walks, make cleanup easier, improve visibility, or hold up well in normal use. Some accessories are mostly for looks, and that is fine as long as they are comfortable and you are honest about the purpose.",
+      "related_partner": "brooks-and-roo",
+      "related_lab_notes": []
+    },
+    {
+      "question": "What should you check before buying dog apparel?",
+      "answer": "Check sizing, material feel, how it fastens, whether it restricts movement, and whether your dog will tolerate wearing it. For Remy, we would rather say something is cute but only good for short wear than pretend every accessory is an everyday essential.",
+      "related_partner": "brooks-and-roo",
+      "related_lab_notes": []
+    }
+  ],
+  "sort_order": 6
+}

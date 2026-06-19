@@ -120,3 +120,98 @@ collections:
         fields:
           - { label: "Question", name: "question", widget: "string" }
           - { label: "Answer", name: "answer", widget: "text" }
+
+  - name: "partners"
+    label: "Partner Pages"
+    label_singular: "Partner Page"
+    folder: "content/partners"
+    create: true
+    format: "json"
+    extension: "json"
+    slug: "{{slug}}"
+    identifier_field: "brand_name"
+    summary: "{{brand_name}} | {{coupon_code}} | {{user_discount}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Page Title", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only."] }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "MM/DD/YYYY", time_format: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - { label: "SEO Description", name: "description", widget: "text" }
+      - { label: "Brand Name", name: "brand_name", widget: "string" }
+      - { label: "Website URL", name: "website_url", widget: "string" }
+      - { label: "Affiliate URL", name: "affiliate_url", widget: "string", required: false }
+      - { label: "Coupon Code", name: "coupon_code", widget: "string" }
+      - { label: "User Discount", name: "user_discount", widget: "string" }
+      - { label: "Internal Commission Note", name: "commission_note", widget: "string", required: false, hint: "Stored for your reference. Not shown publicly." }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Logo", name: "logo_url", widget: "image", required: false }
+      - { label: "Logo Alt Text", name: "logo_alt", widget: "string", required: false }
+      - { label: "Short Summary", name: "short_summary", widget: "text" }
+      - { label: "Quick Answer", name: "quick_answer", widget: "text" }
+      - { label: "What Brand Sells", name: "what_brand_sells", widget: "text" }
+      - { label: "What Remy Is Testing", name: "what_remy_testing", widget: "text" }
+      - { label: "What We Like", name: "what_we_like", widget: "text" }
+      - { label: "Watch Outs", name: "watch_out_for", widget: "text" }
+      - { label: "Best Fit", name: "best_fit", widget: "text" }
+      - label: "Related Lab Notes"
+        name: "related_lab_notes"
+        widget: "relation"
+        collection: "lab_notes"
+        search_fields: ["title", "product_name"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        multiple: true
+        required: false
+      - label: "Common Questions"
+        name: "faqs"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
+
+  - name: "faq_categories"
+    label: "Dog Product FAQ"
+    label_singular: "FAQ Category"
+    folder: "content/faq-categories"
+    create: true
+    format: "json"
+    extension: "json"
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{title}} | {{category}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only."] }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "MM/DD/YYYY", time_format: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - { label: "SEO Description", name: "description", widget: "text" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Intro", name: "intro", widget: "text" }
+      - label: "FAQ Entries"
+        name: "entries"
+        widget: "list"
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
+          - label: "Related Partner"
+            name: "related_partner"
+            widget: "relation"
+            collection: "partners"
+            search_fields: ["brand_name", "coupon_code"]
+            value_field: "{{slug}}"
+            display_fields: ["brand_name"]
+            required: false
+          - label: "Related Lab Notes"
+            name: "related_lab_notes"
+            widget: "relation"
+            collection: "lab_notes"
+            search_fields: ["title", "product_name"]
+            value_field: "{{slug}}"
+            display_fields: ["title"]
+            multiple: true
+            required: false
