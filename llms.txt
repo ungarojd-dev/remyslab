@@ -2,21 +2,21 @@
 
 > Dog products tested by an actual Lab.
 
-Remy's Lab is a TikTok connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find product notes, partner links, discount codes, and quick dog product answers without a hard sell.
+Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find product notes, partner codes, current links, and practical dog product answers without a hard sell.
 
-## Pages
+## Main pages
 
-- [Remy's Lab home](https://remyslab.com/): Simple TikTok landing page with current codes, product links, Lab Notes, and affiliate disclosure.
-- [Partner Codes](https://remyslab.com/partners/): Current Remy's Lab partner codes and partner pages.
+- [Remy's Lab home](https://remyslab.com/): Simple link page with current codes, tested products, and TikTok links.
+- [Current Codes](https://remyslab.com/codes/): Quick partner code page for brands Remy's Lab works with.
 - [Lab Notes](https://remyslab.com/blog/): Written notes after Remy actually uses a product.
-- [Dog Product FAQ](https://remyslab.com/dog-product-faq/): Short answers to common dog product questions, grouped by category.
-- [Dog Owner Guides](https://remyslab.com/guides/): Larger evergreen dog owner topics.
+- [Dog Product Questions](https://remyslab.com/dog-product-questions/): Short product answers with links to related Lab Notes and codes.
+- [Dog Owner Guides](https://remyslab.com/guides/): Limited evergreen dog owner guides.
 
-## Current partner brands
+## Current code pages
 
-- [Pack Leashes](https://remyslab.com/partners/pack-leashes/): Use code REMYSLAB20 for 20% off.
-- [Brooks & Roo](https://remyslab.com/partners/brooks-and-roo/): Use code REMYSLAB15 for 15% off.
-- [Pupford](https://remyslab.com/partners/pupford/): Use code REMYSLAB15 for 15% off.
+- [Pack Leashes code](https://remyslab.com/pack-leashes-code/): Use code REMYSLAB20 for 20% off Pack Leashes.
+- [Brooks & Roo code](https://remyslab.com/brooks-and-roo-code/): Use code REMYSLAB15 for 15% off Brooks & Roo.
+- [Pupford code](https://remyslab.com/pupford-code/): Use code REMYSLAB15 for 15% off Pupford.
 
 ## Lab Notes
 
@@ -27,15 +27,6 @@ Remy's Lab is a TikTok connected dog product testing brand built around Remy, a 
 - [Mighty Paw Naturals Bully Sticks: Remy's Test Notes](https://remyslab.com/blog/mighty-paw-naturals-bully-sticks-review.html): Remy knows the sound of the bag. Single-ingredient beef chews with less odor than other bully sticks we have tried.
 - [FURemover Pet Hair Broom: Remy's Test Notes](https://remyslab.com/blog/furemover-pet-hair-broom-review.html): Rubber bristles pull embedded Lab hair out of carpet and work well on hardwood floors too.
 - [BLACK+DECKER Pet Hair Roller: Remy's Test Notes](https://remyslab.com/blog/black-decker-pet-hair-roller-review.html): Tested on a black felt couch, regular couch, comforter, and clothes. Great swap for lint rollers.
-
-## Dog Product FAQ Categories
-
-- [Leashes & Walk Gear FAQ](https://remyslab.com/dog-product-faq/leashes-walk-gear/): Quick answers about dog leashes, walk gear, leash length, carabiner clips, and young Lab walking gear from Remy's Lab.
-- [Training Treats FAQ](https://remyslab.com/dog-product-faq/training-treats/): Quick answers about dog training treats, treat size, freeze dried treats, and reward based practice from Remy's Lab.
-- [Dog Chews FAQ](https://remyslab.com/dog-product-faq/chews/): Quick answers about bully sticks, chicken feet, chew time, smell, mess, and dog chew supervision from Remy's Lab.
-- [Toys & Enrichment FAQ](https://remyslab.com/dog-product-faq/toys-enrichment/): Quick answers about dog puzzle toys, enrichment toys, and how Remy's Lab thinks about toy testing.
-- [Grooming & Cleanup FAQ](https://remyslab.com/dog-product-faq/grooming-cleanup/): Quick answers about pet hair rollers, rubber brooms, carpet rakes, and cleanup tools for dog hair from Remy's Lab.
-- [Dog Accessories FAQ](https://remyslab.com/dog-product-faq/dog-accessories/): Quick answers about dog bandanas, accessory fit, comfort, and practical dog lifestyle gear from Remy's Lab.
 
 ## Dog Owner Guides
 
