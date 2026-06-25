@@ -2,4 +2,18 @@ https://www.remyslab.com/* https://remyslab.com/:splat 301!
 /affiliate-disclosure /disclaimer.html 301
 
 # Old Pack Leashes post URL, replaced by the Dino Collar Set review
-/blog/pack-leashes-test-notes /blog/pack-leashes-dino-collar-set-review.html 301
+/blog/pack-leashes-test-notes /blog/pack-leashes-dino-collar-set-review 301
+
+# Lab Notes: consolidate .html URLs into clean URLs (matches canonical tags)
+/blog/black-decker-pet-hair-roller-review.html /blog/black-decker-pet-hair-roller-review 301
+/blog/furemover-pet-hair-broom-review.html /blog/furemover-pet-hair-broom-review 301
+/blog/mighty-paw-naturals-bully-sticks-review.html /blog/mighty-paw-naturals-bully-sticks-review 301
+/blog/pack-leashes-dino-collar-set-review.html /blog/pack-leashes-dino-collar-set-review 301
+/blog/potaroma-dog-puzzle-toy-review.html /blog/potaroma-dog-puzzle-toy-review 301
+/blog/usa-chicken-feet-dog-chew-review.html /blog/usa-chicken-feet-dog-chew-review 301
+/blog/wild-wolf-angus-bully-sticks-review.html /blog/wild-wolf-angus-bully-sticks-review 301
+
+# Guides: consolidate .html URLs into clean URLs (matches canonical tags)
+/guides/how-to-get-dog-hair-out-of-carpet.html /guides/how-to-get-dog-hair-out-of-carpet 301
+/guides/how-to-remove-dog-hair-from-couch.html /guides/how-to-remove-dog-hair-from-couch 301
+/guides/rubber-broom-vs-vacuum-for-pet-hair.html /guides/rubber-broom-vs-vacuum-for-pet-hair 301
