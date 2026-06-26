@@ -12,7 +12,7 @@
  * what keeps this honest; a vendor row never claims to BE another row's item.
  *
  * Facts only — price, brand, stock, discount code. No Remy verdicts, no
- * "good for X" editorializing. That's intentionally Tested Gear's job on a
+ * "good for X" editorializing. That's intentionally Lab Notes' job on a
  * different page; this page stays a neutral price browser.
  */
 import { readFile, writeFile } from "node:fs/promises";
@@ -34,35 +34,43 @@ function initials(name) {
 /** One vendor offer row inside a category card. Facts only: name, brand, stock, code, price. No editorial tags. */
 function vendorRow(p, isCheapest) {
   const oos = p.in_stock === false ? `<span class="supplier-oos">Out of stock</span>` : `<span>Listed</span>`;
-  const discount = p.discount_code ? `<span class="supplier-discount">Code ${esc(p.discount_code)}</span>` : "";
+  const discountNote = p.discount_code ? `<span class="supplier-discount">Code ready</span>` : "";
   const cheapestBadge = isCheapest ? `<span class="supplier-best">Lowest price</span>` : "";
+  const productCategory = `compare_${p.category}`;
 
   // Real product photo when Shopify gave us one; brand-initials badge as a graceful
-  // fallback both when there's no image AND if a CDN image URL ever fails to load
-  // (onerror swaps the <img> for the same initials markup so nothing breaks visually).
+  // fallback both when there's no image and if a CDN image URL ever fails to load.
   const fallback = `<span class='supplier-initials'>${esc(initials(p.brand_name))}</span>`;
   const thumb = p.image
     ? `<img class="supplier-thumb" src="${attr(p.image)}" alt="" loading="lazy" decoding="async"
          onerror="this.outerHTML='${fallback.replace(/'/g, "&#39;")}'">`
     : fallback;
 
-  return `        <a class="supplier-row affiliate-link" href="${attr(p.url)}" target="_blank" rel="nofollow sponsored noopener"
-          data-product="${attr(p.name)}" data-category="compare_${attr(p.category)}" data-result="not_tested"
-          data-placement="price_compare" data-network="${attr(p.brand_name)}" data-discount="${attr(p.discount_code || "")}"
+  const copyButton = p.discount_code
+    ? `<button type="button" class="supplier-copy coupon-copy" data-code="${attr(p.discount_code)}" data-product="${attr(p.name)}" data-category="${attr(productCategory)}" data-placement="price_compare_code">Grab code</button>`
+    : "";
+
+  return `        <div class="supplier-row"
+          data-network="${attr(p.brand_name)}"
           data-search="${attr([p.name, p.brand_name, p.category, p.discount_code || ""].join(" "))}">
           <div class="supplier-left">
             ${thumb}
-            <div style="min-width:0">
+            <div class="supplier-copy-wrap">
               <div class="supplier-name">${esc(p.name)}</div>
-              <div class="supplier-sub">${esc(p.brand_name)} · ${oos}${discount}</div>
+              <div class="supplier-sub">${esc(p.brand_name)} · ${oos}${discountNote}</div>
             </div>
           </div>
           <div class="supplier-price-wrap">
             <div class="supplier-price">${esc(p.price)}</div>
             ${cheapestBadge}
-            <div class="supplier-go">Visit brand site</div>
+            <div class="supplier-buttons">
+              ${copyButton}
+              <a class="supplier-go affiliate-link" href="${attr(p.url)}" target="_blank" rel="nofollow sponsored noopener"
+                data-product="${attr(p.name)}" data-category="${attr(productCategory)}" data-result="not_tested"
+                data-placement="price_compare" data-network="${attr(p.brand_name)}" data-discount="${attr(p.discount_code || "")}">Visit brand site</a>
+            </div>
           </div>
-        </a>`;
+        </div>`;
 }
 
 /** One category card: header + vendor rows, sorted cheapest first (build-compare already sorts this way).
@@ -76,7 +84,7 @@ function categoryCard(cat, products) {
     const row = vendorRow(p, p.price_value === cheapestValue);
     if (i < VISIBLE) return row;
     // Hidden rows: wrap so plain CSS/JS toggling works with no framework.
-    return row.replace('<a class="supplier-row', '<a hidden class="supplier-row extra-row');
+    return row.replace('<div class="supplier-row', '<div hidden class="supplier-row extra-row');
   }).join("\n");
   const hiddenCount = Math.max(0, products.length - VISIBLE);
   const expandBtn = hiddenCount
@@ -147,7 +155,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="robots" content="index, follow, max-image-preview:large"/>
 <link rel="canonical" href="https://remyslab.com/"/>
 <link rel="icon" type="image/png" href="/assets/icons/favicon-remy-scientist-transparent-v2.png"/>
-<meta name="theme-color" content="#f7f5ef"/>
+<meta name="theme-color" content="#f5f8fc"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Remy's Lab"/>
 <meta property="og:title" content="Compare Dog Gear Prices | Remy's Lab"/>
@@ -157,82 +165,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@500&display=swap" media="print" onload="this.media='all'"/>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@500&display=swap"/></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=DM+Mono:wght@500&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=DM+Mono:wght@500&display=swap"/></noscript>
 <script type="application/ld+json">
 ${jsonLd(data)}
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{font-family:"DM Sans",system-ui,-apple-system,sans-serif;background:#f7f5ef;color:#1b1713;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;overflow-x:clip}
+body{font-family:"Nunito Sans",system-ui,-apple-system,sans-serif;background:#f5f8fc;color:#172033;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;overflow-x:clip}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
-:root{--bg:#f7f5ef;--surface:#fffdfa;--line:#e4dccf;--green:#1f3a2e;--green-deep:#163024;--gold:#c8920a;--text:#1b1713;--muted:#6c665d;--shadow:0 10px 28px rgba(31,58,46,.08)}
+:root{--bg:#f5f8fc;--surface:#fffefd;--line:#d7e3f1;--green:#245f93;--green-deep:#173b61;--sage:#eaf3ff;--gold:#c8920a;--text:#172033;--muted:#667085;--shadow:0 12px 30px rgba(23,59,97,.10)}
+h1,h2,h3,.nav-logo span,.product-title{font-family:"Bricolage Grotesque","Nunito Sans",system-ui,sans-serif}
 .page{width:min(100%,1180px);max-width:100%;margin:0 auto;padding:0 0 24px;overflow-x:clip}
 .site-nav{display:flex;align-items:center;justify-content:space-between;margin:0 16px 16px;gap:8px;padding-top:20px}
-.nav-logo{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none}
-.nav-logo img{width:36px;height:36px;object-fit:contain}
-.nav-logo span{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.02em}
-.nav-tabs{display:flex;gap:4px;flex-wrap:wrap}
-.nav-tab{font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent}
-.nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
-.cmp-head{text-align:center;padding:0 16px 12px}
-.cmp-head h1{font-size:23px;font-weight:800;letter-spacing:-.02em;margin-bottom:5px}
-.cmp-head p{font-size:13px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.5}
-.cmp-disclosure{max-width:1148px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 13px;margin:14px auto 4px;font-size:12px;color:var(--muted);line-height:1.5}
-.cmp-disclosure strong{color:var(--text)}
-
-/* Sticky controls bar, mirrors the peptide site's catalog-controls */
-.catalog-controls{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(247,245,239,.92);backdrop-filter:blur(10px);margin-top:10px}
-.catalog-control-inner{max-width:1180px;margin:0 auto;padding:10px 16px}
-.catalog-search{position:relative;margin-bottom:8px}
-.catalog-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
-.catalog-search input{width:100%;border:1.5px solid var(--line);border-radius:13px;background:var(--surface);color:var(--text);font:inherit;font-size:13px;padding:9px 12px 9px 34px;outline:none}
-.catalog-search input:focus{border-color:#c8b89a;box-shadow:0 0 0 3px rgba(31,58,46,.08)}
-.catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
-.catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
-.catalog-chips::-webkit-scrollbar{display:none}
-.catalog-chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);padding:6px 11px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}
-.catalog-chip.active{border-color:var(--green);background:var(--green);color:#fff}
-.catalog-summary{display:flex;justify-content:space-between;gap:8px;margin:10px 16px 4px;color:var(--muted);font-size:11.5px}
-
-.catalog-main{padding:6px 16px 0;max-width:1180px;margin:0 auto}
-.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
-.product-card{height:100%;display:flex;flex-direction:column}
-.suppliers{flex:1}
+.nav-logo{display:flex;align-items:center;gap:9px;flex:0 0 auto}
+.nav-logo img{width:36px;height:36px;object-fit:contain}.nav-logo span{font-size:16px;font-weight:800;letter-spacing:-.02em}
+.nav-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;font-size:13px;font-weight:800;padding:7px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent;white-space:nowrap}.nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}.nav-tab.active{background:var(--green);border-color:var(--green);color:#fff}
+.cmp-head{text-align:center;max-width:760px;margin:0 auto;padding:18px 18px 12px}.cmp-head h1{font-size:clamp(33px,7vw,58px);letter-spacing:-.055em;line-height:.96}.cmp-head p{max-width:620px;margin:12px auto 0;color:var(--muted);font-size:15px;line-height:1.6}
+.cmp-disclosure{max-width:760px;margin:0 auto 14px;padding:11px 14px;border:1px solid rgba(36,95,147,.16);border-radius:16px;background:var(--sage);color:#40576f;font-size:12.5px;line-height:1.5;text-align:center}
+.catalog-controls{position:sticky;top:0;z-index:20;background:rgba(245,248,252,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(215,227,241,.78);border-bottom:1px solid rgba(215,227,241,.92);padding:10px 0 8px}
+.catalog-control-inner{max-width:1180px;margin:0 auto;padding:0 16px}.catalog-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 11px;color:var(--muted);box-shadow:0 3px 10px rgba(23,59,97,.05)}.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:13px}.catalog-search:focus-within{border-color:#8fb7df;box-shadow:0 0 0 3px rgba(36,95,147,.12)}
+.catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.catalog-chips::-webkit-scrollbar{display:none}.catalog-chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);padding:6px 11px;font:inherit;font-size:11.5px;font-weight:800;cursor:pointer;white-space:nowrap}.catalog-chip.active{border-color:var(--green);background:var(--green);color:#fff}.catalog-summary{display:flex;justify-content:space-between;gap:8px;margin:10px 16px 4px;color:var(--muted);font-size:11.5px}
+.catalog-main{padding:6px 16px 0;max-width:1180px;margin:0 auto}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}.product-card{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}.product-card[hidden]{display:none}.suppliers{flex:1;padding:0 12px 4px}
+.product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:800;letter-spacing:-.025em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
+.supplier-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 2px;border-top:1px solid #dde8f4}.supplier-row:first-child{border-top:none}.supplier-row:hover{background:#eef6ff;border-radius:12px}.supplier-left{display:flex;gap:9px;min-width:0;align-items:flex-start}.supplier-copy-wrap{min-width:0}.supplier-initials{flex:0 0 auto;display:flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:10px;background:var(--sage);color:var(--green);font-size:11px;font-weight:900;margin-top:1px}.supplier-thumb{flex:0 0 auto;width:32px;height:32px;border-radius:10px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}.supplier-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px;font-weight:800;max-width:32ch}.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:1px;color:var(--muted);font-size:11px}.supplier-discount{color:var(--gold);font-weight:900}.supplier-oos{color:#a04848;font-weight:900}
+.supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:900;color:var(--green-deep)}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-copy{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:900;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff}.supplier-go:hover{background:var(--green-deep)}.supplier-copy{background:#fff8e3;color:#795b05;border:1px solid #e7cf7a}.supplier-copy:hover{background:#fff1be}.supplier-copy.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18)}
+.catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}.expand-button{width:100%;border:0;border-top:1px solid var(--line);background:var(--sage);padding:11px;color:var(--green);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer;border-radius:0 0 18px 18px}.expand-button:hover{background:#e9f2fb}[hidden]{display:none!important}
 @media (max-width:920px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}}
-.product-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow)}
-.product-card[hidden]{display:none}
-.product-card-head{padding:13px 14px 9px;border-bottom:1px solid var(--line)}
-.product-card-meta{color:var(--green);font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;opacity:.75}
-.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}
-.product-title{font-size:18px;font-weight:800;letter-spacing:-.01em}
-.vendor-count{flex:0 0 auto;border-radius:999px;background:#ecf5ee;padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:700}
-.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
-.suppliers{padding:0 12px 4px}
-.supplier-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-top:1px solid #ece4d5}
-.supplier-row:first-child{border-top:none}
-.supplier-row:hover{background:#fbf8f1;border-radius:10px}
-.supplier-left{display:flex;gap:9px;min-width:0;align-items:flex-start}
-.supplier-initials{flex:0 0 auto;display:flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:9px;background:#ecf5ee;color:var(--green);font-size:11px;font-weight:800;margin-top:1px}
-.supplier-thumb{flex:0 0 auto;width:30px;height:30px;border-radius:9px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}
-.supplier-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px;font-weight:700;max-width:32ch}
-.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:1px;color:var(--muted);font-size:11px}
-.supplier-discount{color:var(--gold);font-weight:700}
-.supplier-oos{color:#a04848;font-weight:700}
-.supplier-price-wrap{text-align:right;flex:0 0 auto}
-.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}
-.supplier-best{display:inline-block;margin-top:2px;font-size:9.5px;font-weight:700;color:var(--green);background:#ecf5ee;border-radius:999px;padding:1.5px 7px;white-space:nowrap}
-.supplier-go{margin-top:2px;color:var(--muted);font-size:10.5px}
-
-.catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}
-.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
-.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}
-.expand-button{width:100%;border:0;border-top:1px solid var(--line);background:var(--bg);padding:11px;color:var(--green);font-size:12.5px;font-weight:700;cursor:pointer;border-radius:0 0 18px 18px}
-.expand-button:hover{background:#f1ece0}
-[hidden]{display:none!important}
+@media (max-width:620px){.site-nav{margin:0 12px 10px}.nav-logo span{display:none}.nav-tab{font-size:12px;padding:6px 9px}.cmp-head{padding:12px 14px 10px}.cmp-disclosure{margin:0 14px 12px}.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}.supplier-name{max-width:50vw}.supplier-row{align-items:flex-start}.supplier-price-wrap{min-width:104px}.supplier-buttons{gap:4px}.supplier-go,.supplier-copy{font-size:10px;padding:6px 8px}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -248,7 +211,6 @@ img{display:block;max-width:100%}
     <a class="nav-tab active" href="/" role="tab" aria-current="page">Compare</a>
     <a class="nav-tab" href="/codes/" role="tab">Codes</a>
     <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
-    <a class="nav-tab" href="/tested-gear/" role="tab">Tested Gear</a>
   </div>
 </nav>
 
@@ -257,7 +219,7 @@ img{display:block;max-width:100%}
   <p>Live prices, active codes, and Remy-tested notes when we have them. Each card is a category, not a fake ranking.</p>
 </header>
 
-<p class="cmp-disclosure"><strong>Heads up:</strong> Compare shows tracked brand prices, not a blanket Remy recommendation. For products he has actually used, see <a href="/tested-gear/" style="color:var(--green);text-decoration:underline">Tested Gear</a>. Prices pull from each brand's own store and can change.</p>
+<p class="cmp-disclosure"><strong>Heads up:</strong> Compare shows tracked brand prices, not a blanket Remy recommendation. For products he has actually used, see <a href="/blog/" style="color:var(--green);text-decoration:underline">Lab Notes</a>. Prices pull from each brand's own store and can change.</p>
 
 <div class="page">
   <div class="catalog-controls">

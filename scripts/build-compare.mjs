@@ -2,9 +2,9 @@
 /**
  * build-compare.mjs — Remy's Lab price comparison data builder
  * --------------------------------------------------------------
- * Unlike build-catalog.mjs (the tested-gear gate), this pulls EVERY product
+ * Unlike a hand-picked Lab Notes shelf, this pulls every product
  * from each brand's public Shopify /products.json and sorts it into category
- * groups by keyword match. No testing requirement — this is a browse/compare
+ * groups by keyword match. No testing requirement, this is a browse/compare
  * tool, not an endorsement.
  *
  * Honesty rule baked into the design: products are grouped by CATEGORY
@@ -12,7 +12,7 @@
  * That distinction is what keeps this from making false equivalence claims.
  *
  * Reliability: a brand that fails to fetch keeps its last-good products
- * (never blanked). Per-brand fetch isolation — one brand failing doesn't
+ * (never blanked). Per-brand fetch isolation, one brand failing does not
  * affect the others.
  *
  * Zero dependencies. Node 20+. Local test: MOCK_DIR=./_mock node scripts/build-compare.mjs
@@ -85,8 +85,7 @@ function readShopifyProduct(raw) {
  * Some Shopify stores create hidden $0 "shadow" products purely to power an
  * upsell widget (e.g. "would you like to add a matching leash?"). These are
  * real Shopify products with real handles, so they come back from
- * /products.json indistinguishable from genuine catalog items by price alone
- * — except their price actually IS $0, every variant, every time. A real
+ * /products.json indistinguishable from genuine catalog items by price alone, except their price actually IS $0, every variant, every time. A real
  * product never prices at exactly $0. Title/handle patterns like
  * "Free Product" or "copy-of-" are the same upsell-widget artifact showing
  * up in the merchant-chosen name instead of price. Filtering both signals
