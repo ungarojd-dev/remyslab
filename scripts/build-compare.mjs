@@ -81,6 +81,25 @@ function readShopifyProduct(raw) {
   };
 }
 
+/**
+ * Some Shopify stores create hidden $0 "shadow" products purely to power an
+ * upsell widget (e.g. "would you like to add a matching leash?"). These are
+ * real Shopify products with real handles, so they come back from
+ * /products.json indistinguishable from genuine catalog items by price alone
+ * — except their price actually IS $0, every variant, every time. A real
+ * product never prices at exactly $0. Title/handle patterns like
+ * "Free Product" or "copy-of-" are the same upsell-widget artifact showing
+ * up in the merchant-chosen name instead of price. Filtering both signals
+ * here keeps upsell noise out of every brand without per-brand special-casing.
+ */
+function isJunkProduct(live) {
+  if (live.price_value === 0) return true;
+  const haystack = `${live.name || ""} ${live.handle || ""}`.toLowerCase();
+  if (haystack.includes("free product")) return true;
+  if (haystack.includes("copy-of-") || haystack.includes("copy of")) return true;
+  return false;
+}
+
 /** Category match by keyword against title + product_type + tags. First match wins. */
 function matchCategory(product, categories) {
   const haystack = [product.name, product.product_type, ...(product.tags || [])]
@@ -128,6 +147,7 @@ async function build() {
       for (const raw of raws) {
         const live = readShopifyProduct(raw);
         if (!live.name || live.price_value == null) continue; // skip unparsable/no-price entries
+        if (isJunkProduct(live)) continue; // skip $0 upsell shadow products and bundle-copy noise
         const categoryId = matchCategory(live, categories);
         out.push({
           brand_id: brandId,
