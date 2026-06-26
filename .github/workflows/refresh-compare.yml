@@ -1,0 +1,48 @@
+name: Refresh price comparison
+
+# Pulls live products from all 6 brand stores, regroups by category, rebuilds
+# the static /compare/ page, and commits if anything changed.
+#
+# NOTE: GitHub only runs scheduled (cron) workflows from the DEFAULT branch.
+# Use "Run workflow" (workflow_dispatch) to test on this branch; the schedule
+# starts firing once merged to main.
+
+on:
+  schedule:
+    - cron: "30 * * * *"   # offset from the tested-gear refresh (:00) to avoid both jobs hammering Shopify at once
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-compare
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Pull live products from all brand stores
+        run: node scripts/build-compare.mjs
+
+      - name: Render static compare page
+        run: node scripts/render-compare.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name "remyslab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- data/compare.json compare/index.html; then
+            echo "No price changes — nothing to commit."
+          else
+            git add data/compare.json compare/index.html
+            git commit -m "chore: refresh price comparison [skip ci]"
+            git push
+          fi

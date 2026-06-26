@@ -1,0 +1,58 @@
+{
+  "_comment": "Brands the comparison tool pulls from. Pulls every product via each store's public Shopify /products.json (no key needed). Unlike tested-products.json, there's NO testing gate here \u2014 this is a browse/compare tool, not a Remy-tested endorsement. affiliate_url is used as-is (no code to apply) unless the brand has a partner deal like Pack Leashes/Brooks & Roo.",
+  "version": "1.0.0",
+  "brands": {
+    "pack-leashes": {
+      "name": "Pack Leashes",
+      "domain": "https://packleashes.com",
+      "discount_code": "REMYSLAB20",
+      "link_style": "discount_redirect",
+      "affiliate_disclosure": "partner"
+    },
+    "brooks-and-roo": {
+      "name": "Brooks & Roo",
+      "domain": "https://www.brooksandroo.com",
+      "discount_code": "REMYSLAB15",
+      "link_style": "discount_redirect",
+      "affiliate_disclosure": "partner"
+    },
+    "west-paw": {
+      "name": "West Paw",
+      "domain": "https://www.westpaw.com",
+      "discount_code": null,
+      "link_style": "direct",
+      "affiliate_disclosure": "none",
+      "_note": "Has its own AvantLink affiliate program (10%, 30-day window, requires 6mo+ site history). Not yet applied \u2014 direct link only until approved."
+    },
+    "fable-pets": {
+      "name": "Fable",
+      "domain": "https://fablepets.com",
+      "discount_code": null,
+      "link_style": "direct",
+      "affiliate_disclosure": "none"
+    },
+    "wild-one": {
+      "name": "Wild One",
+      "domain": "https://wildone.com",
+      "discount_code": null,
+      "link_style": "direct",
+      "affiliate_disclosure": "none"
+    },
+    "mighty-paw": {
+      "name": "Mighty Paw",
+      "domain": "https://mightypaw.com",
+      "discount_code": null,
+      "link_style": "direct",
+      "affiliate_disclosure": "none",
+      "_note": "Runs its own affiliate program (see mightypaw.com footer). Already reviewed once on the blog (bully sticks). Apply when ready."
+    },
+    "sodapup": {
+      "name": "SodaPup",
+      "domain": "https://sodapup.com",
+      "discount_code": null,
+      "link_style": "direct",
+      "affiliate_disclosure": "none",
+      "_note": "Verified Shopify (variant-refresh behavior on own site; resellers confirm 'Powered by Shopify'). Fills Toys, Chews, and Feeding all at once \u2014 lick mats, slow feeders, treat dispensers, chew toys. No affiliate program found yet \u2014 check for one before applying."
+    }
+  }
+}

@@ -1,17 +1,22 @@
 # Remy's Lab
 
-> Dog products tested by an actual Lab.
+> Live dog gear price comparison, plus product notes from Remy, a yellow Labrador.
 
-Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find product notes, partner links, discount codes, and practical dog owner guides without a hard sell.
+Remy's Lab compares live prices for dog gear across multiple brands — harnesses, leashes, chews, and more, sorted cheapest first and updated automatically. The site also shares Remy's actual product test notes, partner links, discount codes, and practical dog owner guides.
 
 ## Pages
 
-- [Remy's Lab home](https://remyslab.com/): Current product links, discount codes, and affiliate disclosure.
+- [Price Compare](https://remyslab.com/): Live prices for dog gear across multiple brands, grouped by category, updated hourly.
+- [Remy's Links](https://remyslab.com/remyslinks/): Current partner links, discount codes, and affiliate disclosure.
 - [Lab Notes](https://remyslab.com/blog/): Written notes after Remy actually uses a product.
+- [Tested Gear](https://remyslab.com/tested-gear/): Products Remy has personally tested, with live prices from partner stores.
 - [Dog Owner Guides](https://remyslab.com/guides/): Practical evergreen answers for common dog owner problems.
 
 ## Lab Notes
 
+- [Hound Huddle Bandana: Remy's Test Notes](https://remyslab.com/blog/hound-huddle-bandana-review): Football print bandana from Brooks & Roo. Great fit in XL, lightweight and breathable. Too early to judge long-term wear.
+- [Bissell PowerClean FurFinder 200W: Remy's Test Notes](https://remyslab.com/blog/bissell-powerclean-furfinder-vacuum-review): Cordless stick vacuum that's become our daily driver. Powerful, quiet, gets under furniture easily. Battery runs shorter than the claimed 40 minutes.
+- [Vila Puzzle Feeder: Remy's Test Notes](https://remyslab.com/blog/vila-puzzle-feeder-review): A sliding-compartment puzzle feeder. Remy cleared it instantly, no help needed. Good entry-level puzzle, not much of a challenge for him.
 - [USA Chicken Feet Dog Chews: Remy's Test Notes](https://remyslab.com/blog/usa-chicken-feet-dog-chew-review): Remy was curious at first, now loves them. 20 to 25 minutes per chew, low smell, good for teeth. A versatile option when you want something quicker than a bully stick.
 - [Wild Wolf Angus Bully Sticks: Remy's Test Notes](https://remyslab.com/blog/wild-wolf-angus-bully-sticks-review): Remy's second favorite chew. 12-inch Angus bully sticks that last 1 to 1.5 hours. A little more smell than Mighty Paw but a clean product he loves.
 - [Potaroma Dog Puzzle Toy: Remy's Test Notes](https://remyslab.com/blog/potaroma-dog-puzzle-toy-review): A 2-level puzzle toy that turns food or treats into a little job for Remy and helps slow him down.
