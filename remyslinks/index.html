@@ -59,12 +59,13 @@ img{display:block;max-width:100%}
 .page{width:min(100%,540px);max-width:100%;margin:0 auto;padding:20px 16px 24px;overflow-x:clip}
 
 /* ── Nav ── */
-.site-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:8px}
+.site-nav{display:flex;align-items:center;justify-content:space-between;margin:0;gap:8px;padding:16px;max-width:1180px;margin-left:auto;margin-right:auto}
 .nav-logo{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none}
 .nav-logo img{width:36px;height:36px;object-fit:contain}
 .nav-logo span{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.02em}
-.nav-tabs{display:flex;gap:4px}
-.nav-tab{font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent;text-decoration:none;transition:all .15s ease;white-space:nowrap}
+.nav-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent;text-decoration:none;transition:all .15s ease;white-space:nowrap}
 .nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}
 .nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
 
@@ -288,21 +289,22 @@ img{display:block;max-width:100%}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<main class="page">
+<!-- Nav -->
+<nav class="site-nav" aria-label="Site navigation">
+  <a class="nav-logo" href="/">
+    <img src="/assets/icons/remys-lab-dog-scientist-icon-transparent-v2.png" alt="Remy's Lab" width="36" height="36"/>
+    <span>Remy's Lab</span>
+  </a>
+  <div class="nav-tabs" role="tablist">
+    <a class="nav-tab" href="/" role="tab">Compare</a>
+    <a class="nav-tab active" href="/remyslinks/" role="tab" aria-current="page">Remy's Links</a>
+    <a class="nav-tab" href="/codes/" role="tab">Codes</a>
+    <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
+    <a class="nav-tab" href="/tested-gear/" role="tab">Tested Gear</a>
+  </div>
+</nav>
 
-  <!-- Nav -->
-  <nav class="site-nav" aria-label="Site navigation">
-    <a class="nav-logo" href="/">
-      <img src="/assets/icons/remys-lab-dog-scientist-icon-transparent-v2.png" alt="Remy's Lab" width="36" height="36"/>
-      <span>Remy's Lab</span>
-    </a>
-    <div class="nav-tabs" role="tablist">
-      <a class="nav-tab" href="/" role="tab">Compare</a>
-      <a class="nav-tab active" href="/remyslinks/" role="tab" aria-current="page">Remy's Links</a>
-      <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
-      <a class="nav-tab" href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener" role="tab">TikTok</a>
-    </div>
-  </nav>
+<main class="page">
 
   <!-- Hero -->
   <section class="hero" aria-labelledby="page-title">

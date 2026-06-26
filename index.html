@@ -42,8 +42,9 @@ img{display:block;max-width:100%}
 .nav-logo{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none}
 .nav-logo img{width:36px;height:36px;object-fit:contain}
 .nav-logo span{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.02em}
-.nav-tabs{display:flex;gap:4px;flex-wrap:wrap}
-.nav-tab{font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent}
+.nav-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px;color:var(--muted);background:transparent;border:1px solid transparent;white-space:nowrap;text-decoration:none}
 .nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
 .cmp-head{text-align:center;padding:0 16px 12px}
 .cmp-head h1{font-size:23px;font-weight:800;letter-spacing:-.02em;margin-bottom:5px}
@@ -111,6 +112,7 @@ img{display:block;max-width:100%}
   <div class="nav-tabs" role="tablist">
     <a class="nav-tab active" href="/" role="tab" aria-current="page">Compare</a>
     <a class="nav-tab" href="/remyslinks/" role="tab">Remy's Links</a>
+    <a class="nav-tab" href="/codes/" role="tab">Codes</a>
     <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
     <a class="nav-tab" href="/tested-gear/" role="tab">Tested Gear</a>
   </div>

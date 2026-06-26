@@ -48,9 +48,9 @@ body{font-family:"DM Sans",system-ui,-apple-system,sans-serif;background:#f7f5ef
 a{text-decoration:none;color:inherit}img{display:block;max-width:100%}
 :root{--bg:#f7f5ef;--surface:#fffdfa;--line:#e4dccf;--green:#1f3a2e;--gold:#c8920a;--gold-light:#fff8e3;--gold-border:#e7cf7a;--text:#1b1713;--muted:#6c665d;--approved-bg:#ecf5ee;--approved-border:rgba(31,58,46,.18)}
 .page{width:min(100%,620px);margin:0 auto;padding:20px 16px 26px}
-.site-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:8px}
-.nav-logo{display:flex;align-items:center;gap:9px;flex-shrink:0}.nav-logo img{width:36px;height:36px;object-fit:contain}.nav-logo span{font-size:15px;font-weight:800;letter-spacing:-.02em}
-.nav-tabs{display:flex;gap:4px}.nav-tab{font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent;white-space:nowrap}.nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}.nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.site-nav{display:flex;align-items:center;justify-content:space-between;margin:0;gap:8px;padding:16px;max-width:1180px;margin-left:auto;margin-right:auto}
+.nav-logo{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none}.nav-logo img{width:36px;height:36px;object-fit:contain}.nav-logo span{font-size:15px;font-weight:800;letter-spacing:-.02em}
+.nav-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav-tabs::-webkit-scrollbar{display:none}.nav-tab{flex-shrink:0;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent;white-space:nowrap;text-decoration:none}.nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}.nav-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
 .hero{text-align:center;padding:8px 0 18px}.logo{width:min(100%,340px);height:auto;margin:0 auto 8px}.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}.hero h1{font-size:27px;line-height:1.08;letter-spacing:-.04em;margin-bottom:7px}.hero p{font-size:13px;color:var(--muted);max-width:490px;margin:0 auto}.count-pill{display:inline-flex;margin-top:11px;font-size:10px;font-weight:800;color:var(--green);background:var(--approved-bg);border:1px solid var(--approved-border);border-radius:999px;padding:6px 9px}
 .codes-panel{position:relative;display:grid;gap:9px;padding:13px;border:1px solid var(--gold-border);border-radius:22px;background:linear-gradient(180deg,#fff9e8 0%,#fffdf8 100%);box-shadow:0 8px 22px rgba(27,23,19,.05);overflow:hidden}.codes-panel::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold)}
 .codes-panel-note{font-size:12px;color:var(--muted);line-height:1.45;padding:2px 2px 1px}.codes-grid{display:grid;gap:8px}
@@ -66,18 +66,17 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav class="site-nav" aria-label="Site navigation">
+  <a class="nav-logo" href="/"><img src="/assets/icons/remys-lab-dog-scientist-icon-transparent-v2.png" alt="Remy's Lab" width="36" height="36"/><span>Remy's Lab</span></a>
+  <div class="nav-tabs" role="tablist">
+    <a class="nav-tab" href="/" role="tab">Compare</a>
+    <a class="nav-tab" href="/remyslinks/" role="tab">Remy's Links</a>
+    <a class="nav-tab active" href="/codes/" role="tab" aria-current="page">Codes</a>
+    <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
+    <a class="nav-tab" href="/tested-gear/" role="tab">Tested Gear</a>
+  </div>
+</nav>
 <main class="page">
-  <nav class="site-nav" aria-label="Site navigation">
-    <a class="nav-logo" href="/"><img src="/assets/icons/remys-lab-dog-scientist-icon-transparent-v2.png" alt="Remy's Lab" width="36" height="36"/><span>Remy's Lab</span></a>
-    <div class="nav-tabs">
-      <a class="nav-tab" href="/">Compare</a>
-      <a class="nav-tab" href="/remyslinks/">Remy's Links</a>
-      <a class="nav-tab active" href="/codes/" aria-current="page">Codes</a>
-      <a class="nav-tab" href="/blog/">Lab Notes</a>
-      <a class="nav-tab" href="/guides/">Guides</a>
-      <a class="nav-tab" href="/tested-gear/">Tested Gear</a>
-    </div>
-  </nav>
 
   <section class="hero">
     <img class="logo" src="/assets/logos/remys-lab-logo-science-dog-transparent-v2.png" alt="Remy's Lab logo" width="1672" height="941" decoding="async" fetchpriority="high"/>
