@@ -165,26 +165,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=DM+Mono:wght@500&display=swap" media="print" onload="this.media='all'"/>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=DM+Mono:wght@500&display=swap"/></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@500;600&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@500;600&display=swap"/></noscript>
 <script type="application/ld+json">
 ${jsonLd(data)}
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{font-family:"Nunito Sans",system-ui,-apple-system,sans-serif;background:#f5f8fc;color:#172033;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;overflow-x:clip}
+body{font-family:"Inter",system-ui,-apple-system,sans-serif;background:#f5f8fc;color:#172033;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;overflow-x:clip}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 :root{--bg:#f5f8fc;--surface:#fffefd;--line:#d7e3f1;--green:#245f93;--green-deep:#173b61;--sage:#eaf3ff;--gold:#c8920a;--text:#172033;--muted:#667085;--shadow:0 12px 30px rgba(23,59,97,.10)}
-h1,h2,h3,.nav-logo span,.product-title{font-family:"Bricolage Grotesque","Nunito Sans",system-ui,sans-serif}
+h1,h2,h3,.nav-logo span,.product-title{font-family:"Inter",system-ui,-apple-system,sans-serif}
 .page{width:min(100%,1180px);max-width:100%;margin:0 auto;padding:0 0 24px;overflow-x:clip}
 .site-nav{display:flex;align-items:center;justify-content:space-between;margin:0 16px 16px;gap:8px;padding-top:20px}
 .nav-logo{display:flex;align-items:center;gap:9px;flex:0 0 auto}
 .nav-logo img{width:36px;height:36px;object-fit:contain}.nav-logo span{font-size:16px;font-weight:800;letter-spacing:-.02em}
 .nav-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}.nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{flex:0 0 auto;font-size:13px;font-weight:800;padding:7px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent;white-space:nowrap}.nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}.nav-tab.active{background:var(--green);border-color:var(--green);color:#fff}
-.cmp-head{text-align:center;max-width:760px;margin:0 auto;padding:18px 18px 12px}.cmp-head h1{font-size:clamp(33px,7vw,58px);letter-spacing:-.055em;line-height:.96}.cmp-head p{max-width:620px;margin:12px auto 0;color:var(--muted);font-size:15px;line-height:1.6}
+.cmp-head{text-align:center;max-width:760px;margin:0 auto;padding:18px 18px 12px}.cmp-head h1{font-size:clamp(32px,6.3vw,54px);letter-spacing:-.045em;line-height:1}.cmp-head p{max-width:620px;margin:12px auto 0;color:var(--muted);font-size:15px;line-height:1.6}
 .cmp-disclosure{max-width:760px;margin:0 auto 14px;padding:11px 14px;border:1px solid rgba(36,95,147,.16);border-radius:16px;background:var(--sage);color:#40576f;font-size:12.5px;line-height:1.5;text-align:center}
 .catalog-controls{position:sticky;top:0;z-index:20;background:rgba(245,248,252,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(215,227,241,.78);border-bottom:1px solid rgba(215,227,241,.92);padding:10px 0 8px}
 .catalog-control-inner{max-width:1180px;margin:0 auto;padding:0 16px}.catalog-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 11px;color:var(--muted);box-shadow:0 3px 10px rgba(23,59,97,.05)}.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:13px}.catalog-search:focus-within{border-color:#8fb7df;box-shadow:0 0 0 3px rgba(36,95,147,.12)}
