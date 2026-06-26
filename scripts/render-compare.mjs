@@ -40,7 +40,7 @@ function vendorRow(p, isCheapest) {
   // Real product photo when Shopify gave us one; brand-initials badge as a graceful
   // fallback both when there's no image AND if a CDN image URL ever fails to load
   // (onerror swaps the <img> for the same initials markup so nothing breaks visually).
-  const fallback = `<span class="supplier-initials">${esc(initials(p.brand_name))}</span>`;
+  const fallback = `<span class='supplier-initials'>${esc(initials(p.brand_name))}</span>`;
   const thumb = p.image
     ? `<img class="supplier-thumb" src="${attr(p.image)}" alt="" loading="lazy" decoding="async"
          onerror="this.outerHTML='${fallback.replace(/'/g, "&#39;")}'">`
