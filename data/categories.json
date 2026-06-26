@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "categories": [
     {
+      "id": "clothing",
+      "label": "Clothing & Accessories",
+      "keywords": ["bandana", "scrunchie", "bowtie", "bow tie", "sweater", "hat", "lanyard"]
+    },
+    {
       "id": "harnesses",
       "label": "Harnesses",
       "keywords": ["harness"]
