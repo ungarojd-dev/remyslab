@@ -26,7 +26,7 @@ const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "data");
 const MOCK_DIR = process.env.MOCK_DIR ? path.resolve(ROOT, process.env.MOCK_DIR) : null;
 const FETCH_TIMEOUT_MS = 14000;
-const ENGINE_VERSION = "1.0.0";
+const ENGINE_VERSION = "1.1.0";
 
 const log  = (...a) => console.log("[compare]", ...a);
 const warn = (...a) => console.warn("[compare] WARN:", ...a);
@@ -92,20 +92,57 @@ function readShopifyProduct(raw) {
  * up in the merchant-chosen name instead of price. Filtering both signals
  * here keeps upsell noise out of every brand without per-brand special-casing.
  */
+const JUNK_PRODUCT_PATTERNS = [
+  "free product",
+  "copy-of-",
+  "copy of",
+  "gift card",
+  "store credit",
+  "shipping protection",
+  "package protection",
+  "delivery guarantee",
+  "return shipping",
+  "priority processing",
+  "carbon offset",
+  "plant 1 tree",
+  "ambassador coupon",
+  "personalization",
+  "engraving test",
+  "dad hat",
+  "pack hat",
+  "lanyard",
+  "satin scrunchie",
+  "scrunchie",
+  "cat harness",
+  "breakaway cat",
+  "cat collar",
+  "cat tunnel",
+  "cat meal kit",
+  "cat litter",
+  "litter box",
+  "cat tower",
+  "cat wild wand",
+  "flora wand",
+  "catenary flora wand"
+];
+
 function isJunkProduct(live) {
   if (live.price_value === 0) return true;
-  const haystack = `${live.name || ""} ${live.handle || ""}`.toLowerCase();
-  if (haystack.includes("free product")) return true;
-  if (haystack.includes("copy-of-") || haystack.includes("copy of")) return true;
-  return false;
+  const haystack = `${live.name || ""} ${live.handle || ""} ${live.product_type || ""} ${(live.tags || []).join(" ")}`.toLowerCase();
+  return JUNK_PRODUCT_PATTERNS.some(pattern => haystack.includes(pattern));
 }
 
-/** Category match by keyword against title + product_type + tags. First match wins. */
+/** Category match by keyword. Product title gets first pass so noisy store tags do not override obvious names like "collar". */
 function matchCategory(product, categories) {
+  const name = String(product.name || "").toLowerCase();
+  for (const cat of categories) {
+    if (cat.keywords.length === 0) continue;
+    if (cat.keywords.some(kw => name.includes(kw.toLowerCase()))) return cat.id;
+  }
   const haystack = [product.name, product.product_type, ...(product.tags || [])]
     .filter(Boolean).join(" ").toLowerCase();
   for (const cat of categories) {
-    if (cat.keywords.length === 0) continue; // "other" is the fallback, skip in the scan
+    if (cat.keywords.length === 0) continue;
     if (cat.keywords.some(kw => haystack.includes(kw.toLowerCase()))) return cat.id;
   }
   return "other";

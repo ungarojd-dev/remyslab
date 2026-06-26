@@ -4,48 +4,94 @@
   "categories": [
     {
       "id": "clothing",
-      "label": "Clothing & Accessories",
-      "keywords": ["bandana", "scrunchie", "bowtie", "bow tie", "sweater", "hat", "lanyard"]
+      "label": "Bandanas & Accessories",
+      "keywords": [
+        "bandana",
+        "bowtie",
+        "bow tie",
+        "sweater",
+        "dog jacket",
+        "dog coat"
+      ]
     },
     {
       "id": "harnesses",
       "label": "Harnesses",
-      "keywords": ["harness"]
+      "keywords": [
+        "harness"
+      ]
     },
     {
       "id": "leashes",
       "label": "Leashes",
-      "keywords": ["leash", "lead"]
+      "keywords": [
+        "leash",
+        "lead"
+      ]
     },
     {
       "id": "collars",
       "label": "Collars",
-      "keywords": ["collar"]
+      "keywords": [
+        "collar"
+      ]
     },
     {
       "id": "enrichment",
       "label": "Enrichment & Puzzle Toys",
-      "keywords": ["lick mat", "emat", "treat dispenser", "puzzle", "ecup", "etray", "snuffle", "enrichment"]
+      "keywords": [
+        "lick mat",
+        "emat",
+        "treat dispenser",
+        "puzzle",
+        "ecup",
+        "etray",
+        "snuffle",
+        "enrichment"
+      ]
     },
     {
       "id": "chews-treats",
       "label": "Chews & Treats",
-      "keywords": ["bully stick", "chew", "treat", "yak", "jerky", "dental stick"]
+      "keywords": [
+        "bully stick",
+        "chew",
+        "treat",
+        "yak",
+        "jerky",
+        "dental stick"
+      ]
     },
     {
       "id": "toys",
       "label": "Toys",
-      "keywords": ["toy", "tug", "fetch", "ball", "plush", "rowdies"]
+      "keywords": [
+        "toy",
+        "tug",
+        "fetch",
+        "ball",
+        "plush",
+        "rowdies"
+      ]
     },
     {
       "id": "feeding",
       "label": "Feeding & Bowls",
-      "keywords": ["bowl", "feeder", "topper", "slow feed"]
+      "keywords": [
+        "bowl",
+        "feeder",
+        "topper",
+        "slow feed"
+      ]
     },
     {
       "id": "beds-crates",
       "label": "Beds & Crates",
-      "keywords": ["bed", "crate", "mattress"]
+      "keywords": [
+        "bed",
+        "crate",
+        "mattress"
+      ]
     },
     {
       "id": "other",

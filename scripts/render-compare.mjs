@@ -48,7 +48,8 @@ function vendorRow(p, isCheapest) {
 
   return `        <a class="supplier-row affiliate-link" href="${attr(p.url)}" target="_blank" rel="nofollow sponsored noopener"
           data-product="${attr(p.name)}" data-category="compare_${attr(p.category)}" data-result="not_tested"
-          data-placement="price_compare" data-network="${attr(p.brand_name)}" data-discount="${attr(p.discount_code || "")}">
+          data-placement="price_compare" data-network="${attr(p.brand_name)}" data-discount="${attr(p.discount_code || "")}"
+          data-search="${attr([p.name, p.brand_name, p.category, p.discount_code || ""].join(" "))}">
           <div class="supplier-left">
             ${thumb}
             <div style="min-width:0">
@@ -59,7 +60,7 @@ function vendorRow(p, isCheapest) {
           <div class="supplier-price-wrap">
             <div class="supplier-price">${esc(p.price)}</div>
             ${cheapestBadge}
-            <div class="supplier-go">Visit brand ›</div>
+            <div class="supplier-go">Visit brand site</div>
           </div>
         </a>`;
 }
@@ -107,8 +108,8 @@ function chip(label, value, active) {
 function jsonLd(data) {
   return JSON.stringify({
     "@context": "https://schema.org", "@type": "ItemList",
-    name: "Price Compare — Remy's Lab",
-    description: "Live prices for dog gear across multiple brands, grouped by category.",
+    name: "Dog Gear Price Compare | Remy's Lab",
+    description: "Compare dog gear prices, partner codes, and tested notes from Remy's Lab.",
     itemListElement: data.products.slice(0, 50).map((p, i) => ({
       "@type": "ListItem", position: i + 1,
       item: { "@type": "Product", name: p.name, ...(p.image ? { image: p.image } : {}),
@@ -141,16 +142,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Remy's Lab | Live Dog Gear Price Compare</title>
-<meta name="description" content="Live prices for dog gear across multiple brands, grouped by category. Harnesses, leashes, chews, and more — sorted cheapest first."/>
+<title>Compare Dog Gear Prices | Remy's Lab</title>
+<meta name="description" content="Compare dog gear prices by category, see partner codes, and jump to Remy-tested notes when we have them."/>
 <meta name="robots" content="index, follow, max-image-preview:large"/>
 <link rel="canonical" href="https://remyslab.com/"/>
 <link rel="icon" type="image/png" href="/assets/icons/favicon-remy-scientist-transparent-v2.png"/>
 <meta name="theme-color" content="#f7f5ef"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Remy's Lab"/>
-<meta property="og:title" content="Remy's Lab | Live Dog Gear Price Compare"/>
-<meta property="og:description" content="Live prices for dog gear across multiple brands, grouped by category."/>
+<meta property="og:title" content="Compare Dog Gear Prices | Remy's Lab"/>
+<meta property="og:description" content="Compare dog gear prices by category, see partner codes, and jump to Remy-tested notes when we have them."/>
 <meta property="og:url" content="https://remyslab.com/"/>
 <meta property="og:image" content="https://remyslab.com/assets/logos/remys-lab-logo-science-dog-transparent-v2.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -185,6 +186,10 @@ img{display:block;max-width:100%}
 /* Sticky controls bar, mirrors the peptide site's catalog-controls */
 .catalog-controls{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(247,245,239,.92);backdrop-filter:blur(10px);margin-top:10px}
 .catalog-control-inner{max-width:1180px;margin:0 auto;padding:10px 16px}
+.catalog-search{position:relative;margin-bottom:8px}
+.catalog-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.catalog-search input{width:100%;border:1.5px solid var(--line);border-radius:13px;background:var(--surface);color:var(--text);font:inherit;font-size:13px;padding:9px 12px 9px 34px;outline:none}
+.catalog-search input:focus{border-color:#c8b89a;box-shadow:0 0 0 3px rgba(31,58,46,.08)}
 .catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
 .catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
 .catalog-chips::-webkit-scrollbar{display:none}
@@ -241,22 +246,26 @@ img{display:block;max-width:100%}
   </a>
   <div class="nav-tabs" role="tablist">
     <a class="nav-tab active" href="/" role="tab" aria-current="page">Compare</a>
-    <a class="nav-tab" href="/remyslinks/" role="tab">Remy's Links</a>
+    <a class="nav-tab" href="/codes/" role="tab">Codes</a>
     <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
     <a class="nav-tab" href="/tested-gear/" role="tab">Tested Gear</a>
   </div>
 </nav>
 
 <header class="cmp-head">
-  <h1>Price Compare 🔍</h1>
-  <p>Live prices for dog gear across a handful of brands. Each card is a category — harnesses, leashes, and so on — with every brand's price laid out cheapest first.</p>
+  <h1>Compare dog gear prices before you buy 🔍</h1>
+  <p>Live prices, active codes, and Remy-tested notes when we have them. Each card is a category, not a fake ranking.</p>
 </header>
 
-<p class="cmp-disclosure"><strong>Heads up:</strong> this is a price browser, not a Remy-tested list. For stuff he's actually tried, see <a href="/tested-gear/" style="color:var(--green);text-decoration:underline">Tested Gear</a>. Prices pull from each brand's own store and can change.</p>
+<p class="cmp-disclosure"><strong>Heads up:</strong> Compare shows tracked brand prices, not a blanket Remy recommendation. For products he has actually used, see <a href="/tested-gear/" style="color:var(--green);text-decoration:underline">Tested Gear</a>. Prices pull from each brand's own store and can change.</p>
 
 <div class="page">
   <div class="catalog-controls">
     <div class="catalog-control-inner">
+      <label class="catalog-search" for="catalogSearch">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zm-.666 3.42a4.5 4.5 0 1 1 .707-.707l2.873 2.872a.5.5 0 1 1-.707.707L9.334 9.92z" fill="currentColor"/></svg>
+        <input id="catalogSearch" type="search" placeholder="Search products or brands..." autocomplete="off"/>
+      </label>
       <div class="catalog-filter-title">Category</div>
       <div class="catalog-chips" id="catChips">
       ${catChips}
@@ -284,39 +293,47 @@ ${cards}
 
 <script>
 (function(){
-  var state={cat:"All",brand:"All"};
+  var state={cat:"All",brand:"All",q:""};
+  var search=document.getElementById("catalogSearch");
+
+  function rowMatches(row){
+    var brandMatch = state.brand==="All" || row.dataset.network===state.brand;
+    var searchText = (row.dataset.search || row.textContent || "").toLowerCase();
+    var searchMatch = !state.q || searchText.indexOf(state.q) > -1;
+    return brandMatch && searchMatch;
+  }
 
   function apply(){
     var cards=document.querySelectorAll(".product-card");
-    var visible=0;
+    var visibleCards=0;
+    var visibleRows=0;
+    var hasExplicitFilter = state.brand !== "All" || !!state.q;
     cards.forEach(function(card){
       var matchesCat = state.cat==="All" || card.dataset.cat===state.cat;
       var rows=card.querySelectorAll(".supplier-row");
-      var anyBrandMatch=false;
+      var anyRowMatch=false;
       var mustExpand=false;
       rows.forEach(function(row){
-        var brandMatch = state.brand==="All" || row.dataset.network===state.brand;
-        if (brandMatch) anyBrandMatch = true;
-        // A real filter intent (picking a specific brand) should surface a
-        // collapsed match rather than hide the whole card — collapsing exists
-        // to declutter the default view, not to fight an explicit filter.
-        if (row.classList.contains("extra-row") && state.brand !== "All" && brandMatch) {
-          mustExpand = true;
+        if (rowMatches(row)) {
+          anyRowMatch = true;
+          if (row.classList.contains("extra-row") && hasExplicitFilter) mustExpand = true;
         }
       });
-      if (state.brand === "All") collapseCard(card, true); // reset only auto-expansions on clear
+      if (!hasExplicitFilter) collapseCard(card, true);
       else if (mustExpand) expandCard(card, true);
       rows.forEach(function(row){
-        var brandMatch = state.brand==="All" || row.dataset.network===state.brand;
+        var match = rowMatches(row);
         var collapsed = row.classList.contains("extra-row") && !row.dataset.expanded;
-        row.style.display = (brandMatch && !collapsed) ? "" : "none";
+        var showRow = match && !collapsed;
+        row.style.display = showRow ? "" : "none";
+        if (match && matchesCat) visibleRows++;
       });
-      var show = matchesCat && anyBrandMatch;
+      var show = matchesCat && anyRowMatch;
       card.hidden = !show;
-      if(show) visible++;
+      if(show) visibleCards++;
     });
     document.getElementById("catalogStatus").textContent =
-      "Showing " + visible + " categor" + (visible===1?"y":"ies") + " · ${data.product_count} listings";
+      "Showing " + visibleCards + " categor" + (visibleCards===1?"y":"ies") + " · " + visibleRows + " listing" + (visibleRows===1?"":"s");
   }
 
   function wire(containerId, key){
@@ -333,7 +350,7 @@ ${cards}
 
   function expandCard(card, auto){
     var extras = card.querySelectorAll(".extra-row");
-    if (!extras.length || extras[0].dataset.expanded) return; // already expanded or nothing to expand
+    if (!extras.length || extras[0].dataset.expanded) return;
     extras.forEach(function(row){ row.dataset.expanded = "1"; row.hidden = false; });
     if (auto) card.dataset.autoExpanded = "1";
     var btn = card.querySelector('[data-action="expand-card"]');
@@ -341,9 +358,9 @@ ${cards}
   }
 
   function collapseCard(card, onlyIfAuto){
-    if (onlyIfAuto && card.dataset.autoExpanded !== "1") return; // leave manual expansions alone
+    if (onlyIfAuto && card.dataset.autoExpanded !== "1") return;
     var extras = card.querySelectorAll(".extra-row");
-    if (!extras.length || !extras[0].dataset.expanded) return; // already collapsed
+    if (!extras.length || !extras[0].dataset.expanded) return;
     extras.forEach(function(row){ row.dataset.expanded = ""; row.hidden = true; });
     delete card.dataset.autoExpanded;
     var btn = card.querySelector('[data-action="expand-card"]');
@@ -356,19 +373,27 @@ ${cards}
         var card = btn.closest(".product-card");
         var extras = card.querySelectorAll(".extra-row");
         if (extras[0] && extras[0].dataset.expanded) collapseCard(card);
-        else expandCard(card); // manual: no "auto" flag, so a later brand-clear won't collapse it
-        apply(); // re-run brand filter against the newly shown/hidden rows
+        else expandCard(card);
+        apply();
       });
+    });
+  }
+
+  if (search) {
+    search.addEventListener("input", function(){
+      state.q = search.value.trim().toLowerCase();
+      apply();
     });
   }
 
   wire("catChips","cat");
   wire("brandChips","brand");
   wireExpand();
+  apply();
 })();
 </script>
 
-<script src="/assets/js/tracking.js" defer></script>
+<script src="/assets/js/affiliate-tracking.js" defer></script>
 </body>
 </html>
 `;

@@ -1,14 +1,23 @@
 # Remy's Lab
 
-> Dog products tested by an actual Lab.
+> Dog gear price comparison, discount codes, and real test notes from a yellow Lab.
 
-Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners find product notes, partner links, discount codes, and practical dog owner guides without a hard sell.
+Remy's Lab is a TikTok-connected dog product testing brand built around Remy, a yellow Labrador. The site helps dog owners compare dog gear prices by category, grab active partner codes, and read honest test notes when Remy has actually used a product.
 
 ## Pages
 
-- [Remy's Lab home](https://remyslab.com/): Current product links, discount codes, and affiliate disclosure.
+- [Compare dog gear prices](https://remyslab.com/): Live dog gear prices from tracked brand stores, grouped by category and sorted low to high. This is a price browser, not a Remy-tested endorsement list.
+- [Codes](https://remyslab.com/codes/): Active Remy's Lab partner and ambassador codes.
 - [Lab Notes](https://remyslab.com/blog/): Written notes after Remy actually uses a product.
+- [Tested Gear](https://remyslab.com/tested-gear/): Products Remy has actually used, linked to full Lab Notes.
 - [Dog Owner Guides](https://remyslab.com/guides/): Practical evergreen answers for common dog owner problems.
+
+## How Remy's Lab separates things
+
+- Compare: tracked prices and codes from brand stores.
+- Tested Gear: products Remy has actually used.
+- Codes: current partner and ambassador discounts Josh can share.
+- Lab Notes: honest product writeups and dog owner guides.
 
 ## Lab Notes
 
