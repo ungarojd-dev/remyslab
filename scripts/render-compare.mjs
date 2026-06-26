@@ -15,7 +15,7 @@
  * "good for X" editorializing. That's intentionally Tested Gear's job on a
  * different page; this page stays a neutral price browser.
  */
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -37,11 +37,20 @@ function vendorRow(p, isCheapest) {
   const discount = p.discount_code ? `<span class="supplier-discount">Code ${esc(p.discount_code)}</span>` : "";
   const cheapestBadge = isCheapest ? `<span class="supplier-best">Lowest price</span>` : "";
 
+  // Real product photo when Shopify gave us one; brand-initials badge as a graceful
+  // fallback both when there's no image AND if a CDN image URL ever fails to load
+  // (onerror swaps the <img> for the same initials markup so nothing breaks visually).
+  const fallback = `<span class="supplier-initials">${esc(initials(p.brand_name))}</span>`;
+  const thumb = p.image
+    ? `<img class="supplier-thumb" src="${attr(p.image)}" alt="" loading="lazy" decoding="async"
+         onerror="this.outerHTML='${fallback.replace(/'/g, "&#39;")}'">`
+    : fallback;
+
   return `        <a class="supplier-row affiliate-link" href="${attr(p.url)}" target="_blank" rel="nofollow sponsored noopener"
           data-product="${attr(p.name)}" data-category="compare_${attr(p.category)}" data-result="not_tested"
           data-placement="price_compare" data-network="${attr(p.brand_name)}" data-discount="${attr(p.discount_code || "")}">
           <div class="supplier-left">
-            <span class="supplier-initials">${esc(initials(p.brand_name))}</span>
+            ${thumb}
             <div style="min-width:0">
               <div class="supplier-name">${esc(p.name)}</div>
               <div class="supplier-sub">${esc(p.brand_name)} · ${oos}${discount}</div>
@@ -132,17 +141,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Price Compare | Remy's Lab</title>
+<title>Remy's Lab | Live Dog Gear Price Compare</title>
 <meta name="description" content="Live prices for dog gear across multiple brands, grouped by category. Harnesses, leashes, chews, and more — sorted cheapest first."/>
 <meta name="robots" content="index, follow, max-image-preview:large"/>
-<link rel="canonical" href="https://remyslab.com/compare/"/>
+<link rel="canonical" href="https://remyslab.com/"/>
 <link rel="icon" type="image/png" href="/assets/icons/favicon-remy-scientist-transparent-v2.png"/>
 <meta name="theme-color" content="#f7f5ef"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Remy's Lab"/>
-<meta property="og:title" content="Price Compare | Remy's Lab"/>
+<meta property="og:title" content="Remy's Lab | Live Dog Gear Price Compare"/>
 <meta property="og:description" content="Live prices for dog gear across multiple brands, grouped by category."/>
-<meta property="og:url" content="https://remyslab.com/compare/"/>
+<meta property="og:url" content="https://remyslab.com/"/>
 <meta property="og:image" content="https://remyslab.com/assets/logos/remys-lab-logo-science-dog-transparent-v2.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -203,6 +212,7 @@ img{display:block;max-width:100%}
 .supplier-row:hover{background:#fbf8f1;border-radius:10px}
 .supplier-left{display:flex;gap:9px;min-width:0;align-items:flex-start}
 .supplier-initials{flex:0 0 auto;display:flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:9px;background:#ecf5ee;color:var(--green);font-size:11px;font-weight:800;margin-top:1px}
+.supplier-thumb{flex:0 0 auto;width:30px;height:30px;border-radius:9px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}
 .supplier-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px;font-weight:700;max-width:32ch}
 .supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:1px;color:var(--muted);font-size:11px}
 .supplier-discount{color:var(--gold);font-weight:700}
@@ -230,10 +240,10 @@ img{display:block;max-width:100%}
     <span>Remy's Lab</span>
   </a>
   <div class="nav-tabs" role="tablist">
-    <a class="nav-tab" href="/" role="tab">Links</a>
+    <a class="nav-tab active" href="/" role="tab" aria-current="page">Compare</a>
+    <a class="nav-tab" href="/remyslinks/" role="tab">Remy's Links</a>
     <a class="nav-tab" href="/blog/" role="tab">Lab Notes</a>
     <a class="nav-tab" href="/tested-gear/" role="tab">Tested Gear</a>
-    <a class="nav-tab active" href="/compare/" role="tab" aria-current="page">Compare</a>
   </div>
 </nav>
 
@@ -366,9 +376,7 @@ ${cards}
 
 async function main() {
   const data = JSON.parse(await readFile(path.join(ROOT, "data", "compare.json"), "utf8"));
-  const outDir = path.join(ROOT, "compare");
-  await mkdir(outDir, { recursive: true });
-  await writeFile(path.join(outDir, "index.html"), page(data));
-  console.log(`[render] wrote compare/index.html (${data.product_count} listings, ${data.category_summary.length} categories)`);
+  await writeFile(path.join(ROOT, "index.html"), page(data));
+  console.log(`[render] wrote index.html (${data.product_count} listings, ${data.category_summary.length} categories)`);
 }
 main().catch(err => { console.error("[render] FATAL:", err.message); process.exit(1); });
