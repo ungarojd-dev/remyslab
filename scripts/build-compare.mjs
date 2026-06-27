@@ -37,6 +37,14 @@ async function readJson(file, fallback = null) {
 }
 const trimSlash = u => String(u || "").replace(/\/+$/, "");
 const money = v => { const n = Number.parseFloat(v); return Number.isFinite(n) ? `$${n.toFixed(2)}` : null; };
+/** Price a shopper actually pays after applying the brand's standing discount code, if any.
+ *  Used for sorting and the "Lowest price" badge — "cheapest" should mean cheapest in reality,
+ *  not cheapest on the sticker, or a discounted competitor could lose to a pricier listed one. */
+const effectivePrice = p => {
+  const base = p.price_value;
+  if (base == null || !Number.isFinite(p.discount_percent)) return base;
+  return Math.round(base * (1 - p.discount_percent / 100) * 100) / 100;
+};
 
 async function fetchShopifyPage(domain, page) {
   const url = `${trimSlash(domain)}/products.json?limit=250&page=${page}`;
@@ -196,6 +204,8 @@ async function build() {
           image: live.image,
           url: buildUrl(brand, live.handle),
           discount_code: brand.discount_code,
+          discount_percent: brand.discount_percent ?? null,
+          effective_price: effectivePrice({ price_value: live.price_value, discount_percent: brand.discount_percent ?? null }),
           affiliate_disclosure: brand.affiliate_disclosure || "none",
           source: "live"
         });
@@ -212,7 +222,7 @@ async function build() {
   out.sort((a, b) => {
     const ca = catOrder[a.category] ?? 99, cb = catOrder[b.category] ?? 99;
     if (ca !== cb) return ca - cb;
-    return (a.price_value ?? Infinity) - (b.price_value ?? Infinity);
+    return (a.effective_price ?? a.price_value ?? Infinity) - (b.effective_price ?? b.price_value ?? Infinity);
   });
 
   // Category summary: which categories have 2+ brands (real comparison) vs 1 (browse-only)

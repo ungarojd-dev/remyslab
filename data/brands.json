@@ -6,6 +6,7 @@
       "name": "Pack Leashes",
       "domain": "https://packleashes.com",
       "discount_code": "REMYSLAB20",
+      "discount_percent": 20,
       "link_style": "discount_redirect",
       "affiliate_disclosure": "partner"
     },
@@ -13,6 +14,7 @@
       "name": "Brooks & Roo",
       "domain": "https://www.brooksandroo.com",
       "discount_code": "REMYSLAB15",
+      "discount_percent": 15,
       "link_style": "discount_redirect",
       "affiliate_disclosure": "partner"
     },

@@ -34,7 +34,6 @@ function initials(name) {
 /** One vendor offer row inside a category card. Facts only: name, brand, stock, code, price. No editorial tags. */
 function vendorRow(p, isCheapest) {
   const oos = p.in_stock === false ? `<span class="supplier-oos">Out of stock</span>` : `<span>Listed</span>`;
-  const discountNote = p.discount_code ? `<span class="supplier-discount">Code ready</span>` : "";
   const cheapestBadge = isCheapest ? `<span class="supplier-best">Lowest price</span>` : "";
   const productCategory = `compare_${p.category}`;
 
@@ -50,6 +49,19 @@ function vendorRow(p, isCheapest) {
     ? `<button type="button" class="supplier-copy coupon-copy" data-code="${attr(p.discount_code)}" data-product="${attr(p.name)}" data-category="${attr(productCategory)}" data-placement="price_compare_code">Grab code</button>`
     : "";
 
+  // Show the discount math only when we actually have a percentage to do math with — older
+  // cached fallback rows (from before discount_percent existed) just show plain price + a
+  // generic "code ready" note, same as always, until the next live fetch backfills the field.
+  const hasPercent = p.discount_code && Number.isFinite(p.discount_percent);
+  const discountNote = p.discount_code
+    ? (hasPercent
+        ? `<span class="supplier-discount">${p.discount_percent}% off with ${esc(p.discount_code)}</span>`
+        : `<span class="supplier-discount">Code ready</span>`)
+    : "";
+  const priceBlock = hasPercent && p.effective_price != null
+    ? `<div class="supplier-price-was">${esc(p.price)}</div><div class="supplier-price supplier-price-discounted">$${p.effective_price.toFixed(2)}</div>`
+    : `<div class="supplier-price">${esc(p.price)}</div>`;
+
   return `        <div class="supplier-row"
           data-network="${attr(p.brand_name)}"
           data-search="${attr([p.name, p.brand_name, p.category, p.discount_code || ""].join(" "))}">
@@ -61,7 +73,7 @@ function vendorRow(p, isCheapest) {
             </div>
           </div>
           <div class="supplier-price-wrap">
-            <div class="supplier-price">${esc(p.price)}</div>
+            ${priceBlock}
             ${cheapestBadge}
             <div class="supplier-buttons">
               ${copyButton}
@@ -77,18 +89,19 @@ function vendorRow(p, isCheapest) {
  *  Shows the first 5 rows by default; the rest sit behind a "Show N more" toggle (same pattern as the
  *  peptide site's product cards) so a deep category like Collars doesn't dominate the page on load. */
 function categoryCard(cat, products) {
-  const cheapestValue = Math.min(...products.map(p => p.price_value ?? Infinity));
+  const cheapestValue = Math.min(...products.map(p => (p.effective_price ?? p.price_value) ?? Infinity));
   const brandCount = new Set(products.map(p => p.brand_id)).size;
   const VISIBLE = 5;
   const rows = products.map((p, i) => {
-    const row = vendorRow(p, p.price_value === cheapestValue);
+    const row = vendorRow(p, (p.effective_price ?? p.price_value) === cheapestValue);
     if (i < VISIBLE) return row;
     // Hidden rows: wrap so plain CSS/JS toggling works with no framework.
     return row.replace('<div class="supplier-row', '<div hidden class="supplier-row extra-row');
   }).join("\n");
   const hiddenCount = Math.max(0, products.length - VISIBLE);
+  const firstBatch = Math.min(10, hiddenCount);
   const expandBtn = hiddenCount
-    ? `<button type="button" class="expand-button" data-action="expand-card">Show ${hiddenCount} more listing${hiddenCount === 1 ? "" : "s"}</button>`
+    ? `<button type="button" class="expand-button" data-action="expand-card">Show ${firstBatch} more listing${firstBatch === 1 ? "" : "s"}${hiddenCount > firstBatch ? ` (${hiddenCount} left)` : ""}</button>`
     : "";
   return `      <article class="product-card" data-cat="${attr(cat.id)}">
         <header class="product-card-head">
@@ -191,7 +204,7 @@ h1,h2,h3,.product-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing
 .catalog-main{padding:6px 16px 0;max-width:1180px;margin:0 auto}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}.product-card{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}.product-card[hidden]{display:none}.suppliers{flex:1;padding:0 12px 4px}
 .product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:600;letter-spacing:-.005em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
 .supplier-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 2px;border-top:1px solid #dde8f4}.supplier-row:first-child{border-top:none}.supplier-row:hover{background:#eef6ff;border-radius:12px}.supplier-left{display:flex;gap:9px;min-width:0;flex:1 1 auto;align-items:flex-start}.supplier-copy-wrap{min-width:0;flex:1 1 auto}.supplier-initials{flex:0 0 auto;display:flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:10px;background:var(--sage);color:var(--green);font-size:11px;font-weight:900;margin-top:1px}.supplier-thumb{flex:0 0 auto;width:32px;height:32px;border-radius:10px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}.supplier-name{font-size:13.5px;font-weight:700;line-height:1.2;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;overflow-wrap:anywhere}.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}.supplier-discount{color:var(--gold);font-weight:900}.supplier-oos{color:#a04848;font-weight:900}
-.supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-copy{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:800;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff}.supplier-go:hover{background:var(--green-deep)}.supplier-copy{background:#fff8e3;color:#795b05;border:1px solid #e7cf7a}.supplier-copy:hover{background:#fff1be}.supplier-copy.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18)}
+.supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}.supplier-price-was{font-size:11px;font-weight:600;color:var(--muted);text-decoration:line-through}.supplier-price-discounted{color:#1d7a3c}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-copy{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:800;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff}.supplier-go:hover{background:var(--green-deep)}.supplier-copy{background:#fff8e3;color:#795b05;border:1px solid #e7cf7a}.supplier-copy:hover{background:#fff1be}.supplier-copy.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18)}
 .catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}.expand-button{width:100%;border:0;border-top:1px solid var(--line);background:var(--sage);padding:11px;color:var(--green);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer;border-radius:0 0 18px 18px}.expand-button:hover{background:#e9f2fb}[hidden]{display:none!important}
 @media (max-width:920px){.cmp-hero-inner{grid-template-columns:1fr}.cmp-stat-card{max-width:440px}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.site-nav{margin:0 12px 10px}.nav-logo span{display:none}.nav-tab{font-size:12px;padding:6px 9px}.cmp-hero-inner{padding:34px 14px 30px;gap:22px}.cmp-head h1{font-size:clamp(33px,11vw,46px)}.cmp-head p{font-size:15px}.cmp-actions{gap:8px}.cmp-action{font-size:12px;padding:9px 11px}.cmp-stat-card{padding:15px;border-radius:18px}.cmp-stat-row{font-size:13px}.cmp-disclosure-inner{padding:11px 14px}.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}.supplier-row{gap:9px}.supplier-price-wrap{min-width:96px}.supplier-buttons{gap:4px}.supplier-go,.supplier-copy{font-size:10px;padding:6px 8px}}
@@ -326,23 +339,51 @@ ${cards}
     });
   }
 
+  var EXPAND_BATCH = 10;
+
+  /** Manual browsing: reveal the next batch of hidden rows, not the whole rest of the list —
+   *  a deep category like "Other" (200+ hidden) shouldn't dump everything in on one click. */
+  function expandNextBatch(card){
+    var hidden = Array.prototype.slice.call(card.querySelectorAll(".extra-row")).filter(function(r){ return !r.dataset.expanded; });
+    if (!hidden.length) return;
+    hidden.slice(0, EXPAND_BATCH).forEach(function(row){ row.dataset.expanded = "1"; row.hidden = false; });
+    updateExpandButton(card);
+  }
+
+  /** Filter/search correctness path: a match buried in the hidden tail must actually become
+   *  visible, not require several manual clicks to reach — so this reveals everything at once. */
   function expandCard(card, auto){
     var extras = card.querySelectorAll(".extra-row");
-    if (!extras.length || extras[0].dataset.expanded) return;
+    if (!extras.length) return;
+    var anyHidden = Array.prototype.slice.call(extras).some(function(r){ return !r.dataset.expanded; });
+    if (!anyHidden) return;
     extras.forEach(function(row){ row.dataset.expanded = "1"; row.hidden = false; });
     if (auto) card.dataset.autoExpanded = "1";
-    var btn = card.querySelector('[data-action="expand-card"]');
-    if (btn) btn.textContent = "Show fewer listings";
+    updateExpandButton(card);
   }
 
   function collapseCard(card, onlyIfAuto){
     if (onlyIfAuto && card.dataset.autoExpanded !== "1") return;
     var extras = card.querySelectorAll(".extra-row");
-    if (!extras.length || !extras[0].dataset.expanded) return;
+    var anyExpanded = Array.prototype.slice.call(extras).some(function(r){ return r.dataset.expanded; });
+    if (!extras.length || !anyExpanded) return;
     extras.forEach(function(row){ row.dataset.expanded = ""; row.hidden = true; });
     delete card.dataset.autoExpanded;
+    updateExpandButton(card);
+  }
+
+  function updateExpandButton(card){
     var btn = card.querySelector('[data-action="expand-card"]');
-    if (btn) btn.textContent = "Show " + extras.length + " more listing" + (extras.length === 1 ? "" : "s");
+    if (!btn) return;
+    var extras = Array.prototype.slice.call(card.querySelectorAll(".extra-row"));
+    var hiddenCount = extras.filter(function(r){ return !r.dataset.expanded; }).length;
+    if (hiddenCount === 0) {
+      btn.textContent = "Show fewer listings";
+    } else {
+      var nextBatch = Math.min(EXPAND_BATCH, hiddenCount);
+      btn.textContent = "Show " + nextBatch + " more listing" + (nextBatch === 1 ? "" : "s") +
+        (hiddenCount > nextBatch ? " (" + hiddenCount + " left)" : "");
+    }
   }
 
   function wireExpand(){
@@ -350,8 +391,9 @@ ${cards}
       btn.addEventListener("click", function(){
         var card = btn.closest(".product-card");
         var extras = card.querySelectorAll(".extra-row");
-        if (extras[0] && extras[0].dataset.expanded) collapseCard(card);
-        else expandCard(card);
+        var anyHidden = Array.prototype.slice.call(extras).some(function(r){ return !r.dataset.expanded; });
+        if (anyHidden) expandNextBatch(card);
+        else collapseCard(card);
         apply();
       });
     });
