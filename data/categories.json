@@ -1,0 +1,102 @@
+{
+  "_comment": "How raw Shopify products get sorted into comparison categories. This is CATEGORY-level matching, not product-level \u2014 we group 'all the leashes' together, we never claim two different brands' products ARE the same item. That's the honest line: same category, side by side, sorted by price \u2014 not 'these are equivalent products.' Order matters: first matching category wins. Edit keywords/order to retune.",
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "clothing",
+      "label": "Bandanas & Accessories",
+      "keywords": [
+        "bandana",
+        "bowtie",
+        "bow tie",
+        "sweater",
+        "dog jacket",
+        "dog coat"
+      ]
+    },
+    {
+      "id": "harnesses",
+      "label": "Harnesses",
+      "keywords": [
+        "harness"
+      ]
+    },
+    {
+      "id": "leashes",
+      "label": "Leashes",
+      "keywords": [
+        "leash",
+        "lead"
+      ]
+    },
+    {
+      "id": "collars",
+      "label": "Collars",
+      "keywords": [
+        "collar"
+      ]
+    },
+    {
+      "id": "enrichment",
+      "label": "Enrichment & Puzzle Toys",
+      "keywords": [
+        "lick mat",
+        "emat",
+        "treat dispenser",
+        "puzzle",
+        "ecup",
+        "etray",
+        "snuffle",
+        "enrichment"
+      ]
+    },
+    {
+      "id": "chews-treats",
+      "label": "Chews & Treats",
+      "keywords": [
+        "bully stick",
+        "chew",
+        "treat",
+        "yak",
+        "jerky",
+        "dental stick"
+      ]
+    },
+    {
+      "id": "toys",
+      "label": "Toys",
+      "keywords": [
+        "toy",
+        "tug",
+        "fetch",
+        "ball",
+        "plush",
+        "rowdies"
+      ]
+    },
+    {
+      "id": "feeding",
+      "label": "Feeding & Bowls",
+      "keywords": [
+        "bowl",
+        "feeder",
+        "topper",
+        "slow feed"
+      ]
+    },
+    {
+      "id": "beds-crates",
+      "label": "Beds & Crates",
+      "keywords": [
+        "bed",
+        "crate",
+        "mattress"
+      ]
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "keywords": []
+    }
+  ]
+}
