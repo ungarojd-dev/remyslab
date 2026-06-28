@@ -15,12 +15,25 @@
  * "good for X" editorializing. That's intentionally Lab Notes' job on a
  * different page; this page stays a neutral price browser.
  */
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
+
+// Explicit, hand-checked mapping — not a string-matcher — because Lab Notes use loose
+// human categories ("Walk Gear", "Treats") that don't map 1:1 to Compare's category IDs
+// ("harnesses" vs "leashes" vs "collars" are all plausibly "Walk Gear"). Guessing wrong
+// here would silently claim review coverage that doesn't exist, which is worse than no
+// claim at all. Update this by hand whenever a new Lab Note covers a new category.
+const LAB_NOTE_CATEGORY_MAP = {
+  "Cleaning": [],          // grooming/cleanup tools aren't a Compare category — no mapping
+  "Walk Gear": ["collars"],   // current Walk Gear lab note (Pack Leashes Dino Collar Set) is a collar
+  "Treats": ["chews-treats"],
+  "Toys": ["toys", "enrichment"],
+  "Accessories": ["clothing"]
+};
 
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -88,7 +101,7 @@ function vendorRow(p, isCheapest) {
 /** One category card: header + vendor rows, sorted cheapest first (build-compare already sorts this way).
  *  Shows the first 5 rows by default; the rest sit behind a "Show N more" toggle (same pattern as the
  *  peptide site's product cards) so a deep category like Collars doesn't dominate the page on load. */
-function categoryCard(cat, products) {
+function categoryCard(cat, products, reviewedCategoryIds) {
   const cheapestValue = Math.min(...products.map(p => (p.effective_price ?? p.price_value) ?? Infinity));
   const brandCount = new Set(products.map(p => p.brand_id)).size;
   const VISIBLE = 5;
@@ -103,6 +116,12 @@ function categoryCard(cat, products) {
   const expandBtn = hiddenCount
     ? `<button type="button" class="expand-button" data-action="expand-card">Show ${firstBatch} more listing${firstBatch === 1 ? "" : "s"}${hiddenCount > firstBatch ? ` (${hiddenCount} left)` : ""}</button>`
     : "";
+  // Honest gap disclosure: say plainly when nothing here has been Remy-tested yet, rather
+  // than let silence imply coverage that doesn't exist. This is the thing that's supposed
+  // to set this page apart from "Top 10 Best X" listicles — don't undercut it by omission.
+  const noReviewNote = (reviewedCategoryIds && !reviewedCategoryIds.has(cat.id))
+    ? `<p class="no-review-note">Remy hasn't tested anything in this category yet. Prices below are real, but this isn't an endorsement &mdash; check <a href="/blog/">Lab Notes</a> for what he has actually tried.</p>`
+    : "";
   return `      <article class="product-card" data-cat="${attr(cat.id)}">
         <header class="product-card-head">
           <div class="product-card-meta">Dog Gear · Live Prices</div>
@@ -110,6 +129,7 @@ function categoryCard(cat, products) {
             <h2 class="product-title">${esc(cat.label)}</h2>
             <span class="vendor-count">${brandCount} brand${brandCount === 1 ? "" : "s"}</span>
           </div>
+          ${noReviewNote}
         </header>
         <div class="supplier-head">
           <span>Sorted low to high</span>
@@ -139,7 +159,7 @@ function jsonLd(data) {
   });
 }
 
-function page(data) {
+function page(data, reviewedCategoryIds) {
   const when = data.generated_at ? new Date(data.generated_at) : null;
   const whenStr = when && !isNaN(when) ? when.toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
 
@@ -147,7 +167,7 @@ function page(data) {
   const grouped = cats.map(c => ({ ...c, products: data.products.filter(p => p.category === c.id) }));
   const brandNames = [...new Set(data.products.map(p => p.brand_name))].sort();
 
-  const cards = grouped.map(c => categoryCard(c, c.products)).join("\n\n");
+  const cards = grouped.map(c => categoryCard(c, c.products, reviewedCategoryIds)).join("\n\n");
   const catChips = `${chip("All", "All", true)}\n      ${cats.map(c => chip(c.label, c.id, false)).join("\n      ")}`;
   const brandChips = `${chip("All", "All", true)}\n      ${brandNames.map(b => chip(b, b, false)).join("\n      ")}`;
 
@@ -202,7 +222,7 @@ h1,h2,h3,.product-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing
 .catalog-control-inner{max-width:1180px;margin:0 auto;padding:0 16px}.catalog-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 11px;color:var(--muted);box-shadow:0 3px 10px rgba(23,59,97,.05)}.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:13px}.catalog-search:focus-within{border-color:#8fb7df;box-shadow:0 0 0 3px rgba(36,95,147,.12)}
 .catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.catalog-chips::-webkit-scrollbar{display:none}.catalog-chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);padding:6px 11px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}.catalog-chip.active{border-color:var(--green);background:var(--green);color:#fff}.catalog-summary{display:flex;justify-content:space-between;gap:8px;margin:10px 16px 4px;color:var(--muted);font-size:11.5px}
 .catalog-main{padding:6px 16px 0;max-width:1180px;margin:0 auto}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}.product-card{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}.product-card[hidden]{display:none}.suppliers{flex:1;padding:0 12px 4px}
-.product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:600;letter-spacing:-.005em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
+.product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:600;letter-spacing:-.005em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.no-review-note{margin-top:8px;padding:7px 10px;background:#fff8e3;border:1px solid #eadba8;border-radius:10px;font-size:11px;line-height:1.4;color:#6b5a2c}.no-review-note a{color:#6b5a2c;text-decoration:underline}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
 .supplier-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 2px;border-top:1px solid #dde8f4}.supplier-row:first-child{border-top:none}.supplier-row:hover{background:#eef6ff;border-radius:12px}.supplier-left{display:flex;gap:9px;min-width:0;flex:1 1 auto;align-items:flex-start}.supplier-copy-wrap{min-width:0;flex:1 1 auto}.supplier-initials{flex:0 0 auto;display:flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:10px;background:var(--sage);color:var(--green);font-size:11px;font-weight:900;margin-top:1px}.supplier-thumb{flex:0 0 auto;width:32px;height:32px;border-radius:10px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}.supplier-name{font-size:13.5px;font-weight:700;line-height:1.2;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;overflow-wrap:anywhere}.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}.supplier-discount{color:var(--gold);font-weight:900}.supplier-oos{color:#a04848;font-weight:900}
 .supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}.supplier-price-was{font-size:11px;font-weight:600;color:var(--muted);text-decoration:line-through}.supplier-price-discounted{color:#1d7a3c}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-copy{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:800;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff}.supplier-go:hover{background:var(--green-deep)}.supplier-copy{background:#fff8e3;color:#795b05;border:1px solid #e7cf7a}.supplier-copy:hover{background:#fff1be}.supplier-copy.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18)}
 .catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}.expand-button{width:100%;border:0;border-top:1px solid var(--line);background:var(--sage);padding:11px;color:var(--green);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer;border-radius:0 0 18px 18px}.expand-button:hover{background:#e9f2fb}[hidden]{display:none!important}
@@ -229,9 +249,9 @@ h1,h2,h3,.product-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing
 <header class="cmp-head">
   <div class="cmp-hero-inner">
     <div>
-      <span class="cmp-kicker">Independent dog gear tracker</span>
-      <h1>Compare dog gear prices <em>without the guesswork.</em></h1>
-      <p>Choose a category, compare tracked brand listings from low to high, grab a code when one is available, and use Lab Notes for products Remy has actually tried.</p>
+      <span class="cmp-kicker">Remy's Lab · Pet product research</span>
+      <h1>Compare real prices on pet products <em>before you buy.</em></h1>
+      <p>Remy's Lab tracks live prices across pet brands, lists active discount codes, and shares Lab Notes on what we've actually tested, all in one place, so you can shop smarter without doing the digging yourself.</p>
       <div class="cmp-actions" aria-label="Primary actions">
         <a class="cmp-action primary" href="#catalogSearch">Compare prices</a>
         <a class="cmp-action" href="/codes/">View active codes</a>
@@ -419,9 +439,26 @@ ${cards}
 `;
 }
 
+async function getReviewedCategoryIds() {
+  const dir = path.join(ROOT, "content", "lab-notes");
+  let files = [];
+  try { files = await readdir(dir); } catch { return new Set(); } // no lab-notes dir yet — fine, just means nothing's covered
+  const covered = new Set();
+  for (const file of files) {
+    if (!file.endsWith(".json")) continue;
+    try {
+      const note = JSON.parse(await readFile(path.join(dir, file), "utf8"));
+      const ids = LAB_NOTE_CATEGORY_MAP[note.category] || [];
+      ids.forEach(id => covered.add(id));
+    } catch { /* skip unreadable note rather than fail the whole build over one bad file */ }
+  }
+  return covered;
+}
+
 async function main() {
   const data = JSON.parse(await readFile(path.join(ROOT, "data", "compare.json"), "utf8"));
-  await writeFile(path.join(ROOT, "index.html"), page(data));
+  const reviewedCategoryIds = await getReviewedCategoryIds();
+  await writeFile(path.join(ROOT, "index.html"), page(data, reviewedCategoryIds));
   console.log(`[render] wrote index.html (${data.product_count} listings, ${data.category_summary.length} categories)`);
 }
 main().catch(err => { console.error("[render] FATAL:", err.message); process.exit(1); });
