@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T12:55:05.533Z",
+  "generated_at": "2026-06-28T15:03:11.882Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -30,7 +30,7 @@
       "id": "clothing",
       "label": "Bandanas & Accessories",
       "brand_count": 2,
-      "product_count": 60
+      "product_count": 59
     },
     {
       "id": "harnesses",
@@ -87,7 +87,7 @@
       "product_count": 176
     }
   ],
-  "product_count": 704,
+  "product_count": 703,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -227,22 +227,6 @@
       "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/1649/7215/files/aaab4e15343b9141c60dbd7edf174df2.jpg?v=1762212635",
       "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fthe-anni",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 37.56,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
-      "name": "Denim",
-      "category": "clothing",
-      "price": "$46.95",
-      "price_value": 46.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/BT-denim-min.jpg?v=1587761837",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fdenim",
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 37.56,
