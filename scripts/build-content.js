@@ -3,6 +3,30 @@ const path=require('path');
 const ROOT=path.resolve(__dirname,'..');
 const SITE='https://remyslab.com';
 const YEAR='2026';
+
+// Parses price_text values like "$179", "$17.99", "~$16" into a plain number for
+// schema.org Offer.price. Several real lab notes have no price at all (None/'') --
+// returns null in that case so the schema generator can skip the offers block
+// entirely, rather than emit a broken/NaN price that just trades one Search
+// Console error for another.
+function parsePriceNumber(priceText){
+  if(!priceText) return null;
+  const match = String(priceText).replace(/~/g,'').match(/[\d.]+/);
+  if(!match) return null;
+  const n = parseFloat(match[0]);
+  return Number.isFinite(n) ? n : null;
+}
+
+// Maps the real 3-state lab_result scale (approved / pass / still testing) to a
+// schema.org rating. "testing" is explicitly NOT a completed verdict, so it
+// returns null and the caller skips the Review block entirely for that note --
+// presenting an in-progress test as a finished review would be dishonest, not
+// just a schema technicality.
+function labResultToRating(labResult){
+  if(labResult==='approved') return 5;
+  if(labResult==='pass') return 2;
+  return null;
+}
 const GTM=`<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TS4KTRPL');</script>
 <!-- End Google Tag Manager -->`;
@@ -50,7 +74,19 @@ function faqHtml(faqs=[]){if(!faqs.length)return '';return `<section class="faq"
 function faqSchema(faqs=[]){return faqs.length?{"@context":"https://schema.org","@type":"FAQPage",mainEntity:faqs.map(x=>({"@type":"Question",name:x.question,acceptedAnswer:{"@type":"Answer",text:x.answer}}))}:null;}
 function breadcrumb(items){return {"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:items.map((x,i)=>({"@type":"ListItem",position:i+1,name:x.name,item:x.item}))};}
 function renderLabNote(note){
- const canonical=`${SITE}/blog/${note.slug}`;const productImage=note.image_url?(String(note.image_url).startsWith('http')?note.image_url:`${SITE}${note.image_url}`):undefined;const schemas=[{"@context":"https://schema.org","@type":"Article",headline:note.title,description:note.description,datePublished:note.date,dateModified:note.date,image:productImage,author:{"@type":"Organization",name:"Remy's Lab",url:SITE},publisher:{"@type":"Organization",name:"Remy's Lab",url:SITE,logo:{"@type":"ImageObject",url:`${SITE}/assets/logos/og-image.jpg`}},about:{"@type":"Product",name:note.product_name,brand:note.brand?{"@type":"Brand",name:note.brand}:undefined,image:productImage},mainEntityOfPage:{"@type":"WebPage","@id":canonical}},breadcrumb([{name:'Home',item:SITE+'/'},{name:'Lab Notes',item:SITE+'/blog/'},{name:note.title,item:canonical}])];const fq=faqSchema(note.faqs);if(fq)schemas.push(fq);
+ const canonical=`${SITE}/blog/${note.slug}`;const productImage=note.image_url?(String(note.image_url).startsWith('http')?note.image_url:`${SITE}${note.image_url}`):undefined;
+ // Real offers/review data, not fabricated: priceNum comes from the actual price_text
+ // field (several notes genuinely have no price -- offers is omitted for those rather
+ // than emit a broken price). rating comes from the real 3-state lab_result scale;
+ // "still testing" notes correctly get no review block at all, since presenting an
+ // unfinished test as a completed review would be dishonest.
+ const priceNum=parsePriceNumber(note.price_text);
+ const ratingValue=labResultToRating(note.lab_result);
+ const productSchema={"@type":"Product",name:note.product_name,brand:note.brand?{"@type":"Brand",name:note.brand.trim()}:undefined,image:productImage,
+   ...(priceNum!=null?{offers:{"@type":"Offer",price:priceNum,priceCurrency:"USD",url:note.affiliate_url,availability:"https://schema.org/InStock"}}:{}),
+   ...(ratingValue!=null?{review:{"@type":"Review",reviewRating:{"@type":"Rating",ratingValue,bestRating:5},author:{"@type":"Organization",name:"Remy's Lab"},reviewBody:note.verdict_text,datePublished:note.date},
+       aggregateRating:{"@type":"AggregateRating",ratingValue,bestRating:5,reviewCount:1}}:{})};
+ const schemas=[{"@context":"https://schema.org","@type":"Article",headline:note.title,description:note.description,datePublished:note.date,dateModified:note.date,image:productImage,author:{"@type":"Organization",name:"Remy's Lab",url:SITE},publisher:{"@type":"Organization",name:"Remy's Lab",url:SITE,logo:{"@type":"ImageObject",url:`${SITE}/assets/logos/og-image.jpg`}},about:productSchema,mainEntityOfPage:{"@type":"WebPage","@id":canonical}},breadcrumb([{name:'Home',item:SITE+'/'},{name:'Lab Notes',item:SITE+'/blog/'},{name:note.title,item:canonical}])];const fq=faqSchema(note.faqs);if(fq)schemas.push(fq);
  const productPhoto=note.image_url?`<figure class="product-photo"><img src="${attr(note.image_url)}" alt="${attr(note.image_alt||note.product_name)}" loading="eager" decoding="async"></figure>`:'';
  const surfaces=(note.surfaces||[]).length?`<div class="surface-list">${note.surfaces.map(x=>`<div class="surface-item"><span class="surface-marker" aria-hidden="true"></span><div><div class="surface-name">${esc(x.name)}</div><div class="surface-note">${esc(x.note)}</div></div></div>`).join('')}</div>`:'';
  return `<!DOCTYPE html><html lang="en"><head>${GENERATED}${head({title:`${note.title} | Remy's Lab`,description:note.description,canonical,type:'article',schema:schemas})}</head><body>${GTM_BODY}${nav('notes')}<main><div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/blog/">Lab Notes</a><span>›</span><span>${esc(note.product_name)}</span></nav><div class="post-meta"><span class="meta-pill">${esc(note.category)}</span><span class="meta-pill result">${esc(resultLabel(note.lab_result))}</span><span class="meta-pill">${esc(longDate(note.date))}</span></div><h1>${esc(note.title)}</h1><p class="post-lede">${esc(note.lede)}</p>${productPhoto}<div class="verdict"><div><span class="verdict-label">Test notes</span><strong>${esc(note.verdict_title)}</strong><p>${esc(note.verdict_text)}</p></div></div>${cta(note,'blog_post_top')}${codeBox(note)}<div class="post-body"><h2>What we tested</h2>${markdown(note.what_we_tested)}${surfaces}<h2>What worked</h2>${markdown(note.what_worked)}<h2>What did not work</h2>${markdown(note.what_didnt_work)}<h2>Remy's take</h2>${markdown(note.remys_take)}<h2>Worth buying?</h2>${markdown(note.worth_buying)}</div>${cta(note,'blog_post_bottom')}${faqHtml(note.faqs)}<p class="disclosure">Some links are affiliate links. If you buy through one, Remy's Lab may earn a small commission at no extra cost to you. That does not change what gets tested or what we say. <a href="/disclaimer.html">Full disclosure</a>.</p></div></main>${footer()}<script src="/assets/js/affiliate-tracking.js"></script></body></html>`;
