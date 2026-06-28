@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T16:42:53.687Z",
+  "generated_at": "2026-06-28T18:44:41.874Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -880,7 +880,7 @@
       "category": "clothing",
       "price": "$88.95",
       "price_value": 88.95,
-      "in_stock": true,
+      "in_stock": false,
       "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_03-2021-012.jpg?v=1617299126",
       "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fthe-nantucket-bowtie-collection-1",
       "discount_code": "REMYSLAB20",
