@@ -1,7 +1,7 @@
 name: Refresh price comparison
 
-# Pulls live products from all 6 brand stores, regroups by category, rebuilds
-# the static /compare/ page, and commits if anything changed.
+# Pulls live products from all tracked brand stores, regroups by category, rebuilds
+# the static homepage (index.html), and commits if anything changed.
 #
 # NOTE: GitHub only runs scheduled (cron) workflows from the DEFAULT branch.
 # Use "Run workflow" (workflow_dispatch) to test on this branch; the schedule
@@ -39,10 +39,10 @@ jobs:
         run: |
           git config user.name "remyslab-bot"
           git config user.email "actions@users.noreply.github.com"
-          if git diff --quiet -- data/compare.json compare/index.html; then
+          if git diff --quiet -- data/compare.json index.html; then
             echo "No price changes — nothing to commit."
           else
-            git add data/compare.json compare/index.html
+            git add data/compare.json index.html
             git commit -m "chore: refresh price comparison [skip ci]"
             git push
           fi

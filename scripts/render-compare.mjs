@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * render-compare.mjs — builds compare/index.html from data/compare.json
+ * render-compare.mjs — builds index.html from data/compare.json
  * -----------------------------------------------------------------------
  * Mirrors the card layout from the peptide site (mypeptideprice): one card
  * per group, vendor offers as rows inside, sorted cheapest-first, with a
@@ -15,25 +15,12 @@
  * "good for X" editorializing. That's intentionally Lab Notes' job on a
  * different page; this page stays a neutral price browser.
  */
-import { readFile, writeFile, readdir } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-
-// Explicit, hand-checked mapping — not a string-matcher — because Lab Notes use loose
-// human categories ("Walk Gear", "Treats") that don't map 1:1 to Compare's category IDs
-// ("harnesses" vs "leashes" vs "collars" are all plausibly "Walk Gear"). Guessing wrong
-// here would silently claim review coverage that doesn't exist, which is worse than no
-// claim at all. Update this by hand whenever a new Lab Note covers a new category.
-const LAB_NOTE_CATEGORY_MAP = {
-  "Cleaning": [],          // grooming/cleanup tools aren't a Compare category — no mapping
-  "Walk Gear": ["collars"],   // current Walk Gear lab note (Pack Leashes Dino Collar Set) is a collar
-  "Treats": ["chews-treats"],
-  "Toys": ["toys", "enrichment"],
-  "Accessories": ["clothing"]
-};
 
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -101,7 +88,7 @@ function vendorRow(p, isCheapest) {
 /** One category card: header + vendor rows, sorted cheapest first (build-compare already sorts this way).
  *  Shows the first 5 rows by default; the rest sit behind a "Show N more" toggle (same pattern as the
  *  peptide site's product cards) so a deep category like Collars doesn't dominate the page on load. */
-function categoryCard(cat, products, reviewedCategoryIds) {
+function categoryCard(cat, products) {
   const cheapestValue = Math.min(...products.map(p => (p.effective_price ?? p.price_value) ?? Infinity));
   const brandCount = new Set(products.map(p => p.brand_id)).size;
   const VISIBLE = 5;
@@ -114,13 +101,10 @@ function categoryCard(cat, products, reviewedCategoryIds) {
   const hiddenCount = Math.max(0, products.length - VISIBLE);
   const firstBatch = Math.min(10, hiddenCount);
   const expandBtn = hiddenCount
-    ? `<button type="button" class="expand-button" data-action="expand-card">Show ${firstBatch} more listing${firstBatch === 1 ? "" : "s"}${hiddenCount > firstBatch ? ` (${hiddenCount} left)` : ""}</button>`
-    : "";
-  // Honest gap disclosure: say plainly when nothing here has been Remy-tested yet, rather
-  // than let silence imply coverage that doesn't exist. This is the thing that's supposed
-  // to set this page apart from "Top 10 Best X" listicles — don't undercut it by omission.
-  const noReviewNote = (reviewedCategoryIds && !reviewedCategoryIds.has(cat.id))
-    ? `<p class="no-review-note">Remy hasn't tested anything in this category yet. Prices below are real, but this isn't an endorsement &mdash; check <a href="/blog/">Lab Notes</a> for what he has actually tried.</p>`
+    ? `<div class="expand-row" data-action-row>
+        <button type="button" class="expand-button" data-action="expand-card">Show ${firstBatch} more listing${firstBatch === 1 ? "" : "s"}${hiddenCount > firstBatch ? ` (${hiddenCount} left)` : ""}</button>
+        <button type="button" class="collapse-button" data-action="collapse-card" hidden>Show fewer listings</button>
+      </div>`
     : "";
   return `      <article class="product-card" data-cat="${attr(cat.id)}">
         <header class="product-card-head">
@@ -129,7 +113,6 @@ function categoryCard(cat, products, reviewedCategoryIds) {
             <h2 class="product-title">${esc(cat.label)}</h2>
             <span class="vendor-count">${brandCount} brand${brandCount === 1 ? "" : "s"}</span>
           </div>
-          ${noReviewNote}
         </header>
         <div class="supplier-head">
           <span>Sorted low to high</span>
@@ -159,7 +142,7 @@ function jsonLd(data) {
   });
 }
 
-function page(data, reviewedCategoryIds) {
+function page(data) {
   const when = data.generated_at ? new Date(data.generated_at) : null;
   const whenStr = when && !isNaN(when) ? when.toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
 
@@ -167,7 +150,7 @@ function page(data, reviewedCategoryIds) {
   const grouped = cats.map(c => ({ ...c, products: data.products.filter(p => p.category === c.id) }));
   const brandNames = [...new Set(data.products.map(p => p.brand_name))].sort();
 
-  const cards = grouped.map(c => categoryCard(c, c.products, reviewedCategoryIds)).join("\n\n");
+  const cards = grouped.map(c => categoryCard(c, c.products)).join("\n\n");
   const catChips = `${chip("All", "All", true)}\n      ${cats.map(c => chip(c.label, c.id, false)).join("\n      ")}`;
   const brandChips = `${chip("All", "All", true)}\n      ${brandNames.map(b => chip(b, b, false)).join("\n      ")}`;
 
@@ -217,17 +200,17 @@ h1,h2,h3,.product-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing
 .nav-logo img{width:36px;height:36px;object-fit:contain}.nav-logo span{font-size:16px;font-weight:800;letter-spacing:-.02em}
 .nav-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}.nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{flex:0 0 auto;font-size:13px;font-weight:800;padding:7px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent;white-space:nowrap}.nav-tab:hover{background:var(--surface);border-color:var(--line);color:var(--text)}.nav-tab.active{background:var(--green);border-color:var(--green);color:#fff}
-.cmp-head{background:linear-gradient(135deg,#173b61 0%,#245f93 66%,#2f79b7 100%);border-top:1px solid rgba(23,59,97,.10);border-bottom:1px solid rgba(23,59,97,.18);color:#fff;overflow:hidden}.cmp-hero-inner{max-width:1180px;margin:0 auto;padding:54px 16px 50px;display:grid;grid-template-columns:minmax(0,1.2fr) 320px;gap:34px;align-items:center}.cmp-kicker{display:inline-flex;margin-bottom:13px;border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:5px 10px;color:#f7d88f;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.cmp-head h1{max-width:720px;font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-size:clamp(36px,5.4vw,64px);font-weight:600;letter-spacing:-.015em;line-height:1.02;color:#fffdf7}.cmp-head h1 em{font-style:italic;font-weight:500;color:#f6d995}.cmp-head p{max-width:650px;margin:16px 0 0;color:rgba(255,255,255,.84);font-size:18px;line-height:1.55}.cmp-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.cmp-action{border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:10px 14px;color:#fff;font-size:14px;font-weight:800;background:rgba(255,255,255,.10)}.cmp-action.primary{background:#fff8e3;border-color:#fff8e3;color:#173b61}.cmp-stat-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:22px;padding:20px;box-shadow:0 20px 45px rgba(0,0,0,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.cmp-stat-row{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:14px;color:rgba(255,255,255,.78)}.cmp-stat-row:first-child{padding-top:0}.cmp-stat-row:last-of-type{border-bottom:0}.cmp-stat-row strong{font-size:18px;color:#fff;font-weight:800}.cmp-note{margin-top:12px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.45}.cmp-disclosure{background:#fff8e3;border-bottom:1px solid #eadba8;color:#415160;font-size:13px;line-height:1.55}.cmp-disclosure-inner{max-width:1180px;margin:0 auto;padding:12px 16px;text-align:left}
+.cmp-head{background:linear-gradient(135deg,#173b61 0%,#245f93 66%,#2f79b7 100%);border-top:1px solid rgba(23,59,97,.10);border-bottom:1px solid rgba(23,59,97,.18);color:#fff;overflow:hidden}.cmp-hero-inner{max-width:760px;margin:0 auto;padding:54px 16px 50px}.cmp-kicker{display:inline-flex;margin-bottom:13px;border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:5px 10px;color:#f7d88f;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.cmp-head h1{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-size:clamp(36px,5.4vw,64px);font-weight:600;letter-spacing:-.015em;line-height:1.02;color:#fffdf7}.cmp-head h1 em{font-style:italic;font-weight:500;color:#f6d995}.cmp-head p{max-width:650px;margin:16px 0 0;color:rgba(255,255,255,.84);font-size:18px;line-height:1.55}.cmp-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.cmp-action{border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:10px 14px;color:#fff;font-size:14px;font-weight:800;background:rgba(255,255,255,.10)}.cmp-action.primary{background:#fff8e3;border-color:#fff8e3;color:#173b61}.cmp-disclosure{background:#fff8e3;border-bottom:1px solid #eadba8;color:#415160;font-size:13px;line-height:1.55}.cmp-disclosure-inner{max-width:1180px;margin:0 auto;padding:10px 16px;text-align:left}.cmp-disclosure-stats{font-weight:700;color:#173b61;white-space:nowrap}.cmp-disclosure-sep{margin:0 6px;opacity:.5}
 .catalog-controls{position:sticky;top:0;z-index:20;background:rgba(245,248,252,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(215,227,241,.78);border-bottom:1px solid rgba(215,227,241,.92);padding:10px 0 8px}
 .catalog-control-inner{max-width:1180px;margin:0 auto;padding:0 16px}.catalog-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 11px;color:var(--muted);box-shadow:0 3px 10px rgba(23,59,97,.05)}.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:13px}.catalog-search:focus-within{border-color:#8fb7df;box-shadow:0 0 0 3px rgba(36,95,147,.12)}
 .catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.catalog-chips::-webkit-scrollbar{display:none}.catalog-chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);padding:6px 11px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}.catalog-chip.active{border-color:var(--green);background:var(--green);color:#fff}.catalog-summary{display:flex;justify-content:space-between;gap:8px;margin:10px 16px 4px;color:var(--muted);font-size:11.5px}
 .catalog-main{padding:6px 16px 0;max-width:1180px;margin:0 auto}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}.product-card{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}.product-card[hidden]{display:none}.suppliers{flex:1;padding:0 12px 4px}
-.product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:600;letter-spacing:-.005em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.no-review-note{margin-top:8px;padding:7px 10px;background:#fff8e3;border:1px solid #eadba8;border-radius:10px;font-size:11px;line-height:1.4;color:#6b5a2c}.no-review-note a{color:#6b5a2c;text-decoration:underline}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
+.product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:600;letter-spacing:-.005em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
 .supplier-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 2px;border-top:1px solid #dde8f4}.supplier-row:first-child{border-top:none}.supplier-row:hover{background:#eef6ff;border-radius:12px}.supplier-left{display:flex;gap:9px;min-width:0;flex:1 1 auto;align-items:flex-start}.supplier-copy-wrap{min-width:0;flex:1 1 auto}.supplier-initials{flex:0 0 auto;display:flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:10px;background:var(--sage);color:var(--green);font-size:11px;font-weight:900;margin-top:1px}.supplier-thumb{flex:0 0 auto;width:32px;height:32px;border-radius:10px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}.supplier-name{font-size:13.5px;font-weight:700;line-height:1.2;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;overflow-wrap:anywhere}.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}.supplier-discount{color:var(--gold);font-weight:900}.supplier-oos{color:#a04848;font-weight:900}
 .supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}.supplier-price-was{font-size:11px;font-weight:600;color:var(--muted);text-decoration:line-through}.supplier-price-discounted{color:#1d7a3c}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-copy{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:800;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff}.supplier-go:hover{background:var(--green-deep)}.supplier-copy{background:#fff8e3;color:#795b05;border:1px solid #e7cf7a}.supplier-copy:hover{background:#fff1be}.supplier-copy.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18)}
-.catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}.expand-button{width:100%;border:0;border-top:1px solid var(--line);background:var(--sage);padding:11px;color:var(--green);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer;border-radius:0 0 18px 18px}.expand-button:hover{background:#e9f2fb}[hidden]{display:none!important}
-@media (max-width:920px){.cmp-hero-inner{grid-template-columns:1fr}.cmp-stat-card{max-width:440px}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.site-nav{margin:0 12px 10px}.nav-logo span{display:none}.nav-tab{font-size:12px;padding:6px 9px}.cmp-hero-inner{padding:34px 14px 30px;gap:22px}.cmp-head h1{font-size:clamp(33px,11vw,46px)}.cmp-head p{font-size:15px}.cmp-actions{gap:8px}.cmp-action{font-size:12px;padding:9px 11px}.cmp-stat-card{padding:15px;border-radius:18px}.cmp-stat-row{font-size:13px}.cmp-disclosure-inner{padding:11px 14px}.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}.supplier-row{gap:9px}.supplier-price-wrap{min-width:96px}.supplier-buttons{gap:4px}.supplier-go,.supplier-copy{font-size:10px;padding:6px 8px}}
+.catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}.expand-row{display:flex;border-top:1px solid var(--line);border-radius:0 0 18px 18px;overflow:hidden}.expand-button,.collapse-button{flex:1 1 auto;border:0;background:var(--sage);padding:11px;color:var(--green);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer}.expand-button:hover,.collapse-button:hover{background:#e9f2fb}.expand-button:not([hidden]) ~ .collapse-button{border-left:1px solid var(--line)}.collapse-button{background:#fff8e3;color:#795b05}.collapse-button:hover{background:#fff1be}[hidden]{display:none!important}
+@media (max-width:920px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.site-nav{margin:0 12px 10px}.nav-logo span{display:none}.nav-tab{font-size:12px;padding:6px 9px}.cmp-hero-inner{padding:34px 14px 30px}.cmp-head h1{font-size:clamp(33px,11vw,46px)}.cmp-head p{font-size:15px}.cmp-actions{gap:8px}.cmp-action{font-size:12px;padding:9px 11px}.cmp-disclosure-inner{padding:9px 14px;display:flex;flex-wrap:wrap;gap:4px}.cmp-disclosure-sep{display:none}.cmp-disclosure-stats{display:block;width:100%}.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}.supplier-row{gap:9px}.supplier-price-wrap{min-width:96px}.supplier-buttons{gap:4px}.supplier-go,.supplier-copy{font-size:10px;padding:6px 8px}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -258,17 +241,10 @@ h1,h2,h3,.product-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing
         <a class="cmp-action" href="/blog/">Read Lab Notes</a>
       </div>
     </div>
-    <aside class="cmp-stat-card" aria-label="Remy's Lab comparison stats">
-      <div class="cmp-stat-row"><span>Product listings</span><strong>${data.product_count}</strong></div>
-      <div class="cmp-stat-row"><span>Tracked brands</span><strong>${brandNames.length}</strong></div>
-      <div class="cmp-stat-row"><span>Gear categories</span><strong>${cats.length}</strong></div>
-      <div class="cmp-stat-row"><span>Partner code brands</span><strong>${new Set(data.products.filter(p => p.discount_code).map(p => p.brand_name)).size}</strong></div>
-      <p class="cmp-note">This is a price comparison page, not a fake ranking. Tested products live in Lab Notes.</p>
-    </aside>
   </div>
 </header>
 
-<div class="cmp-disclosure"><div class="cmp-disclosure-inner"><strong>How this works:</strong> prices are pulled from each brand's own store and can change. A listing here does not mean Remy has tested it. For products he has actually used, see <a href="/blog/" style="color:var(--green);text-decoration:underline">Lab Notes</a>.</div></div>
+<div class="cmp-disclosure"><div class="cmp-disclosure-inner"><span class="cmp-disclosure-stats">${data.product_count} listings &middot; ${brandNames.length} brands &middot; ${cats.length} categories</span><span class="cmp-disclosure-sep">·</span><strong>How this works:</strong> prices are pulled from each brand's own store and can change. A listing here does not mean Remy has tested it. For products he has actually used, see <a href="/blog/" style="color:var(--green);text-decoration:underline">Lab Notes</a>.</div></div>
 
 <div class="page">
   <div class="catalog-controls">
@@ -367,7 +343,17 @@ ${cards}
     var hidden = Array.prototype.slice.call(card.querySelectorAll(".extra-row")).filter(function(r){ return !r.dataset.expanded; });
     if (!hidden.length) return;
     hidden.slice(0, EXPAND_BATCH).forEach(function(row){ row.dataset.expanded = "1"; row.hidden = false; });
-    updateExpandButton(card);
+    updateExpandButtons(card);
+  }
+
+  /** Always fully resets a card back to its default 5-visible state, no matter how many
+   *  batches are currently shown — this must be reachable after even a single "show more"
+   *  click, not gated behind manually expanding all the way to the end first. */
+  function collapseToDefault(card){
+    var extras = card.querySelectorAll(".extra-row");
+    extras.forEach(function(row){ row.dataset.expanded = ""; row.hidden = true; });
+    delete card.dataset.autoExpanded;
+    updateExpandButtons(card);
   }
 
   /** Filter/search correctness path: a match buried in the hidden tail must actually become
@@ -379,7 +365,7 @@ ${cards}
     if (!anyHidden) return;
     extras.forEach(function(row){ row.dataset.expanded = "1"; row.hidden = false; });
     if (auto) card.dataset.autoExpanded = "1";
-    updateExpandButton(card);
+    updateExpandButtons(card);
   }
 
   function collapseCard(card, onlyIfAuto){
@@ -389,31 +375,37 @@ ${cards}
     if (!extras.length || !anyExpanded) return;
     extras.forEach(function(row){ row.dataset.expanded = ""; row.hidden = true; });
     delete card.dataset.autoExpanded;
-    updateExpandButton(card);
+    updateExpandButtons(card);
   }
 
-  function updateExpandButton(card){
-    var btn = card.querySelector('[data-action="expand-card"]');
-    if (!btn) return;
+  function updateExpandButtons(card){
+    var expandBtn = card.querySelector('[data-action="expand-card"]');
+    var collapseBtn = card.querySelector('[data-action="collapse-card"]');
+    if (!expandBtn) return;
     var extras = Array.prototype.slice.call(card.querySelectorAll(".extra-row"));
     var hiddenCount = extras.filter(function(r){ return !r.dataset.expanded; }).length;
+    var anyExpanded = extras.some(function(r){ return r.dataset.expanded; });
     if (hiddenCount === 0) {
-      btn.textContent = "Show fewer listings";
+      expandBtn.hidden = true;
     } else {
+      expandBtn.hidden = false;
       var nextBatch = Math.min(EXPAND_BATCH, hiddenCount);
-      btn.textContent = "Show " + nextBatch + " more listing" + (nextBatch === 1 ? "" : "s") +
+      expandBtn.textContent = "Show " + nextBatch + " more listing" + (nextBatch === 1 ? "" : "s") +
         (hiddenCount > nextBatch ? " (" + hiddenCount + " left)" : "");
     }
+    if (collapseBtn) collapseBtn.hidden = !anyExpanded;
   }
 
   function wireExpand(){
     document.querySelectorAll('[data-action="expand-card"]').forEach(function(btn){
       btn.addEventListener("click", function(){
-        var card = btn.closest(".product-card");
-        var extras = card.querySelectorAll(".extra-row");
-        var anyHidden = Array.prototype.slice.call(extras).some(function(r){ return !r.dataset.expanded; });
-        if (anyHidden) expandNextBatch(card);
-        else collapseCard(card);
+        expandNextBatch(btn.closest(".product-card"));
+        apply();
+      });
+    });
+    document.querySelectorAll('[data-action="collapse-card"]').forEach(function(btn){
+      btn.addEventListener("click", function(){
+        collapseToDefault(btn.closest(".product-card"));
         apply();
       });
     });
@@ -439,26 +431,9 @@ ${cards}
 `;
 }
 
-async function getReviewedCategoryIds() {
-  const dir = path.join(ROOT, "content", "lab-notes");
-  let files = [];
-  try { files = await readdir(dir); } catch { return new Set(); } // no lab-notes dir yet — fine, just means nothing's covered
-  const covered = new Set();
-  for (const file of files) {
-    if (!file.endsWith(".json")) continue;
-    try {
-      const note = JSON.parse(await readFile(path.join(dir, file), "utf8"));
-      const ids = LAB_NOTE_CATEGORY_MAP[note.category] || [];
-      ids.forEach(id => covered.add(id));
-    } catch { /* skip unreadable note rather than fail the whole build over one bad file */ }
-  }
-  return covered;
-}
-
 async function main() {
   const data = JSON.parse(await readFile(path.join(ROOT, "data", "compare.json"), "utf8"));
-  const reviewedCategoryIds = await getReviewedCategoryIds();
-  await writeFile(path.join(ROOT, "index.html"), page(data, reviewedCategoryIds));
+  await writeFile(path.join(ROOT, "index.html"), page(data));
   console.log(`[render] wrote index.html (${data.product_count} listings, ${data.category_summary.length} categories)`);
 }
 main().catch(err => { console.error("[render] FATAL:", err.message); process.exit(1); });
