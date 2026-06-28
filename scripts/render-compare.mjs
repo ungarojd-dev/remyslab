@@ -278,6 +278,8 @@ ${cards}
   <p class="cmp-foot">Prices pulled directly from each brand's store. <a href="/disclaimer.html">How links on this page work</a>.</p>
 </div>
 
+<footer><div class="footer-inner"><div class="footer-brand">Remy's Lab</div><div class="footer-desc">Compare dog gear prices, grab codes, and read honest test notes from @remy.lab on TikTok.</div><div class="footer-links"><a href="/">Compare</a><a href="/codes/">Codes</a><a href="/blog/">Lab Notes</a><a href="/vendors/">Vendors</a><a href="https://www.tiktok.com/@remy.lab" target="_blank" rel="noopener">TikTok</a><a href="/disclaimer.html">Disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/llms.txt">LLMs.txt</a></div><div class="footer-bottom">&copy; ${new Date().getFullYear()} Remy's Lab &middot; Some links may be affiliate links &middot; Remy is a real dog.</div></div></footer>
+
 <script>
 (function(){
   var state={cat:"All",brand:"All",q:""};
