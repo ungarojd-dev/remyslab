@@ -73,8 +73,9 @@
       "discount_code": null,
       "link_style": "csv_feed",
       "feed_file": "petsafe-snapshot.json",
+      "affiliate_url": "https://www.pjtra.com/t/8-10967-389453-141049",
       "affiliate_disclosure": "partner",
-      "_note": "Approved for PetSafe's affiliate program via Pepperjam/Ascend, 5-10% commission, no discount code (none offered). PetSafe's storefront is NOT Shopify (Gatsby/Sanity), so no live /products.json endpoint exists -- products come from a manually-downloaded Pepperjam Advanced Format CSV with real per-product affiliate-tracked buy_url links, converted once to data/feeds/petsafe-snapshot.json. This is a STATIC SNAPSHOT, not a live feed: no auto-refresh, prices will go stale until manually re-downloaded and re-converted. Re-download from Ascend > Creatives > Products periodically (~monthly) to keep current."
+      "_note": "Approved for PetSafe's affiliate program via Pepperjam/Ascend, 5-10% commission, no discount code (none offered). PetSafe's storefront is NOT Shopify (Gatsby/Sanity), so no live /products.json endpoint exists -- products come from a manually-downloaded Pepperjam Advanced Format CSV with real per-product affiliate-tracked buy_url links, converted once to data/feeds/petsafe-snapshot.json. This is a STATIC SNAPSHOT, not a live feed: no auto-refresh, prices will go stale until manually re-downloaded and re-converted. Re-download from Ascend > Creatives > Products periodically (~monthly) to keep current. affiliate_url is the real Pepperjam generic/homepage link (one of 6 rotating Pepperjam tracking domains, same network as the per-product buy_url links in the feed) -- used on the Vendors page's 'Visit site' button, which was previously pointing to the plain untracked petsafe.com homepage with zero attribution. Compare tool's per-product rows still use the feed's own buy_url, unaffected by this."
     },
     "woof": {
       "name": "Woof",
