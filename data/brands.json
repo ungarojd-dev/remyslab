@@ -55,6 +55,15 @@
       "link_style": "direct",
       "affiliate_disclosure": "none",
       "_note": "Verified Shopify (variant-refresh behavior on own site; resellers confirm 'Powered by Shopify'). Fills Toys, Chews, and Feeding all at once \u2014 lick mats, slow feeders, treat dispensers, chew toys. No affiliate program found yet \u2014 check for one before applying."
+    },
+    "sniff-and-bark": {
+      "name": "Sniff & Bark",
+      "domain": "https://www.sniffandbark.com.co",
+      "discount_code": "REMYSLAB20",
+      "discount_percent": 20,
+      "link_style": "discount_redirect",
+      "affiliate_disclosure": "partner",
+      "_note": "Ambassador deal: 10% commission on REMYSLAB20 sales. Confirmed real Shopify store (women-owned, Vancouver-founded, now Massachusetts-based) selling collars, leashes, harnesses, bandanas, coats, poop bag holders. Should fill Bandanas & Accessories, Harnesses, Leashes, and Collars."
     }
   }
 }
