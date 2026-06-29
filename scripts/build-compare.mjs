@@ -63,6 +63,14 @@ async function loadBrandProducts(brandId, brand) {
     const data = await readJson(path.join(MOCK_DIR, `${brandId}.json`));
     return Array.isArray(data.products) ? data.products : [];
   }
+  // csv_feed brands (e.g. PetSafe via Pepperjam/Ascend) don't have a public live-pollable
+  // endpoint the way Shopify stores do -- their data comes from a manually-downloaded product
+  // feed, converted once to clean JSON and re-uploaded periodically (see data/feeds/README).
+  // Reads a static local snapshot instead of fetching anything over the network.
+  if (brand.link_style === "csv_feed" && brand.feed_file) {
+    const data = await readJson(path.join(DATA, "feeds", brand.feed_file), { products: [] });
+    return Array.isArray(data.products) ? data.products : [];
+  }
   const all = [];
   for (let page = 1; page <= 20; page++) {
     const batch = await fetchShopifyPage(brand.domain, page);
@@ -86,6 +94,23 @@ function readShopifyProduct(raw) {
     image: (Array.isArray(raw.images) && raw.images[0]) ? raw.images[0].src : null,
     product_type: raw.product_type || "",
     tags: Array.isArray(raw.tags) ? raw.tags : (typeof raw.tags === "string" ? raw.tags.split(",") : [])
+  };
+}
+
+// csv_feed products are already close to the internal shape (built once during the manual
+// CSV-to-JSON conversion), but "handle" needs to carry the complete pre-built buy_url for
+// this brand rather than a bare Shopify-style slug, since buildUrl()'s csv_feed branch just
+// passes that whole URL through directly.
+function readCsvFeedProduct(raw) {
+  return {
+    name: raw.name || null,
+    handle: raw.buy_url || null,
+    price: money(raw.price_value),
+    price_value: Number.isFinite(raw.price_value) ? raw.price_value : null,
+    in_stock: raw.in_stock !== false,
+    image: raw.image || null,
+    product_type: raw.product_type || "",
+    tags: Array.isArray(raw.tags) ? raw.tags : []
   };
 }
 
@@ -161,6 +186,21 @@ function buildUrl(brand, handle) {
   if (brand.link_style === "discount_redirect" && brand.discount_code) {
     return `${domain}/discount/${encodeURIComponent(brand.discount_code)}?redirect=${encodeURIComponent(productPath)}`;
   }
+  // affiliate_generic: a real commission-earning tracking link exists (e.g. Pepperjam/Ascend),
+  // but deep-linking to a specific product page through it hasn't been confirmed safe, so every
+  // product from this brand correctly routes to the same generic tracking link rather than a
+  // per-product URL that might silently drop the affiliate ID. Less convenient than a direct
+  // product link, but guaranteed to actually track and earn commission.
+  if (brand.link_style === "affiliate_generic" && brand.affiliate_url) {
+    return brand.affiliate_url;
+  }
+  // csv_feed: the brand's own product feed (e.g. a Pepperjam Advanced Format CSV) already
+  // contains a complete, per-product, affiliate-tracked URL — "handle" here is repurposed to
+  // carry that whole URL through rather than a bare Shopify-style slug, since there's nothing
+  // to assemble: the feed did that part already.
+  if (brand.link_style === "csv_feed" && handle) {
+    return handle;
+  }
   return `${domain}${productPath}`;
 }
 
@@ -189,7 +229,7 @@ async function build() {
 
     if (raws) {
       for (const raw of raws) {
-        const live = readShopifyProduct(raw);
+        const live = brand.link_style === "csv_feed" ? readCsvFeedProduct(raw) : readShopifyProduct(raw);
         if (!live.name || live.price_value == null) continue; // skip unparsable/no-price entries
         if (isJunkProduct(live)) continue; // skip $0 upsell shadow products and bundle-copy noise
         const categoryId = matchCategory(live, categories);

@@ -64,6 +64,15 @@
       "link_style": "discount_redirect",
       "affiliate_disclosure": "partner",
       "_note": "Ambassador deal: 10% commission on REMYSLAB20 sales. Confirmed real Shopify store (women-owned, Vancouver-founded, now Massachusetts-based) selling collars, leashes, harnesses, bandanas, coats, poop bag holders. Should fill Bandanas & Accessories, Harnesses, Leashes, and Collars."
+    },
+    "petsafe": {
+      "name": "PetSafe",
+      "domain": "https://www.petsafe.com",
+      "discount_code": null,
+      "link_style": "csv_feed",
+      "feed_file": "petsafe-snapshot.json",
+      "affiliate_disclosure": "partner",
+      "_note": "Approved for PetSafe's affiliate program via Pepperjam/Ascend, 5-10% commission, no discount code (none offered). PetSafe's storefront is NOT Shopify (Gatsby/Sanity), so no live /products.json endpoint exists -- products come from a manually-downloaded Pepperjam Advanced Format CSV with real per-product affiliate-tracked buy_url links, converted once to data/feeds/petsafe-snapshot.json. This is a STATIC SNAPSHOT, not a live feed: no auto-refresh, prices will go stale until manually re-downloaded and re-converted. Re-download from Ascend > Creatives > Products periodically (~monthly) to keep current."
     }
   }
 }
