@@ -41,7 +41,7 @@ function validSlug(slug){return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug||'');}
 function dateObj(value){const d=new Date((value||'1970-01-01')+'T12:00:00Z');return Number.isNaN(d.getTime())?new Date('1970-01-01T12:00:00Z'):d;}
 function longDate(value){return new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(dateObj(value));}
 function shortDate(value){return new Intl.DateTimeFormat('en-US',{month:'numeric',day:'numeric',year:'2-digit',timeZone:'UTC'}).format(dateObj(value));}
-function readDir(dir){const full=path.join(ROOT,dir);if(!fs.existsSync(full))return [];return fs.readdirSync(full).filter(x=>x.endsWith('.json')).map(file=>{const data=JSON.parse(fs.readFileSync(path.join(full,file),'utf8'));if(!validSlug(data.slug))throw new Error(`Invalid slug in ${file}`);return data;}).filter(x=>x.published!==false).sort((a,b)=>dateObj(b.date)-dateObj(a.date));}
+function readDir(dir){const full=path.join(ROOT,dir);if(!fs.existsSync(full))return [];const now=new Date();return fs.readdirSync(full).filter(x=>x.endsWith('.json')).map(file=>{const data=JSON.parse(fs.readFileSync(path.join(full,file),'utf8'));if(!validSlug(data.slug))throw new Error(`Invalid slug in ${file}`);return data;}).filter(x=>x.published!==false).filter(x=>dateObj(x.date)<=now).sort((a,b)=>dateObj(b.date)-dateObj(a.date));}
 function inline(text=''){
   let out=esc(text);
   out=out.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)]+)\)/g,(m,label,url)=>`<a href="${attr(url)}">${label}</a>`);
