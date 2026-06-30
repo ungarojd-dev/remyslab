@@ -44,7 +44,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;background:#f5f8fc;color:#172033;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px}
+body{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;background:#f5f8fc;color:#172033;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;padding-top:40px}
+.partner-rolodex{position:fixed;top:0;left:0;right:0;z-index:200;height:40px;background:linear-gradient(135deg,#173b61 0%,#245f93 100%);display:flex;align-items:center;overflow:hidden}
+.rolodex-track{position:relative;flex:1 1 auto;height:100%;overflow:hidden}
+.rolodex-slide{position:absolute;inset:0;display:flex;align-items:center;gap:9px;padding:0 44px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.rolodex-slide.is-active{opacity:1;pointer-events:auto}
+.rolodex-logo{flex:0 0 auto;width:22px;height:22px;border-radius:6px;object-fit:contain;background:#fff;padding:2px}
+.rolodex-copy{flex:1 1 auto;min-width:0;font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rolodex-copy strong{font-weight:800}
+.rolodex-copy code{font-family:"Roboto Mono",ui-monospace,SFMono-Regular,Consolas,monospace;background:rgba(255,255,255,.16);border-radius:5px;padding:1px 6px;font-size:11px;letter-spacing:.02em}
+.rolodex-btn{flex:0 0 auto;font-size:11px;font-weight:800;color:#173b61;background:#fff8e3;border-radius:999px;padding:4px 10px;text-decoration:none;white-space:nowrap}
+.rolodex-btn:hover{background:#fff1be}
+.rolodex-arrow{flex:0 0 auto;width:24px;height:24px;border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:999px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.rolodex-arrow:hover{background:rgba(255,255,255,.26)}
+.rolodex-prev{margin-left:8px}
+.rolodex-next{margin-right:6px}
+.rolodex-dots{position:absolute;right:54px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
+.rolodex-dot{width:5px;height:5px;border-radius:999px;background:rgba(255,255,255,.35);border:0;padding:0;cursor:pointer}
+.rolodex-dot.is-active{background:#fff}
+@media(max-width:560px){.rolodex-slide{padding:0 12px;gap:7px}.rolodex-copy{font-size:11px}.rolodex-dots{display:none}.rolodex-btn{padding:4px 8px}}
 a{text-decoration:none;color:inherit}img{display:block;max-width:100%}h1,h2{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto}.nav-logo span{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif}
 :root{--bg:#f5f8fc;--surface:#fffefd;--line:#d7e3f1;--green:#245f93;--green-deep:#173b61;--gold:#c8920a;--gold-light:#fff8e3;--gold-border:#e7cf7a;--text:#172033;--muted:#667085;--approved-bg:#eaf3ff;--approved-border:rgba(36,95,147,.18)}
 .page{width:min(100%,620px);margin:0 auto;padding:20px 16px 26px}
@@ -66,6 +84,40 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}h1,h2{font
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS4KTRPL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="partner-rolodex" id="partnerRolodex" aria-label="Active partner discount codes">
+  <div class="rolodex-track" id="rolodexTrack">
+    <div class="rolodex-slide is-active" aria-hidden="false">
+      <img class="rolodex-logo" src="/assets/logos/pack-leashes-logo.jpg" alt="" width="22" height="22" loading="eager" decoding="async"/>
+      <span class="rolodex-copy"><strong>Pack Leashes</strong> &middot; 20% off with <code>REMYSLAB20</code></span>
+      <a class="rolodex-btn affiliate-link" href="https://packleashes.com/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Pack Leashes" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit site</a>
+    </div>
+    <div class="rolodex-slide" aria-hidden="true">
+      <img class="rolodex-logo" src="/assets/logos/brooks-and-roo-logo.jpg" alt="" width="22" height="22" loading="lazy" decoding="async"/>
+      <span class="rolodex-copy"><strong>Brooks &amp; Roo</strong> &middot; 15% off with <code>REMYSLAB15</code></span>
+      <a class="rolodex-btn affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored" data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit site</a>
+    </div>
+    <div class="rolodex-slide" aria-hidden="true">
+      <img class="rolodex-logo" src="/assets/logos/sniff-and-bark-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
+      <span class="rolodex-copy"><strong>Sniff &amp; Bark</strong> &middot; 20% off with <code>REMYSLAB20</code></span>
+      <a class="rolodex-btn affiliate-link" href="https://www.sniffandbark.com.co/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Sniff &amp; Bark" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB20" data-network="Sniff &amp; Bark">Visit site</a>
+    </div>
+    <div class="rolodex-slide" aria-hidden="true">
+      <img class="rolodex-logo" src="/assets/logos/woof-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
+      <span class="rolodex-copy"><strong>Woof</strong> &middot; 10% off with <code>REMYSLAB10</code></span>
+      <a class="rolodex-btn affiliate-link" href="https://mywoof.com/discount/REMYSLAB10" target="_blank" rel="nofollow sponsored" data-product="Woof" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB10" data-network="Woof">Visit site</a>
+    </div>
+    <div class="rolodex-slide" aria-hidden="true">
+      <img class="rolodex-logo" src="/assets/logos/sodapup-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
+      <span class="rolodex-copy"><strong>SodaPup</strong> &middot; 10% off with <code>JOSH</code></span>
+      <a class="rolodex-btn affiliate-link" href="https://sodapup.com/?ref=remyslab" target="_blank" rel="nofollow sponsored" data-product="SodaPup" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="JOSH" data-network="SodaPup">Visit site</a>
+    </div>
+  </div>
+  <button type="button" class="rolodex-arrow rolodex-prev" id="rolodexPrev" aria-label="Previous partner">&larr;</button>
+  <button type="button" class="rolodex-arrow rolodex-next" id="rolodexNext" aria-label="Next partner">&rarr;</button>
+  <div class="rolodex-dots" id="rolodexDots" role="tablist" aria-label="Select partner slide"></div>
+</div>
+
 <nav class="site-nav" aria-label="Site navigation">
   <a class="nav-logo" href="/"><img src="/assets/icons/nav-icon.png" alt="Remy's Lab" width="36" height="36"/><span>Remy's Lab</span></a>
   <div class="nav-tabs" role="tablist">
@@ -102,21 +154,21 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}h1,h2{font
       </article>
 
       <article class="partner-card">
-        <span class="partner-logo"><img src="/assets/logos/sniff-and-bark-logo.png" alt="Sniff and Bark logo" width="225" height="225" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=&#39;partner-logo&#39; style=&#39;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center&#39;>S&amp;B</span>'"/></span>
+        <span class="partner-logo"><img src="/assets/logos/sniff-and-bark-logo.webp" alt="Sniff and Bark logo" width="225" height="225" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=&#39;partner-logo&#39; style=&#39;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center&#39;>S&amp;B</span>'"/></span>
         <span class="partner-copy"><span class="partner-kicker">Current partner</span><h2>Sniff &amp; Bark</h2><span class="partner-offer">20% off sitewide</span></span>
         <a class="partner-visit affiliate-link" href="https://www.sniffandbark.com.co/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Sniff &amp; Bark" data-category="partner_store" data-result="current_partner" data-placement="codes_page" data-discount="REMYSLAB20" data-network="Sniff &amp; Bark">Visit</a>
         <span class="code-row"><span class="code-details"><span class="code-label">Discount code</span><strong class="code-value">REMYSLAB20</strong></span><button class="copy-btn coupon-copy" type="button" data-code="REMYSLAB20" data-product="Sniff &amp; Bark" data-category="partner_store" data-placement="codes_page">Grab code</button></span>
       </article>
 
       <article class="partner-card">
-        <span class="partner-logo"><img src="/assets/logos/woof-logo.png" alt="Woof logo" width="225" height="225" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=&#39;partner-logo&#39; style=&#39;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center&#39;>Woof</span>'"/></span>
+        <span class="partner-logo"><img src="/assets/logos/woof-logo.webp" alt="Woof logo" width="225" height="225" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=&#39;partner-logo&#39; style=&#39;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center&#39;>Woof</span>'"/></span>
         <span class="partner-copy"><span class="partner-kicker">Current partner</span><h2>Woof</h2><span class="partner-offer">10% off sitewide</span></span>
         <a class="partner-visit affiliate-link" href="https://mywoof.com/discount/REMYSLAB10" target="_blank" rel="nofollow sponsored" data-product="Woof" data-category="partner_store" data-result="current_partner" data-placement="codes_page" data-discount="REMYSLAB10" data-network="Woof">Visit</a>
         <span class="code-row"><span class="code-details"><span class="code-label">Discount code</span><strong class="code-value">REMYSLAB10</strong></span><button class="copy-btn coupon-copy" type="button" data-code="REMYSLAB10" data-product="Woof" data-category="partner_store" data-placement="codes_page">Grab code</button></span>
       </article>
 
       <article class="partner-card">
-        <span class="partner-logo"><img src="/assets/logos/sodapup-logo.png" alt="SodaPup logo" width="225" height="225" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=&#39;partner-logo&#39; style=&#39;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center&#39;>SodaPup</span>'"/></span>
+        <span class="partner-logo"><img src="/assets/logos/sodapup-logo.webp" alt="SodaPup logo" width="225" height="225" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=&#39;partner-logo&#39; style=&#39;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center&#39;>SodaPup</span>'"/></span>
         <span class="partner-copy"><span class="partner-kicker">Current partner</span><h2>SodaPup</h2><span class="partner-offer">10% off sitewide</span></span>
         <a class="partner-visit affiliate-link" href="https://sodapup.com/?ref=remyslab" target="_blank" rel="nofollow sponsored" data-product="SodaPup" data-category="partner_store" data-result="current_partner" data-placement="codes_page" data-discount="JOSH" data-network="SodaPup">Visit</a>
         <span class="code-row"><span class="code-details"><span class="code-label">Discount code</span><strong class="code-value">JOSH</strong></span><button class="copy-btn coupon-copy" type="button" data-code="JOSH" data-product="SodaPup" data-category="partner_store" data-placement="codes_page">Grab code</button></span>
@@ -155,5 +207,6 @@ document.addEventListener('click',function(e){
   window.dataLayer.push({event:'affiliate_click',product_name:link.dataset.product||link.textContent.trim(),product_category:link.dataset.category||'partner_store',lab_result:link.dataset.result||'current_partner',button_text:link.textContent.trim(),button_location:link.dataset.placement||'codes_page',affiliate_network:link.dataset.network||'Other',discount_code:link.dataset.discount||'',affiliate_url:href});
 });
 </script>
+<script src="/assets/js/rolodex.js"></script>
 </body>
 </html>
