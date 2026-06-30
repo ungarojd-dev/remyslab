@@ -309,6 +309,25 @@ ${cards}
   var state={cat:"All",brand:"All",q:""};
   var search=document.getElementById("catalogSearch");
 
+  // Reads ?cat=harnesses from the URL on page load so external links (e.g. a guide post's
+  // "Compare X prices" CTA) can deep-link straight into a pre-filtered category, instead of
+  // landing on the generic homepage and making the visitor find the right filter themselves.
+  // Silently does nothing if the param is missing or doesn't match a real category id -- never
+  // breaks the page, just a no-op fallback to the default "All" view.
+  function applyUrlParams(){
+    var params = new URLSearchParams(window.location.search);
+    var catParam = params.get("cat");
+    if (!catParam) return;
+    var chip = null;
+    document.querySelectorAll('#catChips [data-chip]').forEach(function(b){
+      if (b.dataset.chip === catParam) chip = b;
+    });
+    if (!chip) return;
+    document.querySelectorAll('#catChips [data-chip]').forEach(function(b){b.classList.remove("active")});
+    chip.classList.add("active");
+    state.cat = catParam;
+  }
+
   function rowMatches(row){
     var brandMatch = state.brand==="All" || row.dataset.network===state.brand;
     var searchText = (row.dataset.search || row.textContent || "").toLowerCase();
@@ -461,6 +480,7 @@ ${cards}
   wire("catChips","cat");
   wire("brandChips","brand");
   wireExpand();
+  applyUrlParams();
   apply();
 })();
 </script>
