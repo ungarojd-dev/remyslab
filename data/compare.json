@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T21:14:28.215Z",
+  "generated_at": "2026-06-30T22:50:05.835Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -14304,7 +14304,7 @@
       "category": "chews-treats",
       "price": "$149.99",
       "price_value": 149.99,
-      "in_stock": false,
+      "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/0011/0775/5059/files/20260220-MP-bulk-yak-chews-PDP-1.webp?v=1775674809",
       "url": "https://mightypaw.com/products/bulk_bucket_yakcheese_large_2gal",
       "discount_code": null,
