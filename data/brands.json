@@ -53,10 +53,12 @@
     "sodapup": {
       "name": "SodaPup",
       "domain": "https://sodapup.com",
-      "discount_code": null,
-      "link_style": "direct",
-      "affiliate_disclosure": "none",
-      "_note": "Verified Shopify (variant-refresh behavior on own site; resellers confirm 'Powered by Shopify'). Fills Toys, Chews, and Feeding all at once \u2014 lick mats, slow feeders, treat dispensers, chew toys. No affiliate program found yet \u2014 check for one before applying."
+      "discount_code": "JOSH",
+      "discount_percent": 10,
+      "link_style": "ref_param",
+      "ref_param": "ref=remyslab",
+      "affiliate_disclosure": "partner",
+      "_note": "Approved affiliate partner via Goaffpro, confirmed 10% referral commission + 10% customer discount via coupon code JOSH. Goaffpro auto-applies the coupon at checkout when the referral link is used IF the store owner has that setting enabled (confirmed via Goaffpro's own docs) -- not independently verified for SodaPup specifically, but per Josh's standing rule (Pack Leashes/Brooks & Roo), the discount is real either way so price display reflects it regardless of auto-apply status. ref_param appends the referral query string to the actual product page, so links are real per-product deep links, not just one fixed homepage link."
     },
     "sniff-and-bark": {
       "name": "Sniff & Bark",
