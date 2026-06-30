@@ -30,6 +30,40 @@
       ]
     },
     {
+      "id": "fences-training",
+      "label": "Fences & Training",
+      "keywords": [
+        "in-ground fence",
+        "wireless fence",
+        "yardmax",
+        "stay & play",
+        "containment",
+        "boundary wire",
+        "remote trainer",
+        "spray trainer",
+        "pawz away",
+        "barrier",
+        "guardian gps",
+        "transmitter",
+        "fence collar",
+        "fence receiver"
+      ]
+    },
+    {
+      "id": "pet-doors",
+      "label": "Pet Doors",
+      "keywords": [
+        "pet door",
+        "cat door",
+        "dog door",
+        "door flap",
+        "smartdoor",
+        "screen door",
+        "freedom aluminum",
+        "staywell"
+      ]
+    },
+    {
       "id": "collars",
       "label": "Collars",
       "keywords": [
@@ -81,7 +115,9 @@
         "bowl",
         "feeder",
         "topper",
-        "slow feed"
+        "slow feed",
+        "fountain",
+        "drinkwell"
       ]
     },
     {

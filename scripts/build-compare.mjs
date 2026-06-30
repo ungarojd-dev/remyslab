@@ -201,6 +201,14 @@ function buildUrl(brand, handle) {
   if (brand.link_style === "csv_feed" && handle) {
     return handle;
   }
+  // ref_param: a Goaffpro-style (or similar) referral link that works by appending a query
+  // param to ANY page on the store, including specific product pages -- unlike
+  // affiliate_generic, this means real per-product deep links are possible, not just one
+  // fixed homepage-style link.
+  if (brand.link_style === "ref_param" && brand.ref_param) {
+    const sep = productPath.includes("?") ? "&" : "?";
+    return `${domain}${productPath}${sep}${brand.ref_param}`;
+  }
   return `${domain}${productPath}`;
 }
 
@@ -232,7 +240,14 @@ async function build() {
         const live = brand.link_style === "csv_feed" ? readCsvFeedProduct(raw) : readShopifyProduct(raw);
         if (!live.name || live.price_value == null) continue; // skip unparsable/no-price entries
         if (isJunkProduct(live)) continue; // skip $0 upsell shadow products and bundle-copy noise
-        const categoryId = matchCategory(live, categories);
+        let categoryId = matchCategory(live, categories);
+        // Brand-level fallback: some brands' product names carry zero matchable keywords
+        // (e.g. Brooks & Roo bandanas are named by pattern -- "Pineapple Parade," "Moose" --
+        // with no generic word like "bandana" anywhere in the title), so keyword matching has
+        // nothing to grab onto. Rather than leave a brand's entire catalog dumped in Other when
+        // we know what they actually sell, this applies an explicit per-brand default ONLY when
+        // no real keyword matched anything -- it never overrides a genuine keyword match.
+        if (categoryId === "other" && brand.fallback_category) categoryId = brand.fallback_category;
         out.push({
           brand_id: brandId,
           brand_name: brand.name,

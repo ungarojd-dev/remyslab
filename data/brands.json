@@ -18,7 +18,8 @@
       "discount_percent": 15,
       "link_style": "discount_redirect",
       "affiliate_disclosure": "partner",
-      "_note": "Confirmed (Josh, real-world test) the /discount/ URL does NOT auto-apply REMYSLAB15 at checkout -- customer must manually enter the code themselves at checkout. The discount itself is real and genuinely honored once entered, so price display and sorting still reflect it. Keep showing the code prominently since the customer has to actually use it."
+      "fallback_category": "clothing",
+      "_note": "Confirmed (Josh, real-world test) the /discount/ URL does NOT auto-apply REMYSLAB15 at checkout -- customer must manually enter the code themselves at checkout. The discount itself is real and genuinely honored once entered, so price display and sorting still reflect it. Keep showing the code prominently since the customer has to actually use it. fallback_category added because 94 of 96 products are bandanas named by pattern (Pineapple Parade, Moose, etc.) with zero matchable keyword -- confirmed their entire catalog is bandanas/accessories before adding this, so unmatched products default there instead of dumping into Other. Does not override the 2 products that already match a real keyword."
     },
     "west-paw": {
       "name": "West Paw",
