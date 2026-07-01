@@ -191,23 +191,24 @@ ${jsonLd(data)}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;background:#f5f8fc;color:#172033;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:52px;padding-top:52px;overflow-x:clip}
 .partner-rolodex{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:linear-gradient(135deg,#173b61 0%,#245f93 100%);display:flex;align-items:center;overflow:hidden}
-.rolodex-track{position:relative;flex:1 1 auto;height:100%;overflow:hidden}
-.rolodex-slide{position:absolute;inset:0;display:flex;align-items:center;gap:10px;padding:0 48px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.rolodex-track{position:relative;flex:1 1 auto;height:100%;overflow:hidden;min-width:0}
+.rolodex-slide{position:absolute;inset:0;display:flex;align-items:center;gap:8px;padding:0 46px;opacity:0;pointer-events:none;transition:opacity .35s ease}
 .rolodex-slide.is-active{opacity:1;pointer-events:auto}
-.rolodex-logo{flex:0 0 auto;width:28px;height:28px;border-radius:7px;object-fit:contain;background:#fff;padding:3px}
-.rolodex-copy{flex:1 1 auto;min-width:0;font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rolodex-copy strong{font-weight:800}
-.rolodex-copy code{font-family:"Roboto Mono",ui-monospace,SFMono-Regular,Consolas,monospace;background:rgba(255,255,255,.18);border-radius:5px;padding:2px 7px;font-size:12px;letter-spacing:.02em}
+.rolodex-logo{flex:0 0 auto;width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;padding:3px}
+.rolodex-brand{flex:0 1 auto;min-width:0;font-size:13px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rolodex-code-wrap{flex:0 0 auto;font-size:12px;color:#fff;white-space:nowrap}
+.rolodex-code{font-family:"Roboto Mono",ui-monospace,SFMono-Regular,Consolas,monospace;background:rgba(255,255,255,.18);border-radius:5px;padding:2px 7px;font-size:12px;letter-spacing:.02em;margin-left:2px}
 .rolodex-btn{flex:0 0 auto;font-size:12px;font-weight:800;color:#173b61;background:#fff8e3;border-radius:999px;padding:6px 13px;text-decoration:none;white-space:nowrap}
 .rolodex-btn:hover{background:#fff1be}
-.rolodex-arrow{flex:0 0 auto;width:28px;height:28px;border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:999px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.rolodex-arrow:hover{background:rgba(255,255,255,.26)}
+.rolodex-arrow{flex:0 0 auto;width:26px;height:26px;border:0;background:rgba(255,255,255,.16);color:#fff;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.rolodex-arrow svg{width:13px;height:13px;display:block}
+.rolodex-arrow:hover{background:rgba(255,255,255,.28)}
 .rolodex-prev{margin-left:8px}
 .rolodex-next{margin-right:6px}
-.rolodex-dots{position:absolute;right:58px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
+.rolodex-dots{position:absolute;right:56px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
 .rolodex-dot{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.35);border:0;padding:0;cursor:pointer}
 .rolodex-dot.is-active{background:#fff}
-@media(max-width:560px){.rolodex-slide{padding:0 14px;gap:8px}.rolodex-copy{font-size:12px}.rolodex-dots{display:none}.rolodex-btn{padding:5px 10px;font-size:11px}}
+@media(max-width:560px){.rolodex-slide{padding:0 10px;gap:6px}.rolodex-dots{display:none}.rolodex-btn{padding:5px 9px;font-size:11px}.rolodex-brand{display:none}.rolodex-code-wrap{font-size:11px}.rolodex-code{font-size:11px;padding:2px 6px}}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 :root{--bg:#f5f8fc;--surface:#fffefd;--line:#d7e3f1;--green:#245f93;--green-deep:#173b61;--sage:#eaf3ff;--gold:#c8920a;--text:#172033;--muted:#667085;--shadow:0 12px 30px rgba(23,59,97,.10)}
@@ -248,32 +249,33 @@ footer{background:linear-gradient(135deg,var(--green-deep),var(--green));padding
   <div class="rolodex-track" id="rolodexTrack">
     <div class="rolodex-slide is-active" aria-hidden="false">
       <img class="rolodex-logo" src="/assets/logos/pack-leashes-logo.jpg" alt="" width="22" height="22" loading="eager" decoding="async"/>
-      <span class="rolodex-copy"><strong>Pack Leashes</strong> &middot; 20% off with <code>REMYSLAB20</code></span>
+      <span class="rolodex-brand">Pack Leashes</span>
+      <span class="rolodex-code-wrap">20% off <code class="rolodex-code">REMYSLAB20</code></span>
       <a class="rolodex-btn affiliate-link" href="https://packleashes.com/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Pack Leashes" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/brooks-and-roo-logo.jpg" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-copy"><strong>Brooks &amp; Roo</strong> &middot; 15% off with <code>REMYSLAB15</code></span>
+      <span class="rolodex-brand">Brooks &amp; Roo</span><span class="rolodex-code-wrap">15% off <code class="rolodex-code">REMYSLAB15</code></span>
       <a class="rolodex-btn affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored" data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/sniff-and-bark-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-copy"><strong>Sniff &amp; Bark</strong> &middot; 20% off with <code>REMYSLAB20</code></span>
+      <span class="rolodex-brand">Sniff &amp; Bark</span><span class="rolodex-code-wrap">20% off <code class="rolodex-code">REMYSLAB20</code></span>
       <a class="rolodex-btn affiliate-link" href="https://www.sniffandbark.com.co/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Sniff &amp; Bark" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB20" data-network="Sniff &amp; Bark">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/woof-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-copy"><strong>Woof</strong> &middot; 10% off with <code>REMYSLAB10</code></span>
+      <span class="rolodex-brand">Woof</span><span class="rolodex-code-wrap">10% off <code class="rolodex-code">REMYSLAB10</code></span>
       <a class="rolodex-btn affiliate-link" href="https://mywoof.com/discount/REMYSLAB10" target="_blank" rel="nofollow sponsored" data-product="Woof" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB10" data-network="Woof">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/sodapup-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-copy"><strong>SodaPup</strong> &middot; 10% off with <code>JOSH</code></span>
+      <span class="rolodex-brand">SodaPup</span><span class="rolodex-code-wrap">10% off <code class="rolodex-code">JOSH</code></span>
       <a class="rolodex-btn affiliate-link" href="https://sodapup.com/?ref=remyslab" target="_blank" rel="nofollow sponsored" data-product="SodaPup" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="JOSH" data-network="SodaPup">Visit site</a>
     </div>
   </div>
-  <button type="button" class="rolodex-arrow rolodex-prev" id="rolodexPrev" aria-label="Previous partner">&larr;</button>
-  <button type="button" class="rolodex-arrow rolodex-next" id="rolodexNext" aria-label="Next partner">&rarr;</button>
+  <button type="button" class="rolodex-arrow rolodex-prev" id="rolodexPrev" aria-label="Previous partner"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button type="button" class="rolodex-arrow rolodex-next" id="rolodexNext" aria-label="Next partner"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <div class="rolodex-dots" id="rolodexDots" role="tablist" aria-label="Select partner slide"></div>
 </div>
 
