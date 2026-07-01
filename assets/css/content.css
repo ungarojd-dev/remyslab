@@ -24,6 +24,13 @@ h1{font-size:clamp(26px,6vw,38px);font-weight:600;letter-spacing:-.01em;line-hei
 .board{max-width:680px;margin:0 auto;padding:20px 14px 42px;display:grid;grid-template-columns:1fr 1fr;gap:14px}.results-label{grid-column:1/-1;font-size:11px;color:var(--muted);font-weight:700}.empty-state{grid-column:1/-1;padding:32px 14px;text-align:center;border:1px dashed #cfc5b6;border-radius:14px;color:var(--muted);font-size:13px;background:rgba(255,253,250,.55)}
 .note-list{max-width:680px;margin:0 auto;padding:16px 14px 48px;display:flex;flex-direction:column;gap:0}
 .note-list .results-label{grid-column:unset;margin-bottom:12px}
+.results-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.results-row .results-label{margin-bottom:0}
+.sort-label{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--muted)}
+.sort-label select{font:inherit;font-size:12px;font-weight:700;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:5px 8px;cursor:pointer}
+.sort-label select:focus{outline:none;border-color:#8fb7df;box-shadow:0 0 0 3px rgba(36,95,147,.11)}
+.guide-card-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px}
+.guide-date{font-size:11px;color:var(--muted);font-family:"Roboto Mono",ui-monospace,monospace;flex-shrink:0}
 .note-list .empty-state{grid-column:unset}
 .note-row{display:block;padding:16px 16px 15px;background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;transition:box-shadow .15s,transform .15s}
 .note-row:hover{box-shadow:0 6px 18px rgba(23,59,97,.10);transform:translateY(-1px)}
