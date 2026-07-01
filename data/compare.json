@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T19:17:52.136Z",
+  "generated_at": "2026-07-01T21:06:26.178Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -34,7 +34,7 @@
       "id": "clothing",
       "label": "Bandanas & Accessories",
       "brand_count": 3,
-      "product_count": 213
+      "product_count": 214
     },
     {
       "id": "harnesses",
@@ -103,7 +103,7 @@
       "product_count": 317
     }
   ],
-  "product_count": 1377,
+  "product_count": 1378,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -2870,6 +2870,22 @@
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 47.96,
+      "affiliate_disclosure": "partner",
+      "source": "live"
+    },
+    {
+      "brand_id": "pack-leashes",
+      "brand_name": "Pack Leashes",
+      "name": "Summer Stroll Leash + Bowtie Collar",
+      "category": "clothing",
+      "price": "$73.95",
+      "price_value": 73.95,
+      "in_stock": true,
+      "image": "https://cdn.shopify.com/s/files/1/1649/7215/files/SummerStroll-Leash.jpg?v=1753578744",
+      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fsummer-stroll-leash-bowtie-collar",
+      "discount_code": "REMYSLAB20",
+      "discount_percent": 20,
+      "effective_price": 59.16,
       "affiliate_disclosure": "partner",
       "source": "live"
     },
@@ -14304,7 +14320,7 @@
       "category": "chews-treats",
       "price": "$149.99",
       "price_value": 149.99,
-      "in_stock": false,
+      "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/0011/0775/5059/files/20260220-MP-bulk-yak-chews-PDP-1.webp?v=1775674809",
       "url": "https://mightypaw.com/products/bulk_bucket_yakcheese_large_2gal",
       "discount_code": null,
