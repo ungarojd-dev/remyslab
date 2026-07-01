@@ -31,8 +31,66 @@ function initials(name) {
   return String(name || "?").split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
 }
 
+/** Loads Lab Notes JSON files and returns [{ slug, brand, productName, normProduct, normBrand }]
+ *  used to cross-link compare listings to the tested-product review, when one exists. */
+async function loadLabNotes() {
+  const dir = path.join(ROOT, "content", "lab-notes");
+  let files = [];
+  try {
+    files = (await (await import("node:fs/promises")).readdir(dir)).filter(f => f.endsWith(".json"));
+  } catch {
+    return [];
+  }
+  const norm = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const notes = [];
+  for (const file of files) {
+    try {
+      const raw = JSON.parse(await readFile(path.join(dir, file), "utf8"));
+      if (!raw.published || !raw.slug || !raw.product_name) continue;
+      notes.push({
+        slug: raw.slug,
+        productWords: significantWords(raw.product_name),
+        normBrand: norm(raw.brand),
+      });
+    } catch { /* skip malformed note files rather than fail the whole build */ }
+  }
+  return notes;
+}
+
+/** Matches a compare-page product to a Lab Note by significant-word overlap, gated on brand
+ *  agreement so two unrelated brands' similarly-named products never cross-link. Real product
+ *  names vary between the live catalog feed and how Josh titles a Lab Note (e.g. "All-Natural
+ *  Bully Sticks" vs "Mighty Paw Naturals 12-Inch Bully Sticks"), so this needs looser word-level
+ *  matching rather than strict substring containment — while still erring conservative, since a
+ *  wrong "Remy tested this" link is worse than a missing one.
+ */
+const STOPWORDS = new Set(["the","and","for","with","dog","dogs","pet","pack","all","natural","inch","pk","pcs"]);
+function significantWords(s) {
+  return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ")
+    .filter(w => w.length >= 3 && !STOPWORDS.has(w) && !/^\d+$/.test(w));
+}
+function matchLabNote(p, labNotes) {
+  if (!labNotes.length) return null;
+  const normBrand = String(p.brand_name || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const nameWords = new Set(significantWords(p.name));
+  if (!nameWords.size) return null;
+  let best = null, bestScore = 0;
+  for (const note of labNotes) {
+    if (!note.normBrand.includes(normBrand) && !normBrand.includes(note.normBrand)) continue;
+    const overlap = note.productWords.filter(w => nameWords.has(w)).length;
+    const score = overlap / Math.min(nameWords.size, note.productWords.length);
+    // High bar on purpose: some brands (e.g. Pack Leashes' "X Leash + Bowtie Collar" line)
+    // share most of their structural words across many different colorways/patterns, so a
+    // looser overlap threshold was cross-linking untested variants to a tested one. Requiring
+    // near-full-name overlap keeps this to true matches, at the cost of some real matches
+    // with slightly different wording going unlinked — the safer trade-off.
+    if (overlap >= 3 && score >= 0.8 && score > bestScore) { best = note.slug; bestScore = score; }
+  }
+  return best;
+}
+
 /** One vendor offer row inside a category card. Facts only: name, brand, stock, code, price. No editorial tags. */
-function vendorRow(p, isCheapest) {
+function vendorRow(p, isCheapest, labNote) {
   const oos = p.in_stock === false ? `<span class="supplier-oos">Out of stock</span>` : `<span>Listed</span>`;
   const cheapestBadge = isCheapest ? `<span class="supplier-best">Lowest price</span>` : "";
   const productCategory = `compare_${p.category}`;
@@ -45,22 +103,32 @@ function vendorRow(p, isCheapest) {
          onerror="this.outerHTML='${fallback.replace(/'/g, "&#39;")}'">`
     : fallback;
 
-  const copyButton = p.discount_code
-    ? `<button type="button" class="supplier-copy coupon-copy" data-code="${attr(p.discount_code)}" data-product="${attr(p.name)}" data-category="${attr(productCategory)}" data-placement="price_compare_code">Grab code</button>`
-    : "";
-
   // Show the discount math only when we actually have a percentage to do math with — older
   // cached fallback rows (from before discount_percent existed) just show plain price + a
   // generic "code ready" note, same as always, until the next live fetch backfills the field.
   const hasPercent = p.discount_code && Number.isFinite(p.discount_percent);
-  const discountNote = p.discount_code
-    ? (hasPercent
-        ? `<span class="supplier-discount">${p.discount_percent}% off with ${esc(p.discount_code)}</span>`
-        : `<span class="supplier-discount">Code ready</span>`)
+  const savings = hasPercent && p.effective_price != null ? (p.price_value - p.effective_price) : null;
+
+  // Code chip replaces what used to be a second full-size "Grab code" button. Still
+  // copyable via the same coupon-copy JS hook, just visually a tag next to the price
+  // instead of competing 1:1 with "Visit brand site" — one primary CTA per row.
+  const codeChip = p.discount_code
+    ? `<button type="button" class="supplier-code-chip coupon-copy" data-code="${attr(p.discount_code)}" data-product="${attr(p.name)}" data-category="${attr(productCategory)}" data-placement="price_compare_code" aria-label="Copy code ${attr(p.discount_code)}">${esc(p.discount_code)}</button>`
     : "";
+
+  // Savings badge makes the code's impact explicit instead of leaving it to strikethrough
+  // math — "Save $X with CODE" reads as an active win, not a passive price difference.
+  const savingsBadge = hasPercent && savings != null && savings > 0
+    ? `<span class="supplier-savings">Save $${savings.toFixed(2)} with ${esc(p.discount_code)}</span>`
+    : (p.discount_code ? `<span class="supplier-discount">Code ready</span>` : "");
+
   const priceBlock = hasPercent && p.effective_price != null
     ? `<div class="supplier-price-was">${esc(p.price)}</div><div class="supplier-price supplier-price-discounted">$${p.effective_price.toFixed(2)}</div>`
     : `<div class="supplier-price">${esc(p.price)}</div>`;
+
+  const labNoteLink = labNote
+    ? ` · <a class="supplier-labnote" href="/blog/${attr(labNote)}/">Remy tested this →</a>`
+    : "";
 
   return `        <div class="supplier-row"
           data-network="${attr(p.brand_name)}"
@@ -69,14 +137,15 @@ function vendorRow(p, isCheapest) {
             ${thumb}
             <div class="supplier-copy-wrap">
               <div class="supplier-name" title="${attr(p.name)}">${esc(p.name)}</div>
-              <div class="supplier-sub">${esc(p.brand_name)} · ${oos}${discountNote}</div>
+              <div class="supplier-sub">${esc(p.brand_name)} · ${oos}${labNoteLink}</div>
+              ${savingsBadge}
             </div>
           </div>
           <div class="supplier-price-wrap">
             ${priceBlock}
             ${cheapestBadge}
             <div class="supplier-buttons">
-              ${copyButton}
+              ${codeChip}
               <a class="supplier-go affiliate-link" href="${attr(p.url)}" target="_blank" rel="nofollow sponsored noopener"
                 data-product="${attr(p.name)}" data-category="${attr(productCategory)}" data-result="not_tested"
                 data-placement="price_compare" data-network="${attr(p.brand_name)}" data-discount="${attr(p.discount_code || "")}">Visit brand site</a>
@@ -88,12 +157,12 @@ function vendorRow(p, isCheapest) {
 /** One category card: header + vendor rows, sorted cheapest first (build-compare already sorts this way).
  *  Shows the first 5 rows by default; the rest sit behind a "Show N more" toggle (same pattern as the
  *  peptide site's product cards) so a deep category like Collars doesn't dominate the page on load. */
-function categoryCard(cat, products) {
+function categoryCard(cat, products, labNotes) {
   const cheapestValue = Math.min(...products.map(p => (p.effective_price ?? p.price_value) ?? Infinity));
   const brandCount = new Set(products.map(p => p.brand_id)).size;
   const VISIBLE = 5;
   const rows = products.map((p, i) => {
-    const row = vendorRow(p, (p.effective_price ?? p.price_value) === cheapestValue);
+    const row = vendorRow(p, (p.effective_price ?? p.price_value) === cheapestValue, matchLabNote(p, labNotes));
     if (i < VISIBLE) return row;
     // Hidden rows: wrap so plain CSS/JS toggling works with no framework.
     return row.replace('<div class="supplier-row', '<div hidden class="supplier-row extra-row');
@@ -142,7 +211,7 @@ function jsonLd(data) {
   });
 }
 
-function page(data) {
+function page(data, labNotes) {
   const when = data.generated_at ? new Date(data.generated_at) : null;
   const whenStr = when && !isNaN(when) ? when.toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
 
@@ -150,7 +219,7 @@ function page(data) {
   const grouped = cats.map(c => ({ ...c, products: data.products.filter(p => p.category === c.id) }));
   const brandNames = [...new Set(data.products.map(p => p.brand_name))].sort();
 
-  const cards = grouped.map(c => categoryCard(c, c.products)).join("\n\n");
+  const cards = grouped.map(c => categoryCard(c, c.products, labNotes)).join("\n\n");
   const catChips = `${chip("All", "All", true)}\n      ${cats.map(c => chip(c.label, c.id, false)).join("\n      ")}`;
   const brandChips = `${chip("All", "All", true)}\n      ${brandNames.map(b => chip(b, b, false)).join("\n      ")}`;
 
@@ -209,7 +278,8 @@ body{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;background:#
 .rolodex-dots{position:absolute;right:56px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
 .rolodex-dot{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.35);border:0;padding:0;cursor:pointer}
 .rolodex-dot.is-active{background:#fff}
-@media(max-width:560px){.rolodex-slide{padding:0 8px;gap:8px}.rolodex-dots{display:none}.rolodex-btn{padding:6px 10px;font-size:11px}.rolodex-logo{width:24px;height:24px}.rolodex-text-stack{display:flex;flex-direction:column;justify-content:center;gap:1px;min-width:0}.rolodex-brand{display:block;font-size:11px;line-height:1.15}.rolodex-code-wrap{font-size:10px;line-height:1.15}.rolodex-code{font-size:10px;padding:1px 5px}}
+.rolodex-counter{flex:0 0 auto;font-size:10.5px;font-weight:800;color:rgba(255,255,255,.72);white-space:nowrap;font-variant-numeric:tabular-nums;margin-right:2px}
+@media(max-width:560px){.rolodex-slide{padding:0 8px;gap:8px}.rolodex-dots{display:none}.rolodex-btn{padding:6px 10px;font-size:11px}.rolodex-logo{width:24px;height:24px}.rolodex-text-stack{display:flex;flex-direction:column;justify-content:center;gap:1px;min-width:0}.rolodex-brand{display:block;font-size:11px;line-height:1.15}.rolodex-code-wrap{font-size:10px;line-height:1.15}.rolodex-code{font-size:10px;padding:1px 5px}.rolodex-counter{font-size:9.5px}}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 :root{--bg:#f5f8fc;--surface:#fffefd;--line:#d7e3f1;--green:#245f93;--green-deep:#173b61;--sage:#eaf3ff;--gold:#c8920a;--text:#172033;--muted:#667085;--shadow:0 12px 30px rgba(23,59,97,.10)}
@@ -231,15 +301,15 @@ h1,h2,h3,.product-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing
 .cmp-hero-inner{position:relative;z-index:1}.cmp-hero-inner{max-width:760px;margin:0 auto;padding:54px 16px 50px;text-align:center}.cmp-kicker{display:inline-flex;margin-bottom:13px;border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:5px 10px;color:#f7d88f;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.cmp-head h1{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-size:clamp(36px,5.4vw,64px);font-weight:600;letter-spacing:-.015em;line-height:1.02;color:#fffdf7}.cmp-head h1 em{font-style:italic;font-weight:500;color:#f6d995}.cmp-head p{max-width:580px;margin:16px auto 0;color:rgba(255,255,255,.84);font-size:18px;line-height:1.55}.hero-search{display:flex;align-items:center;gap:9px;margin:26px auto 0;max-width:560px;background:#fff;border-radius:14px;padding:13px 16px;color:#5b6678;box-shadow:0 10px 30px rgba(10,30,55,.22)}.hero-search svg{flex:0 0 auto;opacity:.55}.hero-search input{flex:1 1 auto;border:0;outline:0;font:inherit;font-size:15px;color:#172033;background:transparent}.hero-search input::placeholder{color:#9aa3b2}.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px auto 0;max-width:560px}.hero-card{display:flex;flex-direction:column;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px 16px;color:#fff;text-decoration:none;text-align:left}.hero-card:hover{background:rgba(255,255,255,.14)}.hero-card svg{opacity:.85}.hero-card strong{font-size:15px;font-weight:800}.hero-card span{font-size:12px;color:rgba(255,255,255,.68)}.hero-text-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;color:#f6d995;font-size:14px;font-weight:700;text-decoration:none}.hero-text-link:hover{text-decoration:underline;text-underline-offset:3px}.disclosure-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(245,248,252,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px;text-align:center;font-size:11px;color:#9e9088;line-height:1.5}.disclosure-bar a{color:var(--green);text-decoration:underline;text-underline-offset:2px;font-weight:600}
 .catalog-controls{position:sticky;top:52px;z-index:20;background:rgba(245,248,252,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(215,227,241,.78);border-bottom:1px solid rgba(215,227,241,.92);padding:10px 0 8px}
 .catalog-control-inner{max-width:1180px;margin:0 auto;padding:0 16px}.catalog-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 11px;color:var(--muted);box-shadow:0 3px 10px rgba(23,59,97,.05)}.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:13px}.catalog-search:focus-within{border-color:#8fb7df;box-shadow:0 0 0 3px rgba(36,95,147,.12)}
-.catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.catalog-chips::-webkit-scrollbar{display:none}.catalog-chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);padding:6px 11px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}.catalog-chip.active{border-color:var(--green);background:var(--green);color:#fff}.catalog-summary{display:flex;justify-content:space-between;gap:8px;margin:10px 16px 4px;color:var(--muted);font-size:11.5px}
+.catalog-filter-title{margin:8px 0 5px;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.catalog-filter-title-row{display:flex;align-items:center;justify-content:space-between}.brand-filter-toggle{display:none;align-items:center;gap:4px;border:0;background:none;color:var(--green);font:inherit;font-size:11px;font-weight:800;text-transform:none;letter-spacing:0;cursor:pointer;padding:2px}.brand-filter-toggle svg{transition:transform .15s ease}.brand-filter-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}.catalog-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.catalog-chips::-webkit-scrollbar{display:none}.catalog-chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);padding:6px 11px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}.catalog-chip.active{border-color:var(--green);background:var(--green);color:#fff}.catalog-summary{display:flex;justify-content:space-between;gap:8px;margin:10px 16px 4px;color:var(--muted);font-size:11.5px}
 .catalog-main{padding:6px 16px 0;max-width:1180px;margin:0 auto}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}.product-card{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}.product-card[hidden]{display:none}.suppliers{flex:1;padding:0 12px 4px}
 .product-card-head{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffefd 0%,#eef6ff 100%)}.product-card-meta{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;opacity:.78}.product-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-top:4px}.product-title{font-size:19px;font-weight:600;letter-spacing:-.005em}.vendor-count{flex:0 0 auto;border-radius:999px;background:var(--sage);padding:4px 9px;color:var(--green);font-size:10.5px;font-weight:800}.supplier-head{display:flex;justify-content:space-between;gap:6px;padding:9px 14px 6px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
-.supplier-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 2px;border-top:1px solid #dde8f4}.supplier-row:first-child{border-top:none}.supplier-row:hover{background:#eef6ff;border-radius:12px}.supplier-left{display:flex;gap:9px;min-width:0;flex:1 1 auto;align-items:flex-start}.supplier-copy-wrap{min-width:0;flex:1 1 auto}.supplier-initials{flex:0 0 auto;display:flex;width:44px;height:44px;align-items:center;justify-content:center;border-radius:11px;background:var(--sage);color:var(--green);font-size:14px;font-weight:900;margin-top:1px}.supplier-thumb{flex:0 0 auto;width:44px;height:44px;border-radius:11px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}.supplier-name{font-size:13.5px;font-weight:700;line-height:1.2;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;overflow-wrap:anywhere}.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}.supplier-discount{color:var(--gold);font-weight:900}.supplier-oos{color:#a04848;font-weight:900}
-.supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}.supplier-price-was{font-size:11px;font-weight:600;color:var(--muted);text-decoration:line-through}.supplier-price-discounted{color:#1d7a3c}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-copy{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:800;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff}.supplier-go:hover{background:var(--green-deep)}.supplier-copy{background:#fff8e3;color:#795b05;border:1px solid #e7cf7a}.supplier-copy:hover{background:#fff1be}.supplier-copy.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18)}
+.supplier-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 2px;border-top:1px solid #dde8f4}.supplier-row:first-child{border-top:none}.supplier-row:hover{background:#eef6ff;border-radius:12px}.supplier-left{display:flex;gap:9px;min-width:0;flex:1 1 auto;align-items:flex-start}.supplier-copy-wrap{min-width:0;flex:1 1 auto}.supplier-initials{flex:0 0 auto;display:flex;width:44px;height:44px;align-items:center;justify-content:center;border-radius:11px;background:var(--sage);color:var(--green);font-size:14px;font-weight:900;margin-top:1px}.supplier-thumb{flex:0 0 auto;width:44px;height:44px;border-radius:11px;object-fit:cover;background:var(--bg);border:1px solid var(--line);margin-top:1px}.supplier-name{font-size:13.5px;font-weight:700;line-height:1.2;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;overflow-wrap:anywhere}.supplier-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}.supplier-discount{color:var(--gold);font-weight:900}.supplier-oos{color:#a04848;font-weight:900}.supplier-labnote{color:var(--green);font-weight:800}.supplier-savings{display:inline-block;margin-top:4px;font-size:11px;font-weight:900;color:#1d7a3c;background:#e7f7ec;border-radius:6px;padding:2px 7px}
+.supplier-price-wrap{text-align:right;flex:0 0 auto;display:grid;justify-items:end;gap:3px}.supplier-price{font-size:14px;font-weight:800;color:var(--green-deep)}.supplier-price-was{font-size:11px;font-weight:600;color:var(--muted);text-decoration:line-through}.supplier-price-discounted{color:#1d7a3c}.supplier-best{display:inline-block;font-size:9.5px;font-weight:800;color:var(--green);background:var(--sage);border-radius:999px;padding:1.5px 7px;white-space:nowrap}.supplier-buttons{display:flex;justify-content:flex-end;align-items:center;gap:5px;flex-wrap:wrap}.supplier-go,.supplier-code-chip{border:0;border-radius:999px;padding:6px 9px;font:inherit;font-size:10.5px;font-weight:800;white-space:nowrap;cursor:pointer}.supplier-go{background:var(--green);color:#fff;min-height:30px;display:inline-flex;align-items:center}.supplier-go:hover{background:var(--green-deep)}.supplier-code-chip{background:#fff8e3;color:#795b05;border:1px dashed #e7cf7a;font-family:"Roboto Mono",ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.02em}.supplier-code-chip:hover{background:#fff1be}.supplier-code-chip.copied{background:var(--sage);color:var(--green);border-color:rgba(36,95,147,.18);font-family:inherit}
 .catalog-empty{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px;text-align:center;color:var(--muted);font-size:13.5px}.cmp-foot{margin:22px 16px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.cmp-foot a{color:var(--green);text-decoration:underline;text-underline-offset:2px}.expand-row{display:flex;border-top:1px solid var(--line);border-radius:0 0 18px 18px;overflow:hidden}.expand-button,.collapse-button{flex:1 1 auto;border:0;background:var(--sage);padding:11px;color:var(--green);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer}.expand-button:hover,.collapse-button:hover{background:#e9f2fb}.expand-button:not([hidden]) ~ .collapse-button{border-left:1px solid var(--line)}.collapse-button{background:#fff8e3;color:#795b05}.collapse-button:hover{background:#fff1be}[hidden]{display:none!important}
 footer{background:linear-gradient(135deg,var(--green-deep),var(--green));padding:24px 14px 20px;margin-top:30px}.footer-inner{max-width:1180px;margin:0 auto}.footer-brand{font-size:14px;font-weight:800;color:#fff;font-family:"Source Sans 3",system-ui,-apple-system,sans-serif}.footer-desc{font-size:11px;color:rgba(255,255,255,.48);line-height:1.6;margin:4px 0 13px}.footer-links{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:11px}.footer-links a{font-size:11px;color:rgba(255,255,255,.58);font-weight:700}.footer-bottom{font-size:10px;color:rgba(255,255,255,.28);padding-top:9px;border-top:1px solid rgba(255,255,255,.08)}
 @media (max-width:920px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.site-nav{margin:0 12px 10px}.nav-logo span{display:none}.nav-tab{font-size:12px;padding:6px 9px}.cmp-hero-inner{padding:34px 14px 30px}.cmp-head h1{font-size:clamp(33px,11vw,46px)}.cmp-head p{font-size:15px}.hero-search{margin-top:20px;padding:11px 14px}.hero-search input{font-size:14px}.hero-cards{margin-top:10px}.hero-card{padding:12px 13px}.hero-card strong{font-size:13.5px}.hero-card span{font-size:11px}.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}.supplier-row{gap:9px}.supplier-price-wrap{min-width:96px}.supplier-buttons{gap:4px}.supplier-go,.supplier-copy{font-size:10px;padding:6px 8px}}
+@media (max-width:620px){.site-nav{margin:0 12px 10px}.nav-logo span{display:none}.nav-tab{font-size:12px;padding:6px 9px}.cmp-hero-inner{padding:34px 14px 30px}.cmp-head h1{font-size:clamp(33px,11vw,46px)}.cmp-head p{font-size:15px}.hero-search{margin-top:20px;padding:11px 14px}.hero-search input{font-size:14px}.hero-cards{margin-top:10px}.hero-card{padding:12px 13px}.hero-card strong{font-size:13.5px}.hero-card span{font-size:11px}.catalog-grid{grid-template-columns:1fr;gap:10px}.catalog-main{padding:6px 16px 0}.supplier-row{gap:9px}.supplier-price-wrap{min-width:96px}.supplier-buttons{gap:4px}.supplier-go,.supplier-code-chip{font-size:10px;padding:6px 8px}#brandChips{display:none}.brand-filter-toggle{display:inline-flex}#brandChips.is-open{display:flex}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -277,6 +347,7 @@ footer{background:linear-gradient(135deg,var(--green-deep),var(--green));padding
   <button type="button" class="rolodex-arrow rolodex-prev" id="rolodexPrev" aria-label="Previous partner"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button type="button" class="rolodex-arrow rolodex-next" id="rolodexNext" aria-label="Next partner"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <div class="rolodex-dots" id="rolodexDots" role="tablist" aria-label="Select partner slide"></div>
+  <span class="rolodex-counter" id="rolodexCounter" aria-hidden="true"></span>
 </div>
 
 <nav class="site-nav" aria-label="Site navigation">
@@ -334,7 +405,10 @@ footer{background:linear-gradient(135deg,var(--green-deep),var(--green));padding
       <div class="catalog-chips" id="catChips">
       ${catChips}
       </div>
-      <div class="catalog-filter-title">Brand</div>
+      <div class="catalog-filter-title catalog-filter-title-row">
+        <span>Brand</span>
+        <button type="button" class="brand-filter-toggle" id="brandFilterToggle" aria-expanded="false" aria-controls="brandChips">Filter by brand <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
       <div class="catalog-chips" id="brandChips">
       ${brandChips}
       </div>
@@ -361,6 +435,18 @@ ${cards}
 (function(){
   var state={cat:"All",brand:"All",q:""};
   var search=document.getElementById("catalogSearch");
+
+  // Brand chip row is collapsed by default on mobile (it's the second filter row after
+  // Category, and with 10+ brands it eats a lot of vertical space before any products show).
+  // Desktop is unaffected — CSS only hides it under the 620px breakpoint.
+  var brandToggle=document.getElementById("brandFilterToggle");
+  var brandChipsEl=document.getElementById("brandChips");
+  if(brandToggle&&brandChipsEl){
+    brandToggle.addEventListener("click",function(){
+      var open=brandChipsEl.classList.toggle("is-open");
+      brandToggle.setAttribute("aria-expanded",open?"true":"false");
+    });
+  }
 
   // Reads ?cat=harnesses from the URL on page load so external links (e.g. a guide post's
   // "Compare X prices" CTA) can deep-link straight into a pre-filtered category, instead of
@@ -559,6 +645,9 @@ ${cards}
   var current = 0;
   var AUTO_MS = 5000;
   var timer = null;
+  var counterEl = document.getElementById("rolodexCounter");
+  function updateCounter(){ if (counterEl) counterEl.textContent = (current + 1) + " of " + slides.length + " codes"; }
+  updateCounter();
 
   function goTo(i){
     slides[current].classList.remove("is-active");
@@ -568,6 +657,7 @@ ${cards}
     slides[current].classList.add("is-active");
     slides[current].setAttribute("aria-hidden", "false");
     dots[current].classList.add("is-active");
+    updateCounter();
   }
 
   function next(){ goTo(current + 1); }
@@ -603,7 +693,8 @@ ${cards}
 
 async function main() {
   const data = JSON.parse(await readFile(path.join(ROOT, "data", "compare.json"), "utf8"));
-  await writeFile(path.join(ROOT, "index.html"), page(data));
-  console.log(`[render] wrote index.html (${data.product_count} listings, ${data.category_summary.length} categories)`);
+  const labNotes = await loadLabNotes();
+  await writeFile(path.join(ROOT, "index.html"), page(data, labNotes));
+  console.log(`[render] wrote index.html (${data.product_count} listings, ${data.category_summary.length} categories, ${labNotes.length} lab notes indexed)`);
 }
 main().catch(err => { console.error("[render] FATAL:", err.message); process.exit(1); });
