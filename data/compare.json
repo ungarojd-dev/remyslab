@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T16:55:39.692Z",
+  "generated_at": "2026-07-01T19:17:52.136Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -34,7 +34,7 @@
       "id": "clothing",
       "label": "Bandanas & Accessories",
       "brand_count": 3,
-      "product_count": 212
+      "product_count": 213
     },
     {
       "id": "harnesses",
@@ -103,7 +103,7 @@
       "product_count": 317
     }
   ],
-  "product_count": 1376,
+  "product_count": 1377,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -2214,6 +2214,22 @@
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 26.36,
+      "affiliate_disclosure": "partner",
+      "source": "live"
+    },
+    {
+      "brand_id": "pack-leashes",
+      "brand_name": "Pack Leashes",
+      "name": "The Winston",
+      "category": "clothing",
+      "price": "$41.95",
+      "price_value": 41.95,
+      "in_stock": true,
+      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/BT-plaid.jpg?v=1584907155",
+      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fthe-winston",
+      "discount_code": "REMYSLAB20",
+      "discount_percent": 20,
+      "effective_price": 33.56,
       "affiliate_disclosure": "partner",
       "source": "live"
     },
