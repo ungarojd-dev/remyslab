@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T10:53:52.797Z",
+  "generated_at": "2026-07-01T13:51:49.945Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -76,7 +76,7 @@
       "id": "chews-treats",
       "label": "Chews & Treats",
       "brand_count": 7,
-      "product_count": 144
+      "product_count": 143
     },
     {
       "id": "toys",
@@ -103,7 +103,7 @@
       "product_count": 317
     }
   ],
-  "product_count": 1377,
+  "product_count": 1376,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -14250,22 +14250,6 @@
       "source": "live"
     },
     {
-      "brand_id": "mighty-paw",
-      "brand_name": "Mighty Paw",
-      "name": "4th of July Chew Bundle",
-      "category": "chews-treats",
-      "price": "$75.00",
-      "price_value": 75,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/0011/0775/5059/files/generate-a-product-image-for-bundle-product.png?v=1782480939",
-      "url": "https://mightypaw.com/products/4th-of-july-chew-bundle",
-      "discount_code": null,
-      "discount_percent": null,
-      "effective_price": 75,
-      "affiliate_disclosure": "none",
-      "source": "live"
-    },
-    {
       "brand_id": "woof",
       "brand_name": "Woof",
       "name": "Power Chewer Bundle",
@@ -16910,14 +16894,14 @@
       "brand_name": "Fable",
       "name": "tuft + paw Porto Cat Carrier",
       "category": "beds-crates",
-      "price": "$109.00",
-      "price_value": 109,
+      "price": "$82.00",
+      "price_value": 82,
       "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/0025/3470/3202/files/Porto-Charcoal-PDP-1-min_4e191cea-c066-48a2-9729-8c9f1dc24141.jpg?v=1740603812",
       "url": "https://fablepets.com/products/porto-cat-carrier",
       "discount_code": null,
       "discount_percent": null,
-      "effective_price": 109,
+      "effective_price": 82,
       "affiliate_disclosure": "none",
       "source": "live"
     },
@@ -16926,14 +16910,14 @@
       "brand_name": "Fable",
       "name": "tuft + paw Cloud Nine Window Hammock",
       "category": "beds-crates",
-      "price": "$119.00",
-      "price_value": 119,
+      "price": "$89.00",
+      "price_value": 89,
       "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/0025/3470/3202/files/1-CloudNine-PDP-Studio-min.jpg?v=1740603811",
       "url": "https://fablepets.com/products/cloud-nine-window-hammock",
       "discount_code": null,
       "discount_percent": null,
-      "effective_price": 119,
+      "effective_price": 89,
       "affiliate_disclosure": "none",
       "source": "live"
     },
