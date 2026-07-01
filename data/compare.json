@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:06:26.178Z",
+  "generated_at": "2026-07-01T22:46:47.539Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -34,7 +34,7 @@
       "id": "clothing",
       "label": "Bandanas & Accessories",
       "brand_count": 3,
-      "product_count": 214
+      "product_count": 213
     },
     {
       "id": "harnesses",
@@ -103,7 +103,7 @@
       "product_count": 317
     }
   ],
-  "product_count": 1378,
+  "product_count": 1377,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -2220,6 +2220,22 @@
     {
       "brand_id": "pack-leashes",
       "brand_name": "Pack Leashes",
+      "name": "The Nantucket",
+      "category": "clothing",
+      "price": "$41.95",
+      "price_value": 41.95,
+      "in_stock": true,
+      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_03-2021-004.jpg?v=1617217265",
+      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fthe-nantucket",
+      "discount_code": "REMYSLAB20",
+      "discount_percent": 20,
+      "effective_price": 33.56,
+      "affiliate_disclosure": "partner",
+      "source": "live"
+    },
+    {
+      "brand_id": "pack-leashes",
+      "brand_name": "Pack Leashes",
       "name": "The Winston",
       "category": "clothing",
       "price": "$41.95",
@@ -2940,22 +2956,6 @@
     {
       "brand_id": "pack-leashes",
       "brand_name": "Pack Leashes",
-      "name": "Rosé Leash + Bowtie Collar",
-      "category": "clothing",
-      "price": "$78.95",
-      "price_value": 78.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Leash-Collar-flowers.jpg?v=1562634723",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Frose-leash-bowtie-collar",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 63.16,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
       "name": "Peaches Leash + Bowtie Collar",
       "category": "clothing",
       "price": "$78.95",
@@ -2963,22 +2963,6 @@
       "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_02-2023-022_a9825416-177e-4146-893a-aa6cdaafcc80.jpg?v=1677771066",
       "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fpeaches-leash-bowtie-collar",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 63.16,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
-      "name": "Tie Dye Leash + Bowtie Collar",
-      "category": "clothing",
-      "price": "$78.95",
-      "price_value": 78.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_05-2022-010_be4b648b-0b5f-44df-a394-488b81db9467.jpg?v=1653364676",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Ftie-dye-leash-bowtie-collar",
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 63.16,
@@ -14320,7 +14304,7 @@
       "category": "chews-treats",
       "price": "$149.99",
       "price_value": 149.99,
-      "in_stock": true,
+      "in_stock": false,
       "image": "https://cdn.shopify.com/s/files/1/0011/0775/5059/files/20260220-MP-bulk-yak-chews-PDP-1.webp?v=1775674809",
       "url": "https://mightypaw.com/products/bulk_bucket_yakcheese_large_2gal",
       "discount_code": null,
