@@ -195,6 +195,7 @@ body{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;background:#
 .rolodex-slide{position:absolute;inset:0;display:flex;align-items:center;gap:8px;padding:0 46px;opacity:0;pointer-events:none;transition:opacity .35s ease}
 .rolodex-slide.is-active{opacity:1;pointer-events:auto}
 .rolodex-logo{flex:0 0 auto;width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;padding:3px}
+.rolodex-text-stack{display:contents}
 .rolodex-brand{flex:0 1 auto;min-width:0;font-size:13px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rolodex-code-wrap{flex:0 0 auto;font-size:12px;color:#fff;white-space:nowrap}
 .rolodex-code{font-family:"Roboto Mono",ui-monospace,SFMono-Regular,Consolas,monospace;background:rgba(255,255,255,.18);border-radius:5px;padding:2px 7px;font-size:12px;letter-spacing:.02em;margin-left:2px}
@@ -208,7 +209,7 @@ body{font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;background:#
 .rolodex-dots{position:absolute;right:56px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
 .rolodex-dot{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.35);border:0;padding:0;cursor:pointer}
 .rolodex-dot.is-active{background:#fff}
-@media(max-width:560px){.rolodex-slide{padding:0 10px;gap:6px}.rolodex-dots{display:none}.rolodex-btn{padding:5px 9px;font-size:11px}.rolodex-brand{display:none}.rolodex-code-wrap{font-size:11px}.rolodex-code{font-size:11px;padding:2px 6px}}
+@media(max-width:560px){.rolodex-slide{padding:0 8px;gap:8px}.rolodex-dots{display:none}.rolodex-btn{padding:6px 10px;font-size:11px}.rolodex-logo{width:24px;height:24px}.rolodex-text-stack{display:flex;flex-direction:column;justify-content:center;gap:1px;min-width:0}.rolodex-brand{display:block;font-size:11px;line-height:1.15}.rolodex-code-wrap{font-size:10px;line-height:1.15}.rolodex-code{font-size:10px;padding:1px 5px}}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 :root{--bg:#f5f8fc;--surface:#fffefd;--line:#d7e3f1;--green:#245f93;--green-deep:#173b61;--sage:#eaf3ff;--gold:#c8920a;--text:#172033;--muted:#667085;--shadow:0 12px 30px rgba(23,59,97,.10)}
@@ -249,28 +250,27 @@ footer{background:linear-gradient(135deg,var(--green-deep),var(--green));padding
   <div class="rolodex-track" id="rolodexTrack">
     <div class="rolodex-slide is-active" aria-hidden="false">
       <img class="rolodex-logo" src="/assets/logos/pack-leashes-logo.jpg" alt="" width="22" height="22" loading="eager" decoding="async"/>
-      <span class="rolodex-brand">Pack Leashes</span>
-      <span class="rolodex-code-wrap">20% off <code class="rolodex-code">REMYSLAB20</code></span>
+      <span class="rolodex-text-stack"><span class="rolodex-brand">Pack Leashes</span><span class="rolodex-code-wrap">20% off <code class="rolodex-code">REMYSLAB20</code></span></span>
       <a class="rolodex-btn affiliate-link" href="https://packleashes.com/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Pack Leashes" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB20" data-network="Pack Leashes">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/brooks-and-roo-logo.jpg" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-brand">Brooks &amp; Roo</span><span class="rolodex-code-wrap">15% off <code class="rolodex-code">REMYSLAB15</code></span>
+      <span class="rolodex-text-stack"><span class="rolodex-brand">Brooks &amp; Roo</span><span class="rolodex-code-wrap">15% off <code class="rolodex-code">REMYSLAB15</code></span></span>
       <a class="rolodex-btn affiliate-link" href="https://www.brooksandroo.com/discount/REMYSLAB15?ref=REMYSLAB15" target="_blank" rel="nofollow sponsored" data-product="Brooks &amp; Roo" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB15" data-network="Brooks &amp; Roo">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/sniff-and-bark-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-brand">Sniff &amp; Bark</span><span class="rolodex-code-wrap">20% off <code class="rolodex-code">REMYSLAB20</code></span>
+      <span class="rolodex-text-stack"><span class="rolodex-brand">Sniff &amp; Bark</span><span class="rolodex-code-wrap">20% off <code class="rolodex-code">REMYSLAB20</code></span></span>
       <a class="rolodex-btn affiliate-link" href="https://www.sniffandbark.com.co/discount/REMYSLAB20?redirect=/" target="_blank" rel="nofollow sponsored" data-product="Sniff &amp; Bark" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB20" data-network="Sniff &amp; Bark">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/woof-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-brand">Woof</span><span class="rolodex-code-wrap">10% off <code class="rolodex-code">REMYSLAB10</code></span>
+      <span class="rolodex-text-stack"><span class="rolodex-brand">Woof</span><span class="rolodex-code-wrap">10% off <code class="rolodex-code">REMYSLAB10</code></span></span>
       <a class="rolodex-btn affiliate-link" href="https://mywoof.com/discount/REMYSLAB10" target="_blank" rel="nofollow sponsored" data-product="Woof" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="REMYSLAB10" data-network="Woof">Visit site</a>
     </div>
     <div class="rolodex-slide" aria-hidden="true">
       <img class="rolodex-logo" src="/assets/logos/sodapup-logo.webp" alt="" width="22" height="22" loading="lazy" decoding="async"/>
-      <span class="rolodex-brand">SodaPup</span><span class="rolodex-code-wrap">10% off <code class="rolodex-code">JOSH</code></span>
+      <span class="rolodex-text-stack"><span class="rolodex-brand">SodaPup</span><span class="rolodex-code-wrap">10% off <code class="rolodex-code">JOSH</code></span></span>
       <a class="rolodex-btn affiliate-link" href="https://sodapup.com/?ref=remyslab" target="_blank" rel="nofollow sponsored" data-product="SodaPup" data-category="partner_store" data-result="current_partner" data-placement="rolodex" data-discount="JOSH" data-network="SodaPup">Visit site</a>
     </div>
   </div>
