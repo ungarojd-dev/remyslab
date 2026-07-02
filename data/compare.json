@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T01:33:01.077Z",
+  "generated_at": "2026-07-02T06:22:24.757Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -34,7 +34,7 @@
       "id": "clothing",
       "label": "Bandanas & Accessories",
       "brand_count": 3,
-      "product_count": 213
+      "product_count": 214
     },
     {
       "id": "harnesses",
@@ -103,7 +103,7 @@
       "product_count": 317
     }
   ],
-  "product_count": 1377,
+  "product_count": 1378,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -2918,6 +2918,22 @@
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 59.96,
+      "affiliate_disclosure": "partner",
+      "source": "live"
+    },
+    {
+      "brand_id": "pack-leashes",
+      "brand_name": "Pack Leashes",
+      "name": "Lemonade Leash + Bowtie Collar",
+      "category": "clothing",
+      "price": "$78.95",
+      "price_value": 78.95,
+      "in_stock": true,
+      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_05-2022-024_2b341456-31e5-45fe-b07a-5a54648bba2a.jpg?v=1657923074",
+      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Flemonade-leash-bowtie-collar",
+      "discount_code": "REMYSLAB20",
+      "discount_percent": 20,
+      "effective_price": 63.16,
       "affiliate_disclosure": "partner",
       "source": "live"
     },
