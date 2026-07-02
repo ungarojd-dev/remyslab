@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T14:41:52.900Z",
+  "generated_at": "2026-07-02T17:10:42.706Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -34,13 +34,13 @@
       "id": "clothing",
       "label": "Bandanas & Accessories",
       "brand_count": 3,
-      "product_count": 214
+      "product_count": 211
     },
     {
       "id": "harnesses",
       "label": "Harnesses",
       "brand_count": 3,
-      "product_count": 78
+      "product_count": 76
     },
     {
       "id": "leashes",
@@ -85,7 +85,7 @@
       "product_count": 186
     }
   ],
-  "product_count": 852,
+  "product_count": 847,
   "products": [
     {
       "brand_id": "brooks-and-roo",
@@ -2890,22 +2890,6 @@
     {
       "brand_id": "pack-leashes",
       "brand_name": "Pack Leashes",
-      "name": "Rainforest Leash + Bowtie Collar + Reversible Harness",
-      "category": "clothing",
-      "price": "$74.95",
-      "price_value": 74.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_02-2023-018.jpg?v=1677781701",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Frainforest-leash-bowtie-collar-reversible-harness",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 59.96,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
       "name": "Lemonade Leash + Bowtie Collar",
       "category": "clothing",
       "price": "$78.95",
@@ -2993,22 +2977,6 @@
       "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_09-2022-013_65ff092a-a170-4c02-a8ce-bef6f1ba14e1.jpg?v=1663957193",
       "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Flavender-leash-bowtie-collar",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 63.16,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
-      "name": "Rainforest Leash + Bowtie Collar",
-      "category": "clothing",
-      "price": "$78.95",
-      "price_value": 78.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_02-2023-016_a2e117aa-68e3-4049-882f-20fb12c9d8af.jpg?v=1677781171",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Frainforest-leash-bowtie-collar",
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 63.16,
@@ -3153,22 +3121,6 @@
       "in_stock": true,
       "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Leash-Collar-Bandanna-pineapple-min.jpg?v=1588623027",
       "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Fpineapple-bowtie-collection",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 71.16,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
-      "name": "Rainforest Bowtie Collection",
-      "category": "clothing",
-      "price": "$88.95",
-      "price_value": 88.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_02-2023-019.jpg?v=1677779024",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Frainforest-bowtie-collection",
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 71.16,
@@ -4282,22 +4234,6 @@
     {
       "brand_id": "pack-leashes",
       "brand_name": "Pack Leashes",
-      "name": "Rainforest Leash + Reversible Harness",
-      "category": "harnesses",
-      "price": "$81.95",
-      "price_value": 81.95,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_02-2023-017_280d67fd-39bd-4824-b890-6c4aeddd0db2.jpg?v=1677782085",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Frainforest-leash-reversible-harness",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 65.56,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
       "name": "Pineapple Leash + Reversible Harness",
       "category": "harnesses",
       "price": "$81.95",
@@ -4308,22 +4244,6 @@
       "discount_code": "REMYSLAB20",
       "discount_percent": 20,
       "effective_price": 65.56,
-      "affiliate_disclosure": "partner",
-      "source": "live"
-    },
-    {
-      "brand_id": "pack-leashes",
-      "brand_name": "Pack Leashes",
-      "name": "Rainforest Harness Collection",
-      "category": "harnesses",
-      "price": "$87.44",
-      "price_value": 87.44,
-      "in_stock": true,
-      "image": "https://cdn.shopify.com/s/files/1/1649/7215/products/Foredrop_PackLeashes_02-2023-020.jpg?v=1677780614",
-      "url": "https://packleashes.com/discount/REMYSLAB20?redirect=%2Fproducts%2Frainforest-harness-collection",
-      "discount_code": "REMYSLAB20",
-      "discount_percent": 20,
-      "effective_price": 69.95,
       "affiliate_disclosure": "partner",
       "source": "live"
     },
