@@ -48,5 +48,16 @@
         discount_code:code
       });
     }
+    // Hero engagement wasn't tracked at all before this — search box, quick-action card,
+    // and the Lab Notes link fired nothing, so hero drop-off was invisible in GA4.
+    var heroCta=event.target.closest('[data-hero-cta]');
+    if(heroCta){
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({
+        event:'hero_cta_click',
+        cta_name:heroCta.dataset.heroCta,
+        button_text:heroCta.textContent.trim()
+      });
+    }
   });
 })();
