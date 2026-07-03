@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T22:36:24.592Z",
+  "generated_at": "2026-07-03T01:09:58.392Z",
   "engine_version": "1.1.0",
   "category_order": [
     "clothing",
@@ -3477,7 +3477,7 @@
       "discount_percent": null,
       "effective_price": 6.75,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -3493,7 +3493,7 @@
       "discount_percent": null,
       "effective_price": 19.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -3509,7 +3509,7 @@
       "discount_percent": null,
       "effective_price": 25.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "pack-leashes",
@@ -4693,7 +4693,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4709,7 +4709,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4725,7 +4725,7 @@
       "discount_percent": null,
       "effective_price": 4.2,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4741,7 +4741,7 @@
       "discount_percent": null,
       "effective_price": 4.5,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4757,7 +4757,7 @@
       "discount_percent": null,
       "effective_price": 5.1,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4773,7 +4773,7 @@
       "discount_percent": null,
       "effective_price": 6.3,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4789,7 +4789,7 @@
       "discount_percent": null,
       "effective_price": 6.49,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4805,7 +4805,7 @@
       "discount_percent": null,
       "effective_price": 6.49,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4821,7 +4821,7 @@
       "discount_percent": null,
       "effective_price": 6.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4837,7 +4837,7 @@
       "discount_percent": null,
       "effective_price": 8.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4853,7 +4853,7 @@
       "discount_percent": null,
       "effective_price": 12.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4869,7 +4869,7 @@
       "discount_percent": null,
       "effective_price": 13.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4885,7 +4885,7 @@
       "discount_percent": null,
       "effective_price": 14.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4901,7 +4901,7 @@
       "discount_percent": null,
       "effective_price": 14.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4917,7 +4917,7 @@
       "discount_percent": null,
       "effective_price": 15.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4933,7 +4933,7 @@
       "discount_percent": null,
       "effective_price": 17,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4949,7 +4949,7 @@
       "discount_percent": null,
       "effective_price": 18.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4965,7 +4965,7 @@
       "discount_percent": null,
       "effective_price": 18.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4981,7 +4981,7 @@
       "discount_percent": null,
       "effective_price": 18.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -4997,7 +4997,7 @@
       "discount_percent": null,
       "effective_price": 22.5,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "pack-leashes",
@@ -5909,7 +5909,7 @@
       "discount_percent": null,
       "effective_price": 1.8,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -5925,7 +5925,7 @@
       "discount_percent": null,
       "effective_price": 2.4,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -5941,7 +5941,7 @@
       "discount_percent": null,
       "effective_price": 2.4,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -5957,7 +5957,7 @@
       "discount_percent": null,
       "effective_price": 3,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -5973,7 +5973,7 @@
       "discount_percent": null,
       "effective_price": 3.3,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -5989,7 +5989,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -6005,7 +6005,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -6021,7 +6021,7 @@
       "discount_percent": null,
       "effective_price": 3.9,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -6037,7 +6037,7 @@
       "discount_percent": null,
       "effective_price": 4.5,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -6053,7 +6053,7 @@
       "discount_percent": null,
       "effective_price": 4.8,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -6069,7 +6069,7 @@
       "discount_percent": null,
       "effective_price": 5.4,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sniff-and-bark",
@@ -7349,7 +7349,7 @@
       "discount_percent": null,
       "effective_price": 12.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -8613,7 +8613,7 @@
       "discount_percent": null,
       "effective_price": 5.7,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -9509,7 +9509,7 @@
       "discount_percent": null,
       "effective_price": 12.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -9733,7 +9733,7 @@
       "discount_percent": null,
       "effective_price": 14.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -9813,7 +9813,7 @@
       "discount_percent": null,
       "effective_price": 16.49,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -9829,7 +9829,7 @@
       "discount_percent": null,
       "effective_price": 16.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -9845,7 +9845,7 @@
       "discount_percent": null,
       "effective_price": 16.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -9877,7 +9877,7 @@
       "discount_percent": null,
       "effective_price": 17.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -9909,7 +9909,7 @@
       "discount_percent": null,
       "effective_price": 18.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -9925,7 +9925,7 @@
       "discount_percent": null,
       "effective_price": 19.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -9941,7 +9941,7 @@
       "discount_percent": null,
       "effective_price": 19.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -9989,7 +9989,7 @@
       "discount_percent": null,
       "effective_price": 20.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10005,7 +10005,7 @@
       "discount_percent": null,
       "effective_price": 23.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10021,7 +10021,7 @@
       "discount_percent": null,
       "effective_price": 26.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10037,7 +10037,7 @@
       "discount_percent": null,
       "effective_price": 28.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10053,7 +10053,7 @@
       "discount_percent": null,
       "effective_price": 29.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10069,7 +10069,7 @@
       "discount_percent": null,
       "effective_price": 30.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10085,7 +10085,7 @@
       "discount_percent": null,
       "effective_price": 31.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10101,7 +10101,7 @@
       "discount_percent": null,
       "effective_price": 39,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -10133,7 +10133,7 @@
       "discount_percent": null,
       "effective_price": 64.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10149,7 +10149,7 @@
       "discount_percent": null,
       "effective_price": 64.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -10197,7 +10197,7 @@
       "discount_percent": null,
       "effective_price": 149.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "pack-leashes",
@@ -10581,7 +10581,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10597,7 +10597,7 @@
       "discount_percent": null,
       "effective_price": 5.1,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -10629,7 +10629,7 @@
       "discount_percent": null,
       "effective_price": 14.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10645,7 +10645,7 @@
       "discount_percent": null,
       "effective_price": 18.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10661,7 +10661,7 @@
       "discount_percent": null,
       "effective_price": 26.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10677,7 +10677,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10693,7 +10693,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10709,7 +10709,7 @@
       "discount_percent": null,
       "effective_price": 3.6,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10725,7 +10725,7 @@
       "discount_percent": null,
       "effective_price": 3.9,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10741,7 +10741,7 @@
       "discount_percent": null,
       "effective_price": 3.9,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10757,7 +10757,7 @@
       "discount_percent": null,
       "effective_price": 3.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -10773,7 +10773,7 @@
       "discount_percent": null,
       "effective_price": 4.2,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -10917,7 +10917,7 @@
       "discount_percent": null,
       "effective_price": 11.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -11141,7 +11141,7 @@
       "discount_percent": null,
       "effective_price": 13.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -11349,7 +11349,7 @@
       "discount_percent": null,
       "effective_price": 16.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -11365,7 +11365,7 @@
       "discount_percent": null,
       "effective_price": 16.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -11589,7 +11589,7 @@
       "discount_percent": null,
       "effective_price": 19.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sodapup",
@@ -12213,7 +12213,7 @@
       "discount_percent": null,
       "effective_price": 24.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -12229,7 +12229,7 @@
       "discount_percent": null,
       "effective_price": 24.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -12245,7 +12245,7 @@
       "discount_percent": null,
       "effective_price": 24.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -12277,7 +12277,7 @@
       "discount_percent": null,
       "effective_price": 26.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -12293,7 +12293,7 @@
       "discount_percent": null,
       "effective_price": 26.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -12309,7 +12309,7 @@
       "discount_percent": null,
       "effective_price": 26.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -12405,7 +12405,7 @@
       "discount_percent": null,
       "effective_price": 27.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -12421,7 +12421,7 @@
       "discount_percent": null,
       "effective_price": 27.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -12485,7 +12485,7 @@
       "discount_percent": null,
       "effective_price": 29.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "pack-leashes",
@@ -12549,7 +12549,7 @@
       "discount_percent": null,
       "effective_price": 34.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "pack-leashes",
@@ -12613,7 +12613,7 @@
       "discount_percent": null,
       "effective_price": 39.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "rigby",
@@ -13141,7 +13141,7 @@
       "discount_percent": null,
       "effective_price": 84.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "mighty-paw",
@@ -13157,7 +13157,7 @@
       "discount_percent": null,
       "effective_price": 84.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "woof",
@@ -13205,7 +13205,7 @@
       "discount_percent": null,
       "effective_price": 99.99,
       "affiliate_disclosure": "none",
-      "source": "live"
+      "source": "fallback"
     },
     {
       "brand_id": "sniff-and-bark",
