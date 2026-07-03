@@ -37,6 +37,14 @@ async function readJson(file, fallback = null) {
 }
 const trimSlash = u => String(u || "").replace(/\/+$/, "");
 const money = v => { const n = Number.parseFloat(v); return Number.isFinite(n) ? `$${n.toFixed(2)}` : null; };
+/** Price a shopper actually pays after applying the brand's standing discount code, if any.
+ *  Used for sorting and the "Lowest price" badge — "cheapest" should mean cheapest in reality,
+ *  not cheapest on the sticker, or a discounted competitor could lose to a pricier listed one. */
+const effectivePrice = p => {
+  const base = p.price_value;
+  if (base == null || !Number.isFinite(p.discount_percent)) return base;
+  return Math.round(base * (1 - p.discount_percent / 100) * 100) / 100;
+};
 
 async function fetchShopifyPage(domain, page) {
   const url = `${trimSlash(domain)}/products.json?limit=250&page=${page}`;
@@ -53,6 +61,14 @@ async function fetchShopifyPage(domain, page) {
 async function loadBrandProducts(brandId, brand) {
   if (MOCK_DIR) {
     const data = await readJson(path.join(MOCK_DIR, `${brandId}.json`));
+    return Array.isArray(data.products) ? data.products : [];
+  }
+  // csv_feed brands (e.g. PetSafe via Pepperjam/Ascend) don't have a public live-pollable
+  // endpoint the way Shopify stores do -- their data comes from a manually-downloaded product
+  // feed, converted once to clean JSON and re-uploaded periodically (see data/feeds/README).
+  // Reads a static local snapshot instead of fetching anything over the network.
+  if (brand.link_style === "csv_feed" && brand.feed_file) {
+    const data = await readJson(path.join(DATA, "feeds", brand.feed_file), { products: [] });
     return Array.isArray(data.products) ? data.products : [];
   }
   const all = [];
@@ -78,6 +94,23 @@ function readShopifyProduct(raw) {
     image: (Array.isArray(raw.images) && raw.images[0]) ? raw.images[0].src : null,
     product_type: raw.product_type || "",
     tags: Array.isArray(raw.tags) ? raw.tags : (typeof raw.tags === "string" ? raw.tags.split(",") : [])
+  };
+}
+
+// csv_feed products are already close to the internal shape (built once during the manual
+// CSV-to-JSON conversion), but "handle" needs to carry the complete pre-built buy_url for
+// this brand rather than a bare Shopify-style slug, since buildUrl()'s csv_feed branch just
+// passes that whole URL through directly.
+function readCsvFeedProduct(raw) {
+  return {
+    name: raw.name || null,
+    handle: raw.buy_url || null,
+    price: money(raw.price_value),
+    price_value: Number.isFinite(raw.price_value) ? raw.price_value : null,
+    in_stock: raw.in_stock !== false,
+    image: raw.image || null,
+    product_type: raw.product_type || "",
+    tags: Array.isArray(raw.tags) ? raw.tags : []
   };
 }
 
@@ -153,6 +186,29 @@ function buildUrl(brand, handle) {
   if (brand.link_style === "discount_redirect" && brand.discount_code) {
     return `${domain}/discount/${encodeURIComponent(brand.discount_code)}?redirect=${encodeURIComponent(productPath)}`;
   }
+  // affiliate_generic: a real commission-earning tracking link exists (e.g. Pepperjam/Ascend),
+  // but deep-linking to a specific product page through it hasn't been confirmed safe, so every
+  // product from this brand correctly routes to the same generic tracking link rather than a
+  // per-product URL that might silently drop the affiliate ID. Less convenient than a direct
+  // product link, but guaranteed to actually track and earn commission.
+  if (brand.link_style === "affiliate_generic" && brand.affiliate_url) {
+    return brand.affiliate_url;
+  }
+  // csv_feed: the brand's own product feed (e.g. a Pepperjam Advanced Format CSV) already
+  // contains a complete, per-product, affiliate-tracked URL — "handle" here is repurposed to
+  // carry that whole URL through rather than a bare Shopify-style slug, since there's nothing
+  // to assemble: the feed did that part already.
+  if (brand.link_style === "csv_feed" && handle) {
+    return handle;
+  }
+  // ref_param: a Goaffpro-style (or similar) referral link that works by appending a query
+  // param to ANY page on the store, including specific product pages -- unlike
+  // affiliate_generic, this means real per-product deep links are possible, not just one
+  // fixed homepage-style link.
+  if (brand.link_style === "ref_param" && brand.ref_param) {
+    const sep = productPath.includes("?") ? "&" : "?";
+    return `${domain}${productPath}${sep}${brand.ref_param}`;
+  }
   return `${domain}${productPath}`;
 }
 
@@ -181,10 +237,17 @@ async function build() {
 
     if (raws) {
       for (const raw of raws) {
-        const live = readShopifyProduct(raw);
+        const live = brand.link_style === "csv_feed" ? readCsvFeedProduct(raw) : readShopifyProduct(raw);
         if (!live.name || live.price_value == null) continue; // skip unparsable/no-price entries
         if (isJunkProduct(live)) continue; // skip $0 upsell shadow products and bundle-copy noise
-        const categoryId = matchCategory(live, categories);
+        let categoryId = matchCategory(live, categories);
+        // Brand-level fallback: some brands' product names carry zero matchable keywords
+        // (e.g. Brooks & Roo bandanas are named by pattern -- "Pineapple Parade," "Moose" --
+        // with no generic word like "bandana" anywhere in the title), so keyword matching has
+        // nothing to grab onto. Rather than leave a brand's entire catalog dumped in Other when
+        // we know what they actually sell, this applies an explicit per-brand default ONLY when
+        // no real keyword matched anything -- it never overrides a genuine keyword match.
+        if (categoryId === "other" && brand.fallback_category) categoryId = brand.fallback_category;
         out.push({
           brand_id: brandId,
           brand_name: brand.name,
@@ -196,6 +259,8 @@ async function build() {
           image: live.image,
           url: buildUrl(brand, live.handle),
           discount_code: brand.discount_code,
+          discount_percent: brand.discount_percent ?? null,
+          effective_price: effectivePrice({ price_value: live.price_value, discount_percent: brand.discount_percent ?? null }),
           affiliate_disclosure: brand.affiliate_disclosure || "none",
           source: "live"
         });
@@ -212,7 +277,7 @@ async function build() {
   out.sort((a, b) => {
     const ca = catOrder[a.category] ?? 99, cb = catOrder[b.category] ?? 99;
     if (ca !== cb) return ca - cb;
-    return (a.price_value ?? Infinity) - (b.price_value ?? Infinity);
+    return (a.effective_price ?? a.price_value ?? Infinity) - (b.effective_price ?? b.price_value ?? Infinity);
   });
 
   // Category summary: which categories have 2+ brands (real comparison) vs 1 (browse-only)
