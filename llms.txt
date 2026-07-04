@@ -1,0 +1,23 @@
+# Remy's Lab
+
+> Remy's Lab is a dog product testing page run by Josh and Remy, a yellow Labrador in Buffalo, NY. Every product featured has actually been tested by Remy before it's written up. The site is a simple, TikTok-driven link page: partner discount codes and honest test notes, not a full review blog or ecommerce store.
+
+## What this site is
+- A mobile-first link-in-bio style page for the TikTok account @remy.lab
+- Partner discount codes for dog product brands, with copy-to-clipboard code buttons
+- "Lab Notes" — short, honest test notes on products Remy has actually used, including what worked and what didn't
+
+## What this site is not
+- Not a full comparison or price-tracking tool
+- Not an ecommerce store
+- Not a traditional SEO content blog
+
+## Pages
+- / — Home: current partner codes and links
+- /lab-notes.html — Test notes on products Remy has tried
+- /disclaimer.html — Affiliate disclosure
+- /privacy.html — Privacy policy
+- /terms.html — Terms of use
+
+## Contact
+josh@remyslab.com

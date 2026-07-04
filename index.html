@@ -97,6 +97,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity:.85;
   }
 
+  /* Tabs */
+  .tabs{display:flex;gap:8px;margin:20px 0 22px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:4px}
+  .tab{flex:1;text-align:center;padding:10px 8px;border-radius:11px;text-decoration:none;font-weight:700;font-size:13.5px;color:var(--paw)}
+  .tab.active{background:var(--rust);color:var(--cream)}
+
   /* Section label */
   .section-label{
     font-size:11px;
@@ -193,9 +198,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div class="header">
     <img class="avatar" src="/assets/profile/remy-hero.jpg" alt="Remy, a yellow Labrador">
-    <div class="name">Remy's Lab</div>
+    <h1 class="name">Remy's Lab</h1>
     <div class="tagline">yellow lab. better watch your socks 🧦</div>
     <div class="subline">Buffalo, NY 🐾</div>
+  </div>
+
+  <div class="tabs">
+    <a class="tab active" href="/">Home</a>
+    <a class="tab" href="/lab-notes.html">Lab Notes</a>
   </div>
 
   <a class="favorites-btn affiliate-link" href="https://www.pinterest.com/remyslab/" target="_blank" rel="noopener" data-product="Remy's Favorites" data-category="link_page" data-result="not_applicable" data-placement="link_page_favorites" data-network="Pinterest" data-discount="">
@@ -203,13 +213,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <span>See Remy's Favorites on Pinterest</span>
   </a>
 
-  <div class="section-label">Partner codes</div>
+  <h2 class="section-label">Partner codes</h2>
 
   <div class="code-card">
     <div class="code-top">
       <img class="brand-logo" src="/assets/logos/pack-leashes-logo.jpg" alt="Pack Leashes logo">
       <div class="code-left">
-        <span class="brand-name">Pack Leashes</span>
+        <h3 class="brand-name">Pack Leashes</h3>
         <span class="partner-tag">Current partner</span>
         <span class="discount">20% off with the code</span>
       </div>
@@ -224,7 +234,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="code-top">
       <img class="brand-logo" src="/assets/logos/sniff-and-bark-logo.webp" alt="Sniff &amp; Bark logo">
       <div class="code-left">
-        <span class="brand-name">Sniff &amp; Bark</span>
+        <h3 class="brand-name">Sniff &amp; Bark</h3>
         <span class="partner-tag">Current partner</span>
         <span class="discount">20% off with the code</span>
       </div>
@@ -239,7 +249,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="code-top">
       <img class="brand-logo" src="/assets/logos/brooks-and-roo-logo.jpg" alt="Brooks &amp; Roo logo">
       <div class="code-left">
-        <span class="brand-name">Brooks &amp; Roo</span>
+        <h3 class="brand-name">Brooks &amp; Roo</h3>
         <span class="partner-tag">Current partner</span>
         <span class="discount">15% off with the code</span>
       </div>
@@ -254,7 +264,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="code-top">
       <img class="brand-logo" src="/assets/logos/sodapup-logo.webp" alt="SodaPup logo">
       <div class="code-left">
-        <span class="brand-name">SodaPup</span>
+        <h3 class="brand-name">SodaPup</h3>
         <span class="partner-tag">Current partner</span>
         <span class="discount">10% off with the code</span>
       </div>
@@ -269,7 +279,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="code-top">
       <img class="brand-logo" src="/assets/logos/woof-logo.webp" alt="Woof logo">
       <div class="code-left">
-        <span class="brand-name">Woof</span>
+        <h3 class="brand-name">Woof</h3>
         <span class="partner-tag">Current partner</span>
         <span class="discount">10% off with the code</span>
       </div>
